@@ -6,7 +6,10 @@ export default {
   ],
   theme: {
     extend: {
-      colors:{"main":"rgba(19, 21, 80, 1)"}
+      colors:{"main":"rgba(19, 21, 80, 1)",
+      "auth-button-color":"rgb(233 231 227)"
+    
+    }
     },
   },
   plugins: [],

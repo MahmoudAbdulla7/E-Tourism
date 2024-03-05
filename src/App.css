@@ -1,0 +1,11 @@
+.auth-image{
+    background-image: url("./assets/auth.jpeg");
+    background-size: cover;
+    background-position: center center;
+}
+.auth-layout{
+    background-color: rgb(30, 30, 94);
+    background-image: url("./assets/Birrd.png");
+    background-size: cover;
+    background-position: center ;
+}
