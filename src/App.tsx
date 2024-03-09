@@ -1,15 +1,18 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
+import ChangePassword from "./AuthModule/Components/ChangePassword/ChangePassword";
 import Login from "./AuthModule/Components/Login/Login";
 import Register from "./AuthModule/Components/Register/Register";
-import ChangePassword from "./AuthModule/Components/ChangePassword/ChangePassword";
 import ResetPassword from "./AuthModule/Components/ResetPassword/ResetPassword";
 import SendResetPasswordCode from "./AuthModule/Components/SendResetPasswordCode/SendResetPasswordCode";
-import NotFound from "./SharedModules/Components/NotFound/NotFound";
-import Home from "./HomeModule/Home";
-import AllMuseums from "./HomeModule/Components/AllMuseums/AllMuseums";
 import AllMonuments from "./HomeModule/Components/AllMonuments/AllMonuments";
+import AllMuseums from "./HomeModule/Components/AllMuseums/AllMuseums";
+import Map from "./HomeModule/Components/Map/Map";
+import Home from "./HomeModule/Home";
+import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
+import NotFound from "./SharedModules/Components/NotFound/NotFound";
+import SpecificMuseum from "./SpecificMuseumModule/SpecificMuseum";
+import VisitorLayout from "./Layouts/VisitorLayout/VisitorLayout";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,16 +31,24 @@ function App() {
     },
     {
       path: "/",
-      errorElement: <NotFound />,
-      element: <Home />,
+      element: <VisitorLayout />,
+      children: [
+        {
+          index: true,
+          errorElement: <NotFound />,
+          element: <Home />,
+        },
+        { path: "/museums", element: <AllMuseums /> },
+        { path: "/museums/:museumId", element: <SpecificMuseum /> },
+        { path: "/map", element: <Map /> },
+        { path: "/monuments", element: <AllMonuments /> },
+      ],
     },
-    { path: "/museums", element: <AllMuseums /> },
-    { path: "/monuments", element: <AllMonuments /> },
   ]);
 
   return (
     <>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   );
 }
