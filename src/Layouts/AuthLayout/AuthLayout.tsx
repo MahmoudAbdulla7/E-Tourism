@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import Typed from "typed.js";
 
@@ -19,12 +19,12 @@ export default function AuthLayout() {
     };
   }, []);
   return (
-    <div className="grid h-[100vh] lg:grid-cols-2 grid-cols-1">
+    <div className="grid h-[100vh] lg:grid-cols-2 bg-auth grid-cols-1">
       <div className="user-data auth-layout">
         <Outlet />
       </div>
 
-      <div className="auth-image   md:flex w-full hidden items-end justify-center">
+      <div className="auth-image rounded-l-3xl  md:flex w-full hidden items-end justify-center">
         <h2 className="mb-8 mx-2 text-2xl text-white font-semibold">
           <label  ref={el}></label>
         </h2>

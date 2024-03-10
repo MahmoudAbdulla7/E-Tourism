@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
+import { MdOutlineMailOutline } from "react-icons/md";
 import Button from "../../../SharedModules/Components/Button/Button";
 import Input from "../../../SharedModules/Components/Input/Input";
-import { MdOutlineMailOutline } from "react-icons/md";
 
 export default function SendResetPasswordCode() {
   return (
