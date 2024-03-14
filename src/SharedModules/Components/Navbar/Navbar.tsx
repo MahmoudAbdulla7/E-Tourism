@@ -66,7 +66,7 @@ export default function Navbar() {
                           </filter>
                         </defs>
                       </svg>
-                      Website Name
+                      EgyptHere
                     </h1>
                   </Link>
                 </div>

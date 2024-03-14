@@ -5,6 +5,9 @@ body{
   font-weight: weight;
   font-style: normal;
 }
+.bg-auth{
+  background-color: rgb(1, 1, 45);
+}
 .Museums{
   background-image: url("./assets/bgformuseum.jpeg");
   background-size: cover;
@@ -16,12 +19,10 @@ body{
     background-position: center center;
 } 
 .auth-layout{
-    background-color: rgb(1, 1, 45);
     background-image: url("./assets/Birrd.png");
     background-size: cover;
     background-position: center ;
 }
-
 @keyframes typingText {
     2% { content: 'E|'; }
     4% { content: 'Em|'; }
@@ -125,7 +126,6 @@ body{
 /* card */
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
-
 :root {
   /* Colors */
   --brand-color: hsl(241.5, 58.8%, 28.6%);
@@ -173,7 +173,6 @@ body{
   left: -1.25rem;
   background-color: var(--brand-color);
 }
-
 .card__button {
   padding: 0.75em 1.6em;
   width: fit-content;
@@ -245,5 +244,4 @@ body{
     transition-delay: 500ms;
   }
 }
-
 
