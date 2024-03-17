@@ -17,7 +17,7 @@ body{
     background-image: url("./assets/auth.jpeg");
     background-size: cover;
     background-position: center center;
-}
+} 
 .auth-layout{
     background-image: url("./assets/Birrd.png");
     background-size: cover;
@@ -245,6 +245,7 @@ body{
   }
 }
 
+
 /* highlight */
 div.cardfan { 
   width: 33%;
@@ -306,3 +307,4 @@ img#roma:hover {
   filter: blur(0px);
   filter: none;
 }
+

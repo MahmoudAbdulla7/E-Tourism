@@ -5,8 +5,7 @@ export interface input {
   type?: string;
   children?: ReactNode;
 }
-const Input = 
-forwardRef(
+const Input = forwardRef(
   (
     { placeholder, type, children, ...delegate }: input,
     ref: ForwardedRef<HTMLInputElement>

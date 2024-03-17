@@ -26,13 +26,13 @@ export default function Login() {
             <div className="email-input flex items-center mt-8">
               <div className="w-[98%]">
                 <Input
-                  type="text"
+                  type="email"
                   placeholder="Enter your email"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: "Invalid email address",
+                      value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                      message: "Invalid Email Format",
                     },
                   })}
                 >
@@ -49,6 +49,12 @@ export default function Login() {
                 <Passsword
                   {...register("password", {
                     required: "Password is required",
+                    pattern:{
+                      value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+                      message:`The password must include at least one lowercase letter,
+                      one uppercase letter, one digit, one special character,
+                      and be at least 6 characters long!!`
+                    }
                   })}
                   placeholder="Enter your Password"
                 />
