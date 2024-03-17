@@ -32,12 +32,12 @@ export default function Museums() {
             </div>
 
             <div className="museum-background rounded-lg group md:h-[100%] h-[35vh]  duration-500 m-3 ">
-              <div className="museum-details flex items-center justify-center w-full h-full text-white px-3">
+              <div className="museum-details flex items-center justify-center w-full h-full text-white px-3 overflow-hidden">
                 <div className="text-center">
-                  <h2 className="text-xl block group-hover:hidden py-3 translate-y-2/3">
+                  <h2 className="text-xl block group-hover:translate-x-[110%] py-3 group-hover:duration-500 rounded-xl bg-black bg-opacity-40 translate-y-2/3">
                     The Grand Egyptian Museum
                   </h2>
-                  <p className="opacity-0 bg-black py-3 rounded-xl bg-opacity-40 invisible text-center group-hover:opacity-100 group-hover:visible group-hover:duration-700 transition-opacity">
+                  <p className="py-3 translate-y-96 group-hover:translate-y-[-30px] rounded-xl bg-black bg-opacity-60 text-center group-hover:duration-500">
                     The Grand Egyptian Museum (GEM) is the world’s largest
                     museum dedicated to a single civilization. Egypt, near the
                     pyramids. It will host over 100,000 artifacts from ancient
@@ -47,7 +47,7 @@ export default function Museums() {
               </div>
             </div>
           </div>
-          <div className="flex lg:justify-around flex-col lg:flex-row sm:py-8">
+          {/* <div className="flex lg:justify-around flex-col lg:flex-row sm:py-8">
             <Link
               to=""
               className="text-4xl rounded-3xl group city overflow-hidden m-3"
@@ -64,7 +64,7 @@ export default function Museums() {
                 <h3>Loxur</h3>
               </div>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
