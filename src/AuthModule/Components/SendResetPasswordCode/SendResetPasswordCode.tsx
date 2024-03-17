@@ -4,6 +4,7 @@ import Input from "../../../SharedModules/Components/Input/Input";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
 
+
 export default function SendResetPasswordCode() {
   const {
     register,
@@ -18,6 +19,7 @@ export default function SendResetPasswordCode() {
     <div className="h-screen text-white flex items-center justify-center text-center">
       <div className="w-full ">
         <div className="w-[100%] flex items-center justify-center">
+
           <form onSubmit={handleSubmit(onSubmit)} className="w-5/6 lg:w-3/4">
             <h2 className="text-2xl my-3 font-semibold">Forget password</h2>
             <div className="email-input  flex items-center ">
@@ -39,7 +41,6 @@ export default function SendResetPasswordCode() {
                 <ErrorMessage text={String(errors?.email.message)} />
               )}
             </div>
-
             <Button text="Send" />
           </form>
         </div>

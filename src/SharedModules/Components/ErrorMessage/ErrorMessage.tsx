@@ -5,6 +5,7 @@ import { MdError } from 'react-icons/md'
  const ErrorMessage: React.FC<{ text: string }>=({text}) =>{
 
   return (
+
     <div className="group relative w-[3%]">
     <span className="text-red-300">
       <MdError />

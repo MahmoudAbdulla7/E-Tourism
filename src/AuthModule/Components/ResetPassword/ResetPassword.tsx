@@ -19,6 +19,7 @@ export default function ResetPassword() {
     <div className="h-screen text-white flex items-center justify-center text-center">
       <div className="w-full ">
         <div className="w-[100%] flex items-center justify-center">
+
           <form onSubmit={handleSubmit(onSubmit)} className="w-5/6 lg:w-3/4">
             <h2 className="text-2xl my-3 font-semibold">Reset password</h2>
             <div className="email-input  flex items-center ">

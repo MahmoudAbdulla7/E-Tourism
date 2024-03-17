@@ -7,6 +7,7 @@ import Passsword from "../../../SharedModules/Components/Password/Passsword";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
 
+
 export default function Register() {
   const {
     register,
@@ -21,6 +22,7 @@ export default function Register() {
     <div className="h-screen text-white flex items-center justify-center text-center">
       <div className="w-full ">
         <div className="w-[100%] flex items-center justify-center">
+
           <form onSubmit={handleSubmit(onSubmit)} className="w-5/6 lg:w-3/4">
             <h2 className="text-2xl my-3 font-semibold">Register</h2>
 
@@ -134,7 +136,6 @@ export default function Register() {
                 <ErrorMessage text={String(errors?.confirmPassword.message)} />
               )}
             </div>
-
             <Button text="Register" />
 
             <div className="flex justify-between">
