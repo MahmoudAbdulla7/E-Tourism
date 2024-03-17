@@ -15,6 +15,12 @@ export default function AllMuseums() {
       image: egyptianMuseum,
     },
     {
+      name: "Amsterdam Walking Tour",
+      descroption:
+        "Amsterdam, the capital of the Netherlands, is a city rich in history, culture, and architecture. ",
+      image: "https://images.unsplash.com/photo-1517736996303-4eec4a66bb17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80",
+    },
+    {
       name: "Luxor Museum",
       descroption:
       "Situated on the east bank of the Nile River in Luxor, this museum houses a significant collection of artifacts from the area.",
