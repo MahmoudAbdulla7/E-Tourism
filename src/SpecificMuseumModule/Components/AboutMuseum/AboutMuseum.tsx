@@ -3,6 +3,11 @@ import { IoIosArrowForward } from "react-icons/io";
 import { TiHome } from "react-icons/ti";
 import { Link } from "react-router-dom";
 export default function AboutMuseum() {
+ const  handleClick=()=>{
+const text="Amsterdam, the capital of the Netherlands, is a city rich in  history, culture, and architecture. Guided walking tours are a popular way for visitors to explore the city while learning about its fascinating past. Knowledgeable guides often lead these tours, taking participants through iconic neighborhoods, landmarks, and hidden gems."
+const value = new SpeechSynthesisUtterance(text);
+window.speechSynthesis.speak(value);
+  }
   return (
     <div className="min:h-[100vh] ">
       <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 py-6">
@@ -64,6 +69,9 @@ export default function AboutMuseum() {
               <div className="btn text-end">
                 <button className="px-4 py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent">
                   Book Now
+                </button>
+                <button onClick={handleClick} className="px-4 py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent">
+                  Speak 
                 </button>
               </div>
             </div>

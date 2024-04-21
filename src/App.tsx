@@ -13,6 +13,8 @@ import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
 import NotFound from "./SharedModules/Components/NotFound/NotFound";
 import SpecificMuseum from "./SpecificMuseumModule/SpecificMuseum";
 import VisitorLayout from "./Layouts/VisitorLayout/VisitorLayout";
+import Booking from "./HomeModule/Components/Booking/Booking";
+import PersonalDetails from "./HomeModule/Components/Booking/PersonalDetails/PersonalDetails";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +44,8 @@ function App() {
         { path: "/museums/:museumId", element: <SpecificMuseum /> },
         { path: "/map", element: <Map /> },
         { path: "/monuments", element: <AllMonuments /> },
+        { path: "/booking", element: <Booking/> },
+        { path: "/booking/personal-details", element: <PersonalDetails/> },
       ],
     },
   ]);
