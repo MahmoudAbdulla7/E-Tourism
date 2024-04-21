@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Card, { museum } from '../../../SharedModules/Components/Card/Card'
 import Navbar from '../../../SharedModules/Components/Navbar/Navbar'
 import alexandria from '../../../assets/Alexandria National Museum.jpg'
@@ -7,41 +8,41 @@ import luxor from '../../../assets/Luxor Museum.jpg'
 import nubian from '../../../assets/Nubian Museum.jpg'
 
 export default function AllMuseums() {
+  const { t, i18n } = useTranslation();
   const data: museum[] = [
     {
-      name: "Egyptian Museum",
-      descroption:
-        "Located in Cairo, this museum is one of the most famous in the world, featuring a vast collection of artifacts from ancient Egypt.",
+      name:t("Egyptian Museum"),
+      descroption:t("Located in Cairo, this museum is one of the most famous in the world, featuring a vast collection of artifacts from ancient Egypt."),
       image: egyptianMuseum,
     },
     {
-      name: "Amsterdam Walking Tour",
+      name:t("National Museum of Egyptian Civilization"),
       descroption:
-        "Amsterdam, the capital of the Netherlands, is a city rich in history, culture, and architecture. ",
-      image: "https://images.unsplash.com/photo-1517736996303-4eec4a66bb17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80",
+      t("Located in New Cairo, the National Museum of Egyptian Civilization is a more recent museum that opened in 2016. The NMEC houses a collection of artifacts from all periods of Egyptian history, from prehistory to the present day. "),
+      image: "https://vanillapapers.net/wp-content/uploads/2023/01/museum-3-1.jpg",
     },
     {
-      name: "Luxor Museum",
+      name:t("Luxor Museum"),
       descroption:
-      "Situated on the east bank of the Nile River in Luxor, this museum houses a significant collection of artifacts from the area.",
+      t("Situated on the east bank of the Nile River in Luxor, this museum houses a significant collection of artifacts from the area."),
       image: luxor,
     },
     {
-      name: "Coptic Museum",
+      name: t("Coptic Museum"),
       descroption:
-      "Situated in Cairo, this museum is dedicated to the history of Egypt's Coptic Christian community.",
+      t("Situated in Cairo, this museum is dedicated to the history of Egypt's Coptic Christian community."),
       image: coptic,
     },
     {
-      name: "Nubian Museum",
+      name: t("Nubian Museum"),
       descroption:
-      " Located in Aswan, this museum focuses on the history and culture of the Nubian people.",
+      t("Located in Aswan, this museum focuses on the history and culture of the Nubian people."),
       image: nubian,
     },
     {
-      name: "Alexandria National Museum",
+      name: t("Alexandria National Museum"),
       descroption:
-        "Located in Alexandria, this museum provides insights into the city's history, including artifacts from the Pharaonic.",
+        t("Located in Alexandria, this museum provides insights into the city's history, including artifacts from the Pharaonic."),
       image: alexandria,
     },
   ];

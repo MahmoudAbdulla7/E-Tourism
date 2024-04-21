@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import amoon from "../../../assets/Amoon.png";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 export default function Museums() {
+  const { t, i18n } = useTranslation();
   return (
     <div className="Museums">
       <div className="h-full w-full bg-white bg-opacity-40 py-16">
@@ -14,7 +16,8 @@ export default function Museums() {
                   <div className="flex flex-col justify-between h-[25vh]">
                     <p></p>
                     <h2 className="text-main text-5xl font-semibold">
-                      Museums
+                      {t("Museums")}
+                 
                     </h2>
                     <Link
                       to="/museums"
@@ -23,7 +26,9 @@ export default function Museums() {
                       }}
                       className="text-lg text-main flex items-center bg-main hover:text-white group hover:border-2 hover:border-white border-2 border-main rounded-3xl duration-500"
                     >
-                      <span className="mx-2 text-gray-300 group-hover:text-white group-hover:duration-500">Explore All Museums</span>
+                      <span className="mx-2 text-gray-300 group-hover:text-white group-hover:duration-500">
+                        {t("Explore All Museums")}
+                      </span>
                       <IoMdArrowDroprightCircle className="text-gray-300 group-hover:text-white group-hover:duration-500"/>
                     </Link>
                   </div>
@@ -35,19 +40,16 @@ export default function Museums() {
               <div className="museum-details flex items-center justify-center w-full h-full text-white px-3 overflow-hidden">
                 <div className="text-center">
                   <h2 className="text-xl block group-hover:translate-x-[110%] py-3 group-hover:duration-500 rounded-xl bg-black bg-opacity-40 translate-y-2/3">
-                    The Grand Egyptian Museum
+               {t("The Grand Egyptian Museum")}
                   </h2>
                   <p className="py-3 translate-y-96 group-hover:translate-y-[-30px] rounded-xl bg-black bg-opacity-60 text-center group-hover:duration-500">
-                    The Grand Egyptian Museum (GEM) is the world’s largest
-                    museum dedicated to a single civilization. Egypt, near the
-                    pyramids. It will host over 100,000 artifacts from ancient
-                    Egyptian history
+                    {t("The Grand Egyptian Museum (GEM) is the world’s largest museum dedicated to a single civilization. Egypt, near the pyramids. It will host over 100,000 artifacts from ancient Egyptian history")}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="flex lg:justify-around flex-col lg:flex-row sm:py-8">
+          <div className="flex lg:justify-around flex-col lg:flex-row sm:py-8">
             <Link
               to=""
               className="text-4xl rounded-3xl group city overflow-hidden m-3"
@@ -64,7 +66,7 @@ export default function Museums() {
                 <h3>Loxur</h3>
               </div>
             </Link>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

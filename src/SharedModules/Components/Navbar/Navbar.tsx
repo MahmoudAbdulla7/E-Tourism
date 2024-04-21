@@ -1,9 +1,15 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation();
+
   return (
-    <div className="bg-transparent shadow-md sticky top-0 z-10">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div
+      dir={i18n.language == "ar" ? "rtl" : "ltr"}
+      className="bg-transparent shadow-md sticky top-0 z-10"
+    >
+      <div  className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex flex-1 items-center sm:items-stretch sm:justify-start">
             <div className="">
@@ -66,7 +72,7 @@ export default function Navbar() {
                           </filter>
                         </defs>
                       </svg>
-                      EgyptHere
+                      {t("Egypt Here")}
                     </h1>
                   </Link>
                 </div>
@@ -77,9 +83,38 @@ export default function Navbar() {
             <div className="search mr-2">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder={t("Search")}
                 className="rounded-3xl focus:border-2 text-white outline-none  placeholder:text-white border-2 bg-gray-400 px-3 py-1"
               />
+            </div>
+
+            <div className="flex items-center">
+              <button
+               
+                onClick={() => {
+                  i18n.changeLanguage("ar");
+                }}
+              >
+                Ar
+              </button>
+
+                <button
+                 className="mx-5"
+                  onClick={() => {
+                    i18n.changeLanguage("en");
+                  }}
+                >
+                  En
+                </button>
+
+                <button
+                  onClick={() => {
+                    i18n.changeLanguage("fr");
+                  }}
+                >
+                  Fr
+                </button>
+             
             </div>
           </div>
         </div>

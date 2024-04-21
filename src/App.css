@@ -8,6 +8,11 @@ body{
 .bg-auth{
   background-color: rgb(1, 1, 45);
 }
+.menu-flags-button{
+  background:transparent !important;
+  color: white !important;
+  border-bottom:2px solid white !important;
+}
 .Museums{
   background-image: url("./assets/bgformuseum.jpeg");
   background-size: cover;
@@ -119,6 +124,9 @@ body{
 
 
 
+.ReactFlagsSelect-module_selectOption__3pcgW , .ReactFlagsSelect-module_filterBox__3m8EU{
+  color: black !important
+}
 
 
 

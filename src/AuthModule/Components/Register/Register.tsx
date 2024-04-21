@@ -6,8 +6,9 @@ import Input from "../../../SharedModules/Components/Input/Input";
 import Passsword from "../../../SharedModules/Components/Password/Passsword";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import {  useState } from "react";
 
-
+import ReactFlagsSelect from "react-flags-select";
 export default function Register() {
   const {
     register,
@@ -15,18 +16,22 @@ export default function Register() {
     getValues,
     formState: { errors },
   } = useForm();
+  const [selected, setSelected] = useState("");
+
   const onSubmit = (data: any) => {
+    data.country=selected
     console.log({ data });
   };
+
+
   return (
     <div className="h-screen text-white flex items-center justify-center text-center">
       <div className="w-full ">
         <div className="w-[100%] flex items-center justify-center">
-
           <form onSubmit={handleSubmit(onSubmit)} className="w-5/6 lg:w-3/4">
             <h2 className="text-2xl my-3 font-semibold">Register</h2>
-
-            <div className="name-inputs  my-4 flex justify-between ">
+            <div className="name-inputs  my-4 grid sm:grid-cols-2 grid-cols-1  ">
+              <div className="mr-3">
               <Input
                 type="text"
                 placeholder="Enter your first name"
@@ -46,7 +51,9 @@ export default function Register() {
               {errors?.firstName && (
                 <ErrorMessage text={String(errors?.firstName.message)} />
               )}
-              <Input
+              </div>
+             <div className="mr-3">
+             <Input
                 type="text"
                 placeholder="Enter your last name"
                 {...register("lastName", {
@@ -65,6 +72,8 @@ export default function Register() {
               {errors?.lastName && (
                 <ErrorMessage text={String(errors?.lastName.message)} />
               )}
+
+             </div>
             </div>
 
             <div className="email-input  my-4  flex items-center">
@@ -89,19 +98,19 @@ export default function Register() {
 
             <div className="password-input my-4 flex items-center">
               <div className="w-[98%]">
-              <Passsword
-                placeholder="Enter your Password"
-                {...register("password", {
-                  required: "Password is required",
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
-                    message: `The password must include at least one lowercase letter,
+                <Passsword
+                  placeholder="Enter your Password"
+                  {...register("password", {
+                    required: "Password is required",
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+                      message: `The password must include at least one lowercase letter,
                 one uppercase letter, one digit, one special character,
                 and be at least 6 characters long!!`,
-                  },
-                })}
-              />
+                    },
+                  })}
+                />
               </div>
               {errors?.password && (
                 <ErrorMessage text={String(errors?.password.message)} />
@@ -109,32 +118,46 @@ export default function Register() {
             </div>
             <div className="confirm-pass input my-4 flex items-center">
               <div className="w-[98%]">
-              <Passsword
-                placeholder="Enter your Confirm Password"
-                {...register("confirmPassword", {
-                  required: "ConfirmPassword is required",
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
-                    message: `The Confirm Password must include at least one lowercase letter,
+                <Passsword
+                  placeholder="Enter your Confirm Password"
+                  {...register("cPassword", {
+                    required: "ConfirmPassword is required",
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+                      message: `The Confirm Password must include at least one lowercase letter,
                 one uppercase letter, one digit, one special character,
                 and be at least 6 characters long!!`,
-                  },
-                  validate: {
-                    checkConfirmationPassHandler: (value) => {
-                      const { password } = getValues();
-                      return (
-                        password === value ||
-                        "Password And ConfirmPassword doesn't match"
-                      );
                     },
-                  },
-                })}
-              />
+                    validate: {
+                      checkConfirmationPassHandler: (value) => {
+                        const { password } = getValues();
+                        return (
+                          password === value ||
+                          "Password And ConfirmPassword doesn't match"
+                        );
+                      },
+                    },
+                  })}
+                />
               </div>
               {errors?.confirmPassword && (
                 <ErrorMessage text={String(errors?.confirmPassword.message)} />
               )}
+            </div>
+
+          
+            <div className="mr-2">
+            <ReactFlagsSelect
+              selected={selected}
+              onSelect={(code) => setSelected(code)}
+              searchable
+              searchPlaceholder="Search countries"
+              selectButtonClassName="menu-flags-button"
+              selectedSize={14}
+              optionsSize={14}
+             
+            />
             </div>
             <Button text="Register" />
 
