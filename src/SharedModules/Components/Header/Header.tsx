@@ -1,6 +1,5 @@
-import React from 'react'
-import ammon from '../../../assets/Through the desert-bro.svg'
 import { useTranslation } from 'react-i18next';
+import ammon from '../../../assets/Through the desert-bro.svg';
 export default function Header() {
   const { t, i18n } = useTranslation();
 
@@ -25,7 +24,6 @@ export default function Header() {
             </div>
 
             <div className='flex justify-end'>
-              
               <img className="w-44" src={ammon} alt="header"/>
             </div>
           

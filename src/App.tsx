@@ -23,6 +23,7 @@ import AdminHome from "./AdminModule/AdminHome";
 import Users from "./AdminModule/Components/Users/Users";
 import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
 import Cities from "./AdminModule/Components/Cities/Cities";
+import AdminProtectedRoute from "./ProtectedRoutes/AdminProtectedRoute";
 
 function App() {
 
@@ -68,7 +69,7 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <MasterLayout/>,
+      element: <AdminProtectedRoute><MasterLayout/></AdminProtectedRoute>,
       children: [
         {
           index: true,
