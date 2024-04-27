@@ -18,6 +18,11 @@ import PersonalDetails from "./HomeModule/Components/Booking/PersonalDetails/Per
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { login } from "./Redux/AuthSlice/AuthSlice";
+import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
+import AdminHome from "./AdminModule/AdminHome";
+import Users from "./AdminModule/Components/Users/Users";
+import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
+import Cities from "./AdminModule/Components/Cities/Cities";
 
 function App() {
 
@@ -59,6 +64,20 @@ function App() {
         { path: "/monuments", element: <AllMonuments /> },
         { path: "/booking", element: <Booking/> },
         { path: "/booking/personal-details", element: <PersonalDetails/> },
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: <MasterLayout/>,
+      children: [
+        {
+          index: true,
+          errorElement: <NotFound />,
+          element: <AdminHome/>,
+        },
+        { path: "users", element: <Users/> },
+        { path: "adminmonuments", element: <AdminMonuments/> },
+        { path: "cities", element: <Cities/> }
       ],
     },
   ]);
