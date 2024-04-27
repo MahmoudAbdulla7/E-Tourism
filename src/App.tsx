@@ -15,8 +15,23 @@ import SpecificMuseum from "./SpecificMuseumModule/SpecificMuseum";
 import VisitorLayout from "./Layouts/VisitorLayout/VisitorLayout";
 import Booking from "./HomeModule/Components/Booking/Booking";
 import PersonalDetails from "./HomeModule/Components/Booking/PersonalDetails/PersonalDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { login } from "./Redux/AuthSlice/AuthSlice";
 
 function App() {
+
+  const dispatch =useDispatch();
+  
+  // const {data}=useSelector((state:any)=>state.authReducer);
+
+  useEffect(() => {
+    dispatch(login())
+    
+  }, []);
+  
+
+
   const router = createBrowserRouter([
     {
       path: "/auth",
@@ -52,6 +67,7 @@ function App() {
 
   return (
     <>
+    
       <RouterProvider router={router} />
     </>
   );

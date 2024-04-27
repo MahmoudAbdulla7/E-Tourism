@@ -4,16 +4,20 @@ import Input from "../../../SharedModules/Components/Input/Input";
 import Passsword from "../../../SharedModules/Components/Password/Passsword";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import postDataHock from "../../../Utls/HockForPostData";
 
 export default function ResetPassword() {
+  const {postData,isLoading}=postDataHock();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     getValues,
   } = useForm();
+
   const onSubmit = (data: any) => {
-    console.log(data);
+    postData(data,"auth/reset-password","/auth")
   };
   return (
     <div className="h-screen text-white flex items-center justify-center text-center">
@@ -45,7 +49,7 @@ export default function ResetPassword() {
               <div className="w-[98%]">
                 <Input
                   type="text"
-                  {...register("otp", {
+                  {...register("forgetCode", {
                     required: "OTP is required",
                   })}
                   placeholder="Enter your otp"
@@ -81,7 +85,7 @@ export default function ResetPassword() {
               <div className="w-[98%]">
                 <Passsword
                   placeholder="Enter your Confirm Password"
-                  {...register("confirmPassword", {
+                  {...register("cpassword", {
                     required: "ConfirmPassword is required",
                     pattern: {
                       value:
@@ -106,7 +110,7 @@ export default function ResetPassword() {
                 <ErrorMessage text={String(errors?.confirmPassword.message)} />
               )}
             </div>
-            <Button text="Reset" />
+            {isLoading?<Button text="lodaing" />:<Button text="Reset" />}
           </form>
         </div>
       </div>

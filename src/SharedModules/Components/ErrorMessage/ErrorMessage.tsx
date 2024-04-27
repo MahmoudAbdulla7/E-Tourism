@@ -6,7 +6,7 @@ import { MdError } from 'react-icons/md'
 
   return (
 
-    <div className="group relative w-[3%]">
+    <div className="group relative w-auto">
     <span className="text-red-300">
       <MdError />
     </span>

@@ -1,19 +1,27 @@
+import { useForm } from "react-hook-form";
 import { MdOutlineMailOutline } from "react-icons/md";
 import Button from "../../../SharedModules/Components/Button/Button";
-import Input from "../../../SharedModules/Components/Input/Input";
-import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import Input from "../../../SharedModules/Components/Input/Input";
+import postDataHock from "../../../Utls/HockForPostData";
 
+interface data{
+  email:string
+}
 
 export default function SendResetPasswordCode() {
+const {postData,isLoading}=postDataHock();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+
+
+  const onSubmit = (data: data|any) => {
+    postData(data,"auth/send-code","/auth/reset-password")
   };
   return (
     <div className="h-screen text-white flex items-center justify-center text-center">
@@ -41,7 +49,7 @@ export default function SendResetPasswordCode() {
                 <ErrorMessage text={String(errors?.email.message)} />
               )}
             </div>
-            <Button text="Send" />
+            {isLoading?<Button text="Loading" />:<Button text="Send" />}
           </form>
         </div>
       </div>
