@@ -120,6 +120,8 @@ body{
   background-size: cover;
   background-position: center;
 }
+
+/* react-flag-select */
 .active{
   background-color: rgb(22 101 52 ) !important;
 }
@@ -318,3 +320,32 @@ img#roma:hover {
   filter: none;
 }
 
+
+.sidebar-container .ps-sidebar-container{
+  background-color: rgb(1, 1, 45);
+  color: #fff;
+  /* border-top-right-radius:50px; */
+}
+.side{
+  border-top-right-radius:60px;
+}
+.sidebar-container .ps-sidebar-root{
+border: none;
+height: 100vh;
+}
+
+.sidebar-container .ps-sidebar-container .ps-menu-button:hover{
+  background-color: #092869;
+}
+
+.header-content{
+  background-image: url(assets/bg-header.png);
+  background-size: cover;
+  background-position:center center;
+  }
+
+  .home-container{
+    background-color: rgb(206, 234, 252);
+    }
+
+    
