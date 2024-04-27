@@ -1,0 +1,1336 @@
+{
+	"info": {
+		"_postman_id": "65135d1e-db9d-4f46-a903-dee3b1e6a06f",
+		"name": "E-Tourism",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26920442"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "john_doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "john@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hashed@123",
+									"type": "text"
+								},
+								{
+									"key": "cpassword",
+									"value": "Hashed@123",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Egypt",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/شبكه هبة/51136493_349116769273445_7046724963914481664_n.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign in",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"mhmudabdullh629@gmail.com\",\r\n  \"password\": \"Hashed@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send code",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"mhmudabdullh629@gmail.com\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/send-code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"send-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"mhmudabdullh629@gmail.com\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/send-code",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"send-code"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "city",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "cairo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNDQ5MzM1LCJleHAiOjE3MTM0NTExMzV9.omCDQdDE1QK6Dfgtxp7PamDtF6aNjV0pVxuUrXq6Y2o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "giza",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/6621299c593fe0796d4fb73e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"6621299c593fe0796d4fb73e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNDQ5MzM1LCJleHAiOjE3MTM0NTExMzV9.omCDQdDE1QK6Dfgtxp7PamDtF6aNjV0pVxuUrXq6Y2o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "giza",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/6621299c593fe0796d4fb73e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"6621299c593fe0796d4fb73e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "cairo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "cairo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "cairo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNTQ2MzQ4LCJleHAiOjE3MTM1NDgxNDh9.z0cWoR2Y-QY2OHOL-TTQp2WuiuwcsknHL99RbQtVwF0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/cart/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "cairo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tourist Destination",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzQ2NDM3NSwiZXhwIjoxNzEzNDY2MTc1fQ.mqSPW1dK6h0ZUdDZadsToDjRZbvARXePbxIPTCX7-AM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cityID",
+									"value": "617e54735d83e03680f3e748",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Museum",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Example Museum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is an example museum located in the city.",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "https://maps.app.goo.gl/Y2GMNNTezaZ17zVX7",
+									"type": "text"
+								},
+								{
+									"key": "ticketPrice",
+									"value": "400",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eebcf60-c090-4b00-923e-8a21b47ee7ae"
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1eebce77-0d2e-4240-904e-5930cf753a1b",
+										"postman-cloud:///1eefd241-b960-42d0-bb13-0ae6780047f8",
+										"postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+									]
+								},
+								{
+									"key": "createdBy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "openingHours",
+									"value": "[object Object]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66216035422bf8dd6536f419/destination",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66216035422bf8dd6536f419",
+								"destination"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzQ2NjQwMCwiZXhwIjoxNzEzNDY4MjAwfQ.9IgEzTgLJDtZhEafZdbopzyWEPXUZxhPnzJ8FJ00w3U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cityID",
+									"value": "617e54735d83e03680f3e748",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Museum",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Example Museum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is an example museum located in the city.",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "https://maps.app.goo.gl/Y2GMNNTezaZ17zVX7",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ticketPrice",
+									"value": "400",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eebcf60-c090-4b00-923e-8a21b47ee7ae",
+									"disabled": true
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1eebce77-0d2e-4240-904e-5930cf753a1b",
+										"postman-cloud:///1eefd241-b960-42d0-bb13-0ae6780047f8",
+										"postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+									],
+									"disabled": true
+								},
+								{
+									"key": "createdBy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "openingHours",
+									"value": "[object Object]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66216035422bf8dd6536f419/destination/66216ddcf8172e5259d1992c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66216035422bf8dd6536f419",
+								"destination",
+								"66216ddcf8172e5259d1992c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzQ2NjQwMCwiZXhwIjoxNzEzNDY4MjAwfQ.9IgEzTgLJDtZhEafZdbopzyWEPXUZxhPnzJ8FJ00w3U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cityID",
+									"value": "617e54735d83e03680f3e748",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Museum",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Example Museum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is an example museum located in the city.",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "https://maps.app.goo.gl/Y2GMNNTezaZ17zVX7",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ticketPrice",
+									"value": "400",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eebcf60-c090-4b00-923e-8a21b47ee7ae",
+									"disabled": true
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1eebce77-0d2e-4240-904e-5930cf753a1b",
+										"postman-cloud:///1eefd241-b960-42d0-bb13-0ae6780047f8",
+										"postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+									],
+									"disabled": true
+								},
+								{
+									"key": "createdBy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "openingHours",
+									"value": "[object Object]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66216035422bf8dd6536f419/destination/66216ddcf8172e5259d1992c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66216035422bf8dd6536f419",
+								"destination",
+								"66216ddcf8172e5259d1992c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by cityId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzQ2NjQwMCwiZXhwIjoxNzEzNDY4MjAwfQ.9IgEzTgLJDtZhEafZdbopzyWEPXUZxhPnzJ8FJ00w3U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cityID",
+									"value": "617e54735d83e03680f3e748",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Museum",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Example Museum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is an example museum located in the city.",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "https://maps.app.goo.gl/Y2GMNNTezaZ17zVX7",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ticketPrice",
+									"value": "400",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eebcf60-c090-4b00-923e-8a21b47ee7ae",
+									"disabled": true
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1eebce77-0d2e-4240-904e-5930cf753a1b",
+										"postman-cloud:///1eefd241-b960-42d0-bb13-0ae6780047f8",
+										"postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+									],
+									"disabled": true
+								},
+								{
+									"key": "createdBy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "openingHours",
+									"value": "[object Object]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66216035422bf8dd6536f419/destination/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66216035422bf8dd6536f419",
+								"destination",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzQ2NjQwMCwiZXhwIjoxNzEzNDY4MjAwfQ.9IgEzTgLJDtZhEafZdbopzyWEPXUZxhPnzJ8FJ00w3U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cityID",
+									"value": "617e54735d83e03680f3e748",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Museum",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Example Museum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is an example museum located in the city.",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "https://maps.app.goo.gl/Y2GMNNTezaZ17zVX7",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ticketPrice",
+									"value": "400",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eebcf60-c090-4b00-923e-8a21b47ee7ae",
+									"disabled": true
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1eebce77-0d2e-4240-904e-5930cf753a1b",
+										"postman-cloud:///1eefd241-b960-42d0-bb13-0ae6780047f8",
+										"postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+									],
+									"disabled": true
+								},
+								{
+									"key": "createdBy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "openingHours",
+									"value": "[object Object]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66216035422bf8dd6536f419/destination/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66216035422bf8dd6536f419",
+								"destination",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzQ2NjQwMCwiZXhwIjoxNzEzNDY4MjAwfQ.9IgEzTgLJDtZhEafZdbopzyWEPXUZxhPnzJ8FJ00w3U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cityID",
+									"value": "617e54735d83e03680f3e748",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "Museum",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Example Museum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is an example museum located in the city.",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "https://maps.app.goo.gl/Y2GMNNTezaZ17zVX7",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ticketPrice",
+									"value": "400",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eebcf60-c090-4b00-923e-8a21b47ee7ae",
+									"disabled": true
+								},
+								{
+									"key": "subImages",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1eebce77-0d2e-4240-904e-5930cf753a1b",
+										"postman-cloud:///1eefd241-b960-42d0-bb13-0ae6780047f8",
+										"postman-cloud:///1eefd8ce-cdc8-4db0-86df-8dbf694f2aa9"
+									],
+									"disabled": true
+								},
+								{
+									"key": "createdBy",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "openingHours",
+									"value": "[object Object]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66216035422bf8dd6536f419/destination/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66216035422bf8dd6536f419",
+								"destination",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNTUyNzMyLCJleHAiOjE3MTM1NTQ1MzJ9._uLKOBcSlKm77tQdYfvMLEml6VottbYUxO7PdCR1vKE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"touristDestination\":{\"touristDestinationId\":\"66227bdb7bda0c9adb6d43c5\",\r\n\"quantity\":2\r\n},\r\n\"DateOfVisit\":\"2024-04-26T00:00:00.000Z\",\"paymentType\":\"card\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNjUwMTQ3LCJleHAiOjE3MTM2NTE5NDd9.-q5K2XQzBYEWEv94U1SybQECieZ4PVVbPm5vjloLeVc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"reason\":\"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/order/66238951d474d0e1d4c4ea71",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"order",
+								"66238951d474d0e1d4c4ea71"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status by admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNTUyNzMyLCJleHAiOjE3MTM1NTQ1MzJ9._uLKOBcSlKm77tQdYfvMLEml6VottbYUxO7PdCR1vKE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"status\":\"[\"waitPayment\",\"placed\",\"canceled\",\"rejected\",\"onWay\",\"delivered\"]\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/order/orderId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"order",
+								"orderId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NDJkNWZlZTcyZjc2ZDdlMjFlOSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxMzY1MjUxOSwiZXhwIjoxNzEzNjU0MzE5fQ.EKHi6oQ1hmDPSXocnzbzkh1QS4xnWFZTPP0TH5Kdwv0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"touristDestination\":{\"touristDestinationId\":\"66227bdb7bda0c9adb6d43c5\",\r\n\"quantity\":2\r\n},\r\n\"DateOfVisit\":\"2024-04-26T00:00:00.000Z\",\"paymentType\":\"card\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNjU0NDc5LCJleHAiOjE3MTM2NTYyNzl9.pZ_aP-gO6u5fQa-s6sqnpha0iX7YHahac1QF89FyUkU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"comment\":\"ACACCAaaaa\",\r\n\"rating\":5}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66227ba47bda0c9adb6d43bf/destination/66227bdb7bda0c9adb6d43c5/review",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66227ba47bda0c9adb6d43bf",
+								"destination",
+								"66227bdb7bda0c9adb6d43c5",
+								"review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNjU0NDc5LCJleHAiOjE3MTM2NTYyNzl9.pZ_aP-gO6u5fQa-s6sqnpha0iX7YHahac1QF89FyUkU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"comment\":\"good \",\r\n\"rating\":3}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/city/66227ba47bda0c9adb6d43bf/destination/66227bdb7bda0c9adb6d43c5/review/66244d3ddab784a574767e98",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66227ba47bda0c9adb6d43bf",
+								"destination",
+								"66227bdb7bda0c9adb6d43c5",
+								"review",
+								"66244d3ddab784a574767e98"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Hamada__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjA4NWZjNmFkOTdmZjIyNzE3ZDdiYiIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNzEzNjU0NDc5LCJleHAiOjE3MTM2NTYyNzl9.pZ_aP-gO6u5fQa-s6sqnpha0iX7YHahac1QF89FyUkU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/city/66227ba47bda0c9adb6d43bf/destination/66227bdb7bda0c9adb6d43c5/review/66244d3ddab784a574767e98",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"city",
+								"66227ba47bda0c9adb6d43bf",
+								"destination",
+								"66227bdb7bda0c9adb6d43c5",
+								"review",
+								"66244d3ddab784a574767e98"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
