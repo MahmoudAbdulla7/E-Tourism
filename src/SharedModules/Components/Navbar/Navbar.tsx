@@ -9,9 +9,9 @@ export default function Navbar() {
       dir={i18n.language == "ar" ? "rtl" : "ltr"}
       className="bg-transparent shadow-md sticky top-0 z-10"
     >
-      <div  className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="flex flex-1 items-center sm:items-stretch sm:justify-start">
+          <div>
             <div className="">
               <div className="flex space-x-4">
                 <div className="website-name">
@@ -79,7 +79,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <div className="right-side flex items-center">
+          <div className="flex items-center">
             <div className="search mr-2">
               <input
                 type="text"
@@ -90,7 +90,6 @@ export default function Navbar() {
 
             <div className="flex items-center">
               <button
-               
                 onClick={() => {
                   i18n.changeLanguage("ar");
                 }}
@@ -98,23 +97,22 @@ export default function Navbar() {
                 Ar
               </button>
 
-                <button
-                 className="mx-5"
-                  onClick={() => {
-                    i18n.changeLanguage("en");
-                  }}
-                >
-                  En
-                </button>
+              <button
+                className="mx-5"
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                }}
+              >
+                En
+              </button>
 
-                <button
-                  onClick={() => {
-                    i18n.changeLanguage("fr");
-                  }}
-                >
-                  Fr
-                </button>
-             
+              <button
+                onClick={() => {
+                  i18n.changeLanguage("fr");
+                }}
+              >
+                Fr
+              </button>
             </div>
           </div>
         </div>

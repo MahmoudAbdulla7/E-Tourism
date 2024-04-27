@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-// import Modal from 'react-bootstrap/Modal';
-import { LiaCitySolid, LiaPizzaSliceSolid } from "react-icons/lia";
-import { IoMdHome } from "react-icons/io";
-import { HiMiniUsers } from "react-icons/hi2";
-import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
-import { Link, useNavigate } from 'react-router-dom';
-import ammon from '../../../assets/Amoon.png'
-import { GiLouvrePyramid } from 'react-icons/gi';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { GiLouvrePyramid } from 'react-icons/gi';
+import { HiMiniUsers } from "react-icons/hi2";
+import { IoIosLogOut, IoMdHome } from "react-icons/io";
+import { LiaCitySolid } from "react-icons/lia";
+import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
+import { Link } from 'react-router-dom';
+import ammon from '../../../assets/Amoon.png';
+import { logOut } from '../../../Redux/AuthSlice/AuthSlice';
+import { useDispatch } from 'react-redux';
 
 export default function SideBar() {
   const { t, i18n } = useTranslation();
@@ -18,6 +19,7 @@ export default function SideBar() {
   let handleToggle=()=>{
     setIsCollapsed(!isCollapsed)
   }
+  const dispatch=useDispatch();
   return (
     <>
    <div dir={i18n.language == "ar" ? "rtl" : "ltr"} className='sidebar-container  vh-100'>
@@ -39,7 +41,7 @@ export default function SideBar() {
     <MenuItem icon={<GiLouvrePyramid className='text-2xl'/>} component={<Link to="/dashboard/adminmonuments" />}>{t("Monuments")} </MenuItem>
     <MenuItem icon={<LiaCitySolid  className='text-2xl' />} component={<Link to="/dashboard/cities" />}> {t("Cities")} </MenuItem>
     {/* <MenuItem icon={<FaKey className='fs-4' />} onClick={handleShow}>Change Password</MenuItem> */}
-    {/* <MenuItem icon={<IoLogOutOutline className='fs-4' />} onClick={logOut}>Logout</MenuItem> */}
+    <MenuItem onClick={()=>{dispatch(logOut())}} icon={<IoIosLogOut className='fs-4' />} >Logout</MenuItem>
   </Menu>
 </Sidebar>
    </div>

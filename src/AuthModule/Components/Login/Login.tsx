@@ -19,7 +19,7 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = (data: LoginData|any) => {
-    postData(data,"auth/login","/");
+    postData(data,"auth/login","/dashboard");
     
   };
 
