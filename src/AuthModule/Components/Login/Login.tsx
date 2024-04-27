@@ -5,15 +5,22 @@ import Input from "../../../SharedModules/Components/Input/Input";
 import { useForm } from "react-hook-form";
 import Passsword from "../../../SharedModules/Components/Password/Passsword";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import postDataHock from "../../../Utls/HockForPostData";
+interface LoginData{
+  email:string;
+  password:string;
+}
 export default function Login() {
+  const {isLoading,postData}=postDataHock();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log({ data });
+  const onSubmit = (data: LoginData|any) => {
+    postData(data,"auth/login","/");
+    
   };
 
   return (
@@ -63,8 +70,7 @@ export default function Login() {
                 <ErrorMessage text={String(errors?.password?.message)} />
               )}
             </div>
-
-            <Button text="Log in" />
+{isLoading?<Button text="Loading" />:<Button text="Log in" />}
 
             <div className="flex justify-between">
               <p>

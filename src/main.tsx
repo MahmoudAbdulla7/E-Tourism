@@ -1,11 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
-import "./i18n.ts"
 import App from './App.tsx'
-
+import "./i18n.ts"
+import './index.css'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
+import { Provider } from 'react-redux'
+import store from './Redux/Store.ts'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <Provider store={store}>
+    <ToastContainer theme='dark'/>
     <App />
+    </Provider>
   </React.StrictMode>,
 )

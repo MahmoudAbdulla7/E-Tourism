@@ -12,7 +12,7 @@ const Input = forwardRef(
   ) => {
     return (
       <>
-        <div className="Email my-1">
+        <div className=" my-1">
           <div className=" mt-2 text-lg border-b-2 flex border-gray-50">
             <label className="pointer-events-none flex items-center pr-2">
               {children}
