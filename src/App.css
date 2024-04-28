@@ -105,21 +105,6 @@ body{
 .amoon-image{
   transform: translateX(-50%);
 }
-.museum-background{
-  background-image: url("./assets/museum.jpeg");
-  background-size: cover;
-  background-position: center;
-}
-.city{
-  background-image: url("./assets/3615db11b8c143df4cdc93c05a516b2a.jpeg");
-  background-size: cover;
-  background-position: center;
-}
-.acity{
-  background-image: url("./assets/Luxor.jpeg");
-  background-size: cover;
-  background-position: center;
-}
 
 /* react-flag-select */
 .active{
