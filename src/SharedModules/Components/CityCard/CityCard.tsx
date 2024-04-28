@@ -2,22 +2,21 @@ import React from 'react'
 import styles from './CityCard.module.css'
 import { FaTrashCan } from 'react-icons/fa6'
 import { FaRegEdit } from 'react-icons/fa'
+interface Prop{
+    name:string;
+    image:string
+}
 
-export default function CityCard() {
+export default function CityCard({name,image}:Prop) {
   return (
     <>
    
-
-
-
-<div className={styles.ag_format_container}>
-  <div className={styles.ag_courses_box}>
-
-    <div className={`${styles.ag_courses_item}`}>
-      <a href="#" className={styles.ag_courses_item_link}>
+<div className=''>
+<div className={`${styles.ag_courses_item}`}>
+      <a href="#" style={{backgroundImage: "url(" + `${image}` + ")"}} className={styles.ag_courses_item_link}>
         <div className={styles.ag_courses_item_bg}  />
-        <div className={styles.ag_courses_item_title}>
-          UX/UI Web-Design&nbsp;+ Mobile Design
+        <div className={`text-main ${styles.ag_courses_item_title}`}>
+          {name}
         </div>
         <div className={` flex items-center ${styles.ag_courses_item_date_box}`}>
         <FaRegEdit className={styles.edit}/>
@@ -27,53 +26,6 @@ export default function CityCard() {
         </div>
       </a>
     </div>
-
-    {/* <div className={styles.ag_courses_item}>
-      <a href="#" className={styles.ag_courses_item_link}>
-        <div className={styles.ag_courses_item_bg}  />
-        <div className={styles.ag_courses_item_title}>
-          UX/UI Web-Design&nbsp;+ Mobile Design
-        </div>
-        <div className={styles.ag_courses_item_date_box}>
-          Start:
-          <span className={styles.ag_courses_item_date}>
-            04.11.2022
-          </span>
-        </div>
-      </a>
-    </div>
-
-    <div className={styles.ag_courses_item}>
-      <a href="#" className={styles.ag_courses_item_link}>
-        <div className={styles.ag_courses_item_bg}  />
-        <div className={styles.ag_courses_item_title}>
-          UX/UI Web-Design&nbsp;+ Mobile Design
-        </div>
-        <div className={styles.ag_courses_item_date_box}>
-          Start:
-          <span className={styles.ag_courses_item_date}>
-            04.11.2022
-          </span>
-        </div>
-      </a>
-    </div>
-
-    <div className={styles.ag_courses_item}>
-      <a href="#" className={styles.ag_courses_item_link}>
-        <div className={styles.ag_courses_item_bg}  />
-        <div className={styles.ag_courses_item_title}>
-          UX/UI Web-Design&nbsp;+ Mobile Design
-        </div>
-        <div className={styles.ag_courses_item_date_box}>
-          Start:
-          <span className={styles.ag_courses_item_date}>
-            04.11.2022
-          </span>
-        </div>
-      </a>
-    </div> */}
-
-  </div>
 </div>
 
     </>
