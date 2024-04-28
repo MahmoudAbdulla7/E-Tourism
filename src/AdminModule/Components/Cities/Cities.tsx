@@ -1,19 +1,19 @@
-import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
+import axios from "axios";
+import { Modal } from "flowbite-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { IoClose } from "react-icons/io5";
-import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
 import { FaPlus } from "react-icons/fa";
-import axios from "axios";
-import { baseUrl } from "./../../../Utls/BaseUrl";
+import { ImSpinner9 } from "react-icons/im";
+import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { ImSpinner9 } from "react-icons/im";
-import CityCard from "../../../SharedModules/Components/CityCard/CityCard";
-import NoData from "../../../SharedModules/Components/NoData/NoData";
-import { getAllCities } from "../../../Utls/getCities";
 import { setCities } from "../../../Redux/CitySlice/CitySlice";
+import CityCard from "../../../SharedModules/Components/CityCard/CityCard";
+import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import NoData from "../../../SharedModules/Components/NoData/NoData";
+import { getAllCities } from "../../../Utls/getData";
+import { baseUrl } from "./../../../Utls/BaseUrl";
 export default function Cities() {
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -27,10 +27,10 @@ export default function Cities() {
   function onCloseModal() {
     setOpenModal(false);
   }
-  const dispatch =useDispatch();
-  const {cities}=useSelector((state:any)=>state.CitiesReducer);
+  const dispatch = useDispatch();
+  const { cities } = useSelector((state: any) => state.CitiesReducer);
   const { headers } = useSelector((state: any) => state.authReducer);
-  
+
   const onSubmit = (data: any) => {
     const addFormData = new FormData();
     addFormData.append("name", data["name"]);
@@ -44,7 +44,9 @@ export default function Cities() {
         setIsLoading(false);
         handleClose();
         toast.success(res?.data?.message);
-        getAllCities((res)=>{return dispatch(setCities(res))})
+        getAllCities("city",(res) => {
+          return dispatch(setCities(res));
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -54,7 +56,7 @@ export default function Cities() {
   };
   return (
     <>
-    {/* header */}
+      {/* header */}
       <div
         dir={i18n.language == "ar" ? "rtl" : "ltr"}
         className="Elheader home-container my-5 mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
@@ -77,14 +79,23 @@ export default function Cities() {
         </div>
       </div>
 
-    
-      {cities.length>0?      <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-1 ">
-{cities.map((city:any)=><div className="w-full" key={city.id}><CityCard name={city.name} image={city.image.secure_url}/></div>)}
-        </div>  :<div className="flex items-center justify-center "><div className="w-[30%]"><NoData/></div></div>}
+      {cities.length > 0 ? (
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-1 ">
+          {cities.map((city: any) => (
+            <div className="w-full" key={city.id}>
+              <CityCard name={city.name} image={city.image.secure_url} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center ">
+          <div className="w-[30%]">
+            <NoData />
+          </div>
+        </div>
+      )}
 
-
-
-{/* Modal */}
+      {/* Modal */}
       <div className="ElModall">
         <Modal show={openModal} size="md" onClose={onCloseModal} popup>
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
@@ -201,8 +212,6 @@ export default function Cities() {
         </Modal>
       </div>
       {/* ---------------------- */}
-       
-
     </>
   );
 }

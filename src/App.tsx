@@ -24,22 +24,20 @@ import Users from "./AdminModule/Components/Users/Users";
 import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
 import Cities from "./AdminModule/Components/Cities/Cities";
 import AdminProtectedRoute from "./ProtectedRoutes/AdminProtectedRoute";
-import { getAllCities } from "./Utls/getCities";
+import { getAllCities } from "./Utls/getData";
 import { setCities } from "./Redux/CitySlice/CitySlice";
 
 function App() {
+  const dispatch = useDispatch();
 
-  const dispatch =useDispatch();
-  
-  
-  // const {headers}=useSelector((state:any)=>state.authReducer);
-  const {cities}=useSelector((state:any)=>state.CitiesReducer);
+  // const { cities } = useSelector((state: any) => state.CitiesReducer);
 
   useEffect(() => {
-    getAllCities((res)=>{return dispatch(setCities(res))})
+    getAllCities("city",(res) => {
+      return dispatch(setCities(res));
+    });
     dispatch(login());
     // console.log(cities);
-    
   }, []);
 
   const router = createBrowserRouter([
@@ -69,29 +67,32 @@ function App() {
         { path: "/museums/:museumId", element: <SpecificMuseum /> },
         { path: "/map", element: <Map /> },
         { path: "/monuments", element: <AllMonuments /> },
-        { path: "/booking", element: <Booking/> },
-        { path: "/booking/personal-details", element: <PersonalDetails/> },
+        { path: "/booking", element: <Booking /> },
+        { path: "/booking/personal-details", element: <PersonalDetails /> },
       ],
     },
     {
       path: "/dashboard",
-      element: <AdminProtectedRoute><MasterLayout/></AdminProtectedRoute>,
+      element: (
+        <AdminProtectedRoute>
+          <MasterLayout />
+        </AdminProtectedRoute>
+      ),
       children: [
         {
           index: true,
           errorElement: <NotFound />,
-          element: <AdminHome/>,
+          element: <AdminHome />,
         },
-        { path: "users", element: <Users/> },
-        { path: "adminmonuments", element: <AdminMonuments/> },
-        { path: "cities", element: <Cities/> }
+        { path: "users", element: <Users /> },
+        { path: "adminmonuments", element: <AdminMonuments /> },
+        { path: "cities", element: <Cities /> },
       ],
     },
   ]);
 
   return (
     <>
-    
       <RouterProvider router={router} />
     </>
   );
