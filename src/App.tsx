@@ -24,15 +24,21 @@ import Users from "./AdminModule/Components/Users/Users";
 import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
 import Cities from "./AdminModule/Components/Cities/Cities";
 import AdminProtectedRoute from "./ProtectedRoutes/AdminProtectedRoute";
+import { getAllCities } from "./Utls/getCities";
+import { setCities } from "./Redux/CitySlice/CitySlice";
 
 function App() {
 
   const dispatch =useDispatch();
   
-  // const {data}=useSelector((state:any)=>state.authReducer);
+  
+  // const {headers}=useSelector((state:any)=>state.authReducer);
+  const {cities}=useSelector((state:any)=>state.CitiesReducer);
 
   useEffect(() => {
-    dispatch(login())
+    getAllCities((res)=>{return dispatch(setCities(res))})
+    dispatch(login());
+    // console.log(cities);
     
   }, []);
 
