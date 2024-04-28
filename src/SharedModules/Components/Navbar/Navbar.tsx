@@ -1,8 +1,11 @@
+import { Dropdown } from "flowbite-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState<string>("En")
 
   return (
     <div
@@ -79,42 +82,36 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="search mr-2">
-              <input
-                type="text"
-                placeholder={t("Search")}
-                className="rounded-3xl focus:border-2 text-white outline-none  placeholder:text-white border-2 bg-gray-400 px-3 py-1"
-              />
-            </div>
 
-            <div className="flex items-center">
-              <button
+            <Dropdown label={language} inline>
+              <Dropdown.Item
                 onClick={() => {
                   i18n.changeLanguage("ar");
+                  setLanguage("Ar")
                 }}
               >
-                Ar
-              </button>
-
-              <button
-                className="mx-5"
+                <span>Ar</span>
+              </Dropdown.Item>
+              <Dropdown.Item
                 onClick={() => {
                   i18n.changeLanguage("en");
+                  setLanguage("En")
+
                 }}
               >
-                En
-              </button>
-
-              <button
+                <span>En</span>
+              </Dropdown.Item>
+              <Dropdown.Item
                 onClick={() => {
                   i18n.changeLanguage("fr");
+                  setLanguage("Fr")
+
                 }}
               >
-                Fr
-              </button>
-            </div>
-          </div>
+                <span>Fr</span>
+              </Dropdown.Item>
+            </Dropdown>
+
         </div>
       </div>
     </div>
