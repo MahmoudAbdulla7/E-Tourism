@@ -16,6 +16,7 @@ import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMe
 import Input from "../../../SharedModules/Components/Input/Input";
 import Passsword from "../../../SharedModules/Components/Password/Passsword";
 import postDataHock from '../../../Utls/HockForPostData';
+import { ImSpinner9 } from "react-icons/im";
 
 interface UserCredentials {
   email?: string;
@@ -97,7 +98,6 @@ export default function Register() {
   };
 
   const onSubmit = (data: UserAdditionalInfo) => {
-    
     if (!selected) {
       return setCountryError("country is required");
     };
@@ -106,8 +106,8 @@ export default function Register() {
     setCountryError("");
     const allFormData:UserProfile={...data,...firstFormData};
     const formData =appendFormData(allFormData);
-
     postData(formData,"auth/signup","/auth");
+    
   };
 
   return (
