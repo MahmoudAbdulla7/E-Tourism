@@ -7,10 +7,13 @@ import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMe
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import { baseUrl } from "./../../../Utls/BaseUrl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { ImSpinner9 } from "react-icons/im";
 import CityCard from "../../../SharedModules/Components/CityCard/CityCard";
+import NoData from "../../../SharedModules/Components/NoData/NoData";
+import { getAllCities } from "../../../Utls/getCities";
+import { setCities } from "../../../Redux/CitySlice/CitySlice";
 export default function Cities() {
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -24,8 +27,10 @@ export default function Cities() {
   function onCloseModal() {
     setOpenModal(false);
   }
-
+  const dispatch =useDispatch();
+  const {cities}=useSelector((state:any)=>state.CitiesReducer);
   const { headers } = useSelector((state: any) => state.authReducer);
+  
   const onSubmit = (data: any) => {
     const addFormData = new FormData();
     addFormData.append("name", data["name"]);
@@ -39,6 +44,7 @@ export default function Cities() {
         setIsLoading(false);
         handleClose();
         toast.success(res?.data?.message);
+        getAllCities((res)=>{return dispatch(setCities(res))})
       })
       .catch((err) => {
         console.log(err);
@@ -70,6 +76,13 @@ export default function Cities() {
           </button>
         </div>
       </div>
+
+    
+      {cities.length>0?      <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-1 ">
+{cities.map((city:any)=><div className="w-full" key={city.id}><CityCard name={city.name} image={city.image.secure_url}/></div>)}
+        </div>  :<div className="flex items-center justify-center "><div className="w-[30%]"><NoData/></div></div>}
+
+
 
 {/* Modal */}
       <div className="ElModall">
@@ -189,7 +202,7 @@ export default function Cities() {
       </div>
       {/* ---------------------- */}
        
-      <CityCard/>
+
     </>
   );
 }

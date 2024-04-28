@@ -1,10 +1,4 @@
-.ag_format_container {
-	width: 1142px;
-	margin: 0 auto;
-  }
-  
-  
-  
+
   .ag_courses_box {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -31,7 +25,6 @@
 	display: block;
 	padding: 30px 20px;
 	background-color: rgba(19, 21, 80, 1);
-	background-image: url('../../../assets/Amoon.png');
 	background-position: center center;
 	background-size: cover;
   
@@ -93,22 +86,7 @@
 	-o-transition: all .5s ease;
 	transition: all .5s ease;
   }
-  .ag_courses_item:nth-child(2n) .ag_courses_item_bg {
-	background-color: #3ecd5e;
-  }
-  .ag_courses_item:nth-child(3n) .ag_courses_item_bg {
-	background-color: #e44002;
-  }
-  .ag_courses_item:nth-child(4n) .ag_courses_item_bg {
-	background-color: #952aff;
-  }
-  .ag_courses_item:nth-child(5n) .ag_courses_item_bg {
-	background-color: #cd3e94;
-  }
-  .ag_courses_item:nth-child(6n) .ag_courses_item_bg {
-	background-color: #4c49ea;
-  }
-  
+
   
   
   @media only screen and (max-width: 979px) {
@@ -121,12 +99,7 @@
 	}
   }
   
-  @media only screen and (max-width: 767px) {
-	.ag_format_container {
-	  width: 96%;
-	}
-  
-  }
+ 
   @media only screen and (max-width: 639px) {
 	.ag_courses_item {
 	  -ms-flex-preferred-size: 100%;
@@ -160,5 +133,5 @@
   }
   
   .edit,.del {
-    transition: all 0.3s;
+    transition: all 0.6s;
   }
