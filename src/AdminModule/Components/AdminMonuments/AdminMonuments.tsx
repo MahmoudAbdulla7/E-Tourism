@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import SharedModal from "../../../SharedModules/Components/SharedModal/SharedModal";
-import { useForm } from "react-hook-form";
-import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
-import { Select } from "flowbite-react";
 import axios from "axios";
-import { baseUrl } from "../../../Utls/BaseUrl";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCities } from "../../../Utls/getData";
-import { setCities } from "../../../Redux/CitySlice/CitySlice";
-import { toast } from "react-toastify";
-import { ImSpinner9 } from "react-icons/im";
+import { Select } from "flowbite-react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { FaPlus } from "react-icons/fa";
+import { HiOutlineExclamationCircle } from "react-icons/hi2";
+import { ImSpinner9 } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { setCities } from "../../../Redux/CitySlice/CitySlice";
+import { setmonuments } from "../../../Redux/MonumentsSlice/MonumentsSlice";
+import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import MonumentsCard from "../../../SharedModules/Components/MonumentsCard/MonumentsCard";
+import NoData from "../../../SharedModules/Components/NoData/NoData";
+import SharedModal from "../../../SharedModules/Components/SharedModal/SharedModal";
+import { baseUrl } from "../../../Utls/BaseUrl";
+import { getAllCities } from "../../../Utls/getData";
 
 interface MonumentInfo {
   name: string;
@@ -25,13 +29,17 @@ interface MonumentInfo {
 
 export default function AdminMonuments() {
   const { t, i18n } = useTranslation();
-  const [openModal, setOpenModal] = useState(false);
+  const [modalState, setModalState] = useState("");
+  const [cityId, setCityId] = useState("");
+  const [id, setId] = useState("");
+  const [monumentName, setMonumentName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [updateModalLoading, setUpdateModalLoading] = useState(false);
   const dispatch = useDispatch();
   const { headers } = useSelector((state: any) => state.authReducer);
   const { cities } = useSelector((state: any) => state.CitiesReducer);
   function onCloseModal() {
-    setOpenModal(false);
+    setModalState("");
   }
   const {
     register,
@@ -40,15 +48,24 @@ export default function AdminMonuments() {
     formState: { errors },
   } = useForm();
 
+  const {
+    register:updateRegister,
+    handleSubmit:handleSubmitUpdateModal,
+    setValue:setUpdateModalValues,
+    formState: { errors:updateErrors },
+  } = useForm();
+
+  const { monuments } = useSelector((state: any) => state.MonumentsReducer);
   useEffect(() => {
-    getAllCities("city",(res) => {
+    getAllCities("city", (res) => {
       return dispatch(setCities(res));
     });
-    console.log(cities);
+    getAllCities("destinations", (res) => {
+      return dispatch(setmonuments(res));
+    });
+
   }, []);
-
-
-
+  //add modal
   const convertDataIntoFormData = (monumentObject: any): FormData => {
     delete monumentObject.cityID;
     const formData = new FormData();
@@ -70,26 +87,23 @@ export default function AdminMonuments() {
   };
 
   const postData = (formData: any, data: MonumentInfo, cityID: string) => {
-
     axios
       .post(`${baseUrl}city/${cityID}/destination`, formData, headers)
       .then((res) => {
-
         toast.success(res.data.message);
         onCloseModal();
         for (const key in data) {
           setValue(key, "");
         }
-        getAllCities("city",(res) => {
-          return dispatch(setCities(res));
+        getAllCities("destinations", (res) => {
+          return dispatch(setmonuments(res));
         });
-
       })
       .catch((err) => {
-
         toast.error(err.response.data.message || "failed to create monument");
-        toast.error(err.response.data.validationErr[0].message||"Network error");
-
+        toast.error(
+          err.response.data.validationErr[0].message || "Network error"
+        );
       })
       .finally(() => {
         setIsLoading(false);
@@ -101,6 +115,100 @@ export default function AdminMonuments() {
     let cityID = data.cityID;
     const formData = convertDataIntoFormData(data);
     postData(formData, data, cityID);
+  };
+
+  //delete
+  const openDeleteModal = (cityId: string, id: string) => {
+    setModalState("delete");
+    setCityId(cityId);
+    setId(id);
+  };
+
+  const deleteMonument = () => {
+    setIsLoading(true);
+    axios
+      .delete(`${baseUrl}city/${cityId}/destination/${id}`, headers)
+      .then((res) => {
+        toast.success(res.data.message);
+        getAllCities("destinations", (res) => {
+          return dispatch(setmonuments(res));
+        });
+        onCloseModal();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message || "network error");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  //update
+  const getMonument = (cityId: string, id: string) => {
+    axios
+    .get(`${baseUrl}city/${cityId}/destination/${id}`)
+    .then((res) => {
+      
+      setMonumentName(res.data.touristDestinations[0].name)
+      if (res.data.touristDestinations[0]) {
+        for (const key in res.data.touristDestinations[0]) {
+          if (Object.prototype.hasOwnProperty.call(res.data.touristDestinations[0], key)) {
+            setUpdateModalValues(key, res.data.touristDestinations[0][key]);
+          }
+        }
+      }
+
+    })
+    .catch(() => {
+      toast.error("network error");
+    })
+    .finally(() => {
+      setUpdateModalLoading(false);
+    });
+  };
+
+  const openUpdateModal = (cityId: string, id: string) => {
+    setUpdateModalLoading(true);
+    setModalState("update");
+    getMonument(cityId, id);
+    setCityId(cityId);
+    setId(id);
+  };
+
+  const submitUpdateModal=(data:any)=>{
+
+    const formData = new FormData();
+
+    if (monumentName!==data.name) {formData.append("name", data.name);}
+    formData.append("ticketPrice", data.ticketPrice);
+    formData.append("type", data.type);
+    formData.append("location", data.location);
+    formData.append("description", data.description);
+    sendUpdatedData(formData);
+
+  }
+
+  const sendUpdatedData=(formData:any)=>{
+    axios
+    .put(`${baseUrl}city/${cityId}/destination/${id}`, formData, headers)
+    .then((res) => {
+
+      toast.success(res.data.message);
+      onCloseModal();
+      getAllCities("destinations", (res) => {
+        return dispatch(setmonuments(res));
+      });
+
+    })
+    .catch((err) => {
+      toast.error(err.response.data.message || "failed to create monument");
+      toast.error(
+        err.response.data.validationErr[0].message || "Network error"
+      );
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   };
 
   return (
@@ -118,7 +226,7 @@ export default function AdminMonuments() {
         <div></div>
         <div className="text-end">
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => setModalState("add")}
             type="button"
             className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
           >
@@ -128,13 +236,191 @@ export default function AdminMonuments() {
       </div>
 
       <SharedModal
+        title="Update Monument"
+        openModal={modalState == "update" ? true : false}
+        onclose={onCloseModal}
+      >
+        {updateModalLoading ? (
+          ""
+        ) : (
+          <form onSubmit={handleSubmitUpdateModal(submitUpdateModal)} className="px-3 pb-5">
+            <div className="grid gap-4 mb-3 grid-cols-2">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                >
+                  Name
+                </label>
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <input
+                      id="name"
+                      type="text"
+                      {...updateRegister("name", {
+                        required: "City Name is required",
+                      })}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Type Monument name"
+                    />
+                  </div>
+                  {updateErrors?.name && (
+                    <ErrorMessage text={String(updateErrors?.name?.message)} />
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="ticketPrice"
+                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                >
+                  Ticket Price
+                </label>
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <input
+                      type="number"
+                      {...updateRegister("ticketPrice", {
+                        required: "Ticket Price is required",
+                      })}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Ticket Price"
+                      id="ticketPrice"
+                    />
+                  </div>
+                  {updateErrors?.ticketPrice && (
+                    <ErrorMessage text={String(updateErrors?.ticketPrice?.message)} />
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="ticketPrice"
+                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                >
+                  Type
+                </label>
+
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <Select
+                      {...updateRegister("type", { required: "Type is required" })}
+                    >
+                      <option value="Museum">Museum</option>
+                      <option value="Monument">Monument</option>
+                    </Select>
+                  </div>
+                  {updateErrors?.type && (
+                    <ErrorMessage text={String(updateErrors?.type?.message)} />
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="city"
+                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                >
+                  City
+                </label>
+
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <Select
+                      {...updateRegister("cityID", { required: "City is required" })}
+                    >
+                      {cities?.length > 0
+                        ? cities.map((city: any, idx: number) => (
+                            <option key={idx} value={city._id}>
+                              {city.name}
+                            </option>
+                          ))
+                        : ""}
+                    </Select>
+                  </div>
+                  {updateErrors?.cityID && (
+                    <ErrorMessage text={String(updateErrors?.cityID?.message)} />
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="location"
+                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                >
+                  Location
+                </label>
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <input
+                      type="text"
+                      {...updateRegister("location", {
+                        required: "Location is required",
+                      })}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Location Link from google map"
+                      id="location"
+                    />
+                  </div>
+                  {updateErrors?.location && (
+                    <ErrorMessage text={String(updateErrors?.location?.message)} />
+                  )}
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <label
+                  htmlFor="description"
+                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                >
+                  Description
+                </label>
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <textarea
+                      rows={5}
+                      cols={40}
+                      {...updateRegister("description", {
+                        required: "Description is required",
+                      })}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="Type Monument Description"
+                      id="description"
+                    />
+                  </div>
+                  {updateErrors?.description && (
+                    <ErrorMessage text={String(updateErrors?.description?.message)} />
+                  )}
+                </div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="text-white bg-gray-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
+            >
+              {!isLoading ? (
+                <span className="flex items-center">
+                  <FaPlus className="mx-2" />
+                  Add new Monument
+                </span>
+              ) : (
+                <ImSpinner9 className="animate-spin" />
+              )}
+            </button>
+          </form>
+        )}
+      </SharedModal>
+
+      <SharedModal
         title="Add New Monument"
-        openModal={openModal}
+        openModal={modalState == "add" ? true : false}
         onclose={onCloseModal}
       >
         <form onSubmit={handleSubmit(onSubmit)} className="px-3 pb-5">
           <div className="grid gap-4 mb-3 grid-cols-2">
-            
             <div>
               <label
                 htmlFor="name"
@@ -351,6 +637,64 @@ export default function AdminMonuments() {
           </button>
         </form>
       </SharedModal>
+
+      <SharedModal
+        title="Delete Monument"
+        openModal={modalState == "delete" ? true : false}
+        onclose={onCloseModal}
+      >
+        <div className="text-center">
+          <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+          <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+            Are you sure you want to delete this monument?
+          </h3>
+          <div className="flex justify-center gap-4">
+            <button
+              className="bg-red-700 duration-300 hover:bg-red-800 text-white px-3 py-1 my-4 rounded-md"
+              onClick={deleteMonument}
+            >
+              {!isLoading ? (
+                <span className="flex items-center">
+                  <FaPlus className="mx-2" />
+                  Yes, I'm sure
+                </span>
+              ) : (
+                <ImSpinner9 className="animate-spin" />
+              )}
+            </button>
+            <button
+              className="bg-gray-600 duration-300 hover:bg-gray-700 text-white px-3 py-1 my-4 rounded-md"
+              onClick={onCloseModal}
+            >
+              No, cancel
+            </button>
+          </div>
+        </div>
+      </SharedModal>
+
+      {monuments.length > 0 ? (
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-1 ">
+          {monuments.map((monument: any) => (
+            <div className="w-full" key={monument.id}>
+              <MonumentsCard
+                openDeleteModal={(cityId: string, id: string) => {
+                  return openDeleteModal(cityId, id);
+                }}
+                openUpdateModal={(cityId: string, id: string) => {
+                  return openUpdateModal(cityId, id);
+                }}
+                monument={monument}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center ">
+          <div className="w-[30%]">
+            <NoData />
+          </div>
+        </div>
+      )}
     </>
   );
 }

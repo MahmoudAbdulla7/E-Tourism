@@ -26,18 +26,22 @@ import Cities from "./AdminModule/Components/Cities/Cities";
 import AdminProtectedRoute from "./ProtectedRoutes/AdminProtectedRoute";
 import { getAllCities } from "./Utls/getData";
 import { setCities } from "./Redux/CitySlice/CitySlice";
+import { setmonuments } from "./Redux/MonumentsSlice/MonumentsSlice";
 
 function App() {
   const dispatch = useDispatch();
 
-  // const { cities } = useSelector((state: any) => state.CitiesReducer);
+  // const { monuments } = useSelector((state: any) => state.MonumentsReducer);
 
   useEffect(() => {
     getAllCities("city",(res) => {
       return dispatch(setCities(res));
     });
+    getAllCities("destinations",(res) => {
+      return dispatch(setmonuments(res));
+    });
     dispatch(login());
-    // console.log(cities);
+    // console.log(monuments);
   }, []);
 
   const router = createBrowserRouter([
