@@ -81,9 +81,9 @@ export default function Register() {
     setFirstFormData(data);
     handleNextStep();
   };
+
   const appendFormData = (allFormData: FormDataObject): FormData => {
     const formData = new FormData();
-  
     for (const key in allFormData) {
       if (Object.prototype.hasOwnProperty.call(allFormData, key)) {
         if (key === "image" && allFormData.image && allFormData.image.length > 0) {
