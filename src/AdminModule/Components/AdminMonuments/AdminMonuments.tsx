@@ -7,7 +7,7 @@ import { Select } from "flowbite-react";
 import axios from "axios";
 import { baseUrl } from "../../../Utls/BaseUrl";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCities } from "../../../Utls/getCities";
+import { getAllCities } from "../../../Utls/getData";
 import { setCities } from "../../../Redux/CitySlice/CitySlice";
 import { toast } from "react-toastify";
 import { ImSpinner9 } from "react-icons/im";
@@ -27,33 +27,31 @@ export default function AdminMonuments() {
   const { t, i18n } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const dispatch = useDispatch();
+  const { headers } = useSelector((state: any) => state.authReducer);
+  const { cities } = useSelector((state: any) => state.CitiesReducer);
+  function onCloseModal() {
+    setOpenModal(false);
+  }
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm();
-  const dispatch = useDispatch();
-
-  const { headers } = useSelector((state: any) => state.authReducer);
-  const { cities } = useSelector((state: any) => state.CitiesReducer);
 
   useEffect(() => {
-    getAllCities((res) => {
+    getAllCities("city",(res) => {
       return dispatch(setCities(res));
     });
     console.log(cities);
   }, []);
 
-  function onCloseModal() {
-    setOpenModal(false);
-  }
+
 
   const convertDataIntoFormData = (monumentObject: any): FormData => {
     delete monumentObject.cityID;
     const formData = new FormData();
-
     formData.append("name", monumentObject.name);
     formData.append("ticketPrice", monumentObject.ticketPrice);
     formData.append("type", monumentObject.type);
@@ -63,31 +61,35 @@ export default function AdminMonuments() {
     if (Object.keys(monumentObject.image).length > 0) {
       formData.append("image", monumentObject.image["0"]);
     }
-
     for (const key in monumentObject.subImages) {
       if (monumentObject.subImages.hasOwnProperty(key)) {
         formData.append(`subImages`, monumentObject.subImages[key]);
       }
     }
-
     return formData;
   };
 
   const postData = (formData: any, data: MonumentInfo, cityID: string) => {
+
     axios
       .post(`${baseUrl}city/${cityID}/destination`, formData, headers)
       .then((res) => {
+
         toast.success(res.data.message);
         onCloseModal();
         for (const key in data) {
           setValue(key, "");
         }
-        getAllCities((res) => {
+        getAllCities("city",(res) => {
           return dispatch(setCities(res));
         });
+
       })
       .catch((err) => {
+
         toast.error(err.response.data.message || "failed to create monument");
+        toast.error(err.response.data.validationErr[0].message||"Network error");
+
       })
       .finally(() => {
         setIsLoading(false);
@@ -132,6 +134,7 @@ export default function AdminMonuments() {
       >
         <form onSubmit={handleSubmit(onSubmit)} className="px-3 pb-5">
           <div className="grid gap-4 mb-3 grid-cols-2">
+            
             <div>
               <label
                 htmlFor="name"
