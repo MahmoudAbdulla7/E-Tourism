@@ -60,7 +60,7 @@ export default function MonumentsCard({ monument,openDeleteModal,openUpdateModal
             className={styles.ag_courses_item_link}
           >
             <div className={styles.ag_courses_item_bg} />
-            <div className={`text-main ${styles.ag_courses_item_title}`}>
+            <div className={`text-white ${styles.ag_courses_item_title}`}>
               {monument.name}
             </div>
             <div

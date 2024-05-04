@@ -90,7 +90,7 @@ export default function AdminMonuments() {
     axios
       .post(`${baseUrl}city/${cityID}/destination`, formData, headers)
       .then((res) => {
-        toast.success(res.data.message);
+        toast.success(res?.data?.message);
         onCloseModal();
         for (const key in data) {
           setValue(key, "");
@@ -100,9 +100,9 @@ export default function AdminMonuments() {
         });
       })
       .catch((err) => {
-        toast.error(err.response.data.message || "failed to create monument");
+        toast.error(err?.response?.data?.message || "failed to create monument");
         toast.error(
-          err.response.data.validationErr[0].message || "Network error"
+          err?.response?.data?.validationErr[0]?.message || "Network error"
         );
       })
       .finally(() => {
@@ -137,6 +137,8 @@ export default function AdminMonuments() {
       })
       .catch((err) => {
         toast.error(err.response.data.message || "network error");
+        console.log(err);
+        
       })
       .finally(() => {
         setIsLoading(false);
@@ -250,7 +252,7 @@ export default function AdminMonuments() {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Name
+                  {t("Name")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
@@ -275,7 +277,7 @@ export default function AdminMonuments() {
                   htmlFor="ticketPrice"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Ticket Price
+                {t("Ticket Price")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
@@ -300,7 +302,7 @@ export default function AdminMonuments() {
                   htmlFor="ticketPrice"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Type
+                  {t("Type")}
                 </label>
 
                 <div className="flex items-center">
@@ -308,8 +310,8 @@ export default function AdminMonuments() {
                     <Select
                       {...updateRegister("type", { required: "Type is required" })}
                     >
-                      <option value="Museum">Museum</option>
-                      <option value="Monument">Monument</option>
+                      <option value="Museum">{t("Museum")}</option>
+                      <option value="Monument">{t("Monument")}</option>
                     </Select>
                   </div>
                   {updateErrors?.type && (
@@ -323,7 +325,7 @@ export default function AdminMonuments() {
                   htmlFor="city"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  City
+                  {t("City")}
                 </label>
 
                 <div className="flex items-center">
@@ -351,7 +353,7 @@ export default function AdminMonuments() {
                   htmlFor="location"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Location
+                  {t("Location")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
@@ -376,7 +378,7 @@ export default function AdminMonuments() {
                   htmlFor="description"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Description
+                  {t("Description")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
@@ -404,7 +406,7 @@ export default function AdminMonuments() {
               {!isLoading ? (
                 <span className="flex items-center">
                   <FaPlus className="mx-2" />
-                  Add new Monument
+                  {t("Add new Monument")}
                 </span>
               ) : (
                 <ImSpinner9 className="animate-spin" />
@@ -426,7 +428,7 @@ export default function AdminMonuments() {
                 htmlFor="name"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                Name
+                {t("Name")}
               </label>
               <div className="flex items-center">
                 <div className="flex-auto mx-1">
@@ -449,7 +451,7 @@ export default function AdminMonuments() {
                 htmlFor="ticketPrice"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                Ticket Price
+                {t("Ticket Price")}
               </label>
               <div className="flex items-center">
                 <div className="flex-auto mx-1">
@@ -474,7 +476,7 @@ export default function AdminMonuments() {
                 htmlFor="ticketPrice"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                Type
+                {t("Type")}
               </label>
 
               <div className="flex items-center">
@@ -497,7 +499,7 @@ export default function AdminMonuments() {
                 htmlFor="city"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                City
+                {t("City")}
               </label>
 
               <div className="flex items-center">
@@ -525,7 +527,7 @@ export default function AdminMonuments() {
                 htmlFor="location"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                Location
+                {t("Location")}
               </label>
               <div className="flex items-center">
                 <div className="flex-auto mx-1">
@@ -550,7 +552,7 @@ export default function AdminMonuments() {
                 htmlFor="description"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                Description
+                {t("Description")}
               </label>
               <div className="flex items-center">
                 <div className="flex-auto mx-1">
@@ -576,7 +578,7 @@ export default function AdminMonuments() {
                 htmlFor="image"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                image
+                {t("image")}
               </label>
               <div className="flex items-center">
                 <div className="flex-auto mx-1">
@@ -600,7 +602,7 @@ export default function AdminMonuments() {
                 htmlFor="subImages"
                 className="block mb-2 text-sm font-medium text-main dark:text-white"
               >
-                Choose 3 images for monument Highlights
+                {t("Choose 3 images for monument Highlights")}
               </label>
               <div className="flex items-center">
                 <div className="flex-auto mx-1">
@@ -629,7 +631,7 @@ export default function AdminMonuments() {
             {!isLoading ? (
               <span className="flex items-center">
                 <FaPlus className="mx-2" />
-                Add new Monument
+               {t("Add new Monument")}
               </span>
             ) : (
               <ImSpinner9 className="animate-spin" />
@@ -646,7 +648,7 @@ export default function AdminMonuments() {
         <div className="text-center">
           <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
           <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to delete this monument?
+            {t("Are you sure you want to delete this monument?")}
           </h3>
           <div className="flex justify-center gap-4">
             <button
@@ -656,7 +658,7 @@ export default function AdminMonuments() {
               {!isLoading ? (
                 <span className="flex items-center">
                   <FaPlus className="mx-2" />
-                  Yes, I'm sure
+                 {t("Yes, I'm sure")}
                 </span>
               ) : (
                 <ImSpinner9 className="animate-spin" />
@@ -666,7 +668,7 @@ export default function AdminMonuments() {
               className="bg-gray-600 duration-300 hover:bg-gray-700 text-white px-3 py-1 my-4 rounded-md"
               onClick={onCloseModal}
             >
-              No, cancel
+            {t("No, cancel")}
             </button>
           </div>
         </div>
