@@ -1,39 +1,52 @@
-import { useState } from "react";
 
-export default function Highlights() {
-  const [firstImage, setFirstImage] = useState<string>("https://theportablewife.com/wp-content/uploads/2-days-in-amsterdam-itinerary-featured.jpg")
-  const [secImage, setSecImage] = useState<string>("https://i.pinimg.com/564x/a6/c2/bf/a6c2bffd932d358ffa97a2c6b03bd47d.jpg")
-  const [thirdImage, setThirdImage] = useState<string>("https://i.pinimg.com/564x/10/bf/14/10bf14bafcb2321e2e49fff027101b95.jpg")
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+interface images {
+  firstImagee: string;
+  secImagee: string;
+  thirdImagee: string;
+}
+
+export default function Highlights({
+  firstImagee,
+  secImagee,
+  thirdImagee,
+}: images) {
+  const { t, i18n } = useTranslation();
+
+  const [firstImage, setFirstImage] = useState<string>(firstImagee);
+  const [secImage, setSecImage] = useState<string>(secImagee);
+  const [thirdImage, setThirdImage] = useState<string>(thirdImagee);
   function swap(e: React.MouseEvent<HTMLImageElement>) {
-    setThirdImage(String(e.currentTarget.src))
-    setFirstImage(thirdImage)
+    setThirdImage(String(e.currentTarget.src));
+    setFirstImage(thirdImage);
   }
   function swap2(e: React.MouseEvent<HTMLImageElement>) {
-    setThirdImage(String(e.currentTarget.src))
-    setSecImage(thirdImage)
+    setThirdImage(String(e.currentTarget.src));
+    setSecImage(thirdImage);
   }
   return (
     <div className="">
       <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 my-3">
         <div className="Highlights text-center border-[12px] rounded-xl">
-          <h2 className="text-main text-6xl font-bold py-6 ">Highlights</h2>
+          <h2 className="text-main text-6xl font-bold py-6 ">{t("Highlights")}</h2>
           <div className="my-3">
             <div className="cardfan">
               <img
-                src={firstImage}
-                alt="Photograph of Florence, Italy"
+                src={firstImagee}
+                alt="Attraction-photo"
                 id="roma"
                 onClick={swap}
               />
               <img
-                src={secImage}
-                alt="Photograph of an ancient aqueduct, Italy"
+                src={secImagee}
+                alt="Attraction-photo"
                 id="aqueduct"
                 onClick={swap2}
               />
               <img
-                src={thirdImage}
-                alt="Photograph of a bike on a Roman Street"
+                src={thirdImagee}
+                alt="Attraction-photo"
                 id="bike"
               />
             </div>

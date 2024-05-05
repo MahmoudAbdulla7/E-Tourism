@@ -6,10 +6,9 @@ import { Link } from "react-router-dom";
 import amoon from "../../../assets/Amoon.png";
 export default function Museums() {
   const { t, i18n } = useTranslation();
-
-  
   const { monuments } = useSelector((state: any) => state.MonumentsReducer);
   const { cities } = useSelector((state: any) => state.CitiesReducer);
+
   const monumentImage = {
     backgroundImage: `url(${monuments[0]?.image.secure_url})`,
     backgroundSize: 'cover',
@@ -25,26 +24,25 @@ export default function Museums() {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
+  const thirdCityImage = {
+    backgroundImage: `url(${cities[2]?.image.secure_url})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  };
+ 
 
   useEffect(() => {
-    console.log(cities);
-    
+    console.log("Cities",cities);
   }, [cities]);
-
-
-
-  
-  
 
   return (
     <div className="Museums">
       <div className="h-full w-full bg-white bg-opacity-40 py-16">
         <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8">
-
           <div className="grid md:grid-cols-2">
             <div className="border-y-[4vh] w-10/12 border-t-main rounded-[28%] mx-6 border-b-gray-400 px-8 my-3">
               <div className="w-1/2 md:w-3/4  lg:w-1/2 flex items-center amoon-image">
-                <img src={amoon} alt="" />
+                <img src={amoon} alt="avatar" />
                 <div>
                   <div className="flex flex-col justify-between h-[25vh]">
                     <p></p>
@@ -72,7 +70,7 @@ export default function Museums() {
               <div className="museum-details flex items-center justify-center w-full h-full text-white px-3 overflow-hidden">
                 <div className="text-center">
                   <h2 className="text-xl block group-hover:translate-x-[110%] py-3 group-hover:duration-500 rounded-xl bg-black bg-opacity-40 translate-y-2/3">
-                    {monuments[0]?.name}
+                   {monuments[0]?.name}
                   </h2>
                   <p className="py-3 translate-y-96 group-hover:translate-y-[-30px] rounded-xl bg-black bg-opacity-60 text-center group-hover:duration-500">
                     {monuments[0]?.description}
@@ -82,25 +80,36 @@ export default function Museums() {
             </div>
           </div>
 
-          <div className="flex lg:justify-around flex-col lg:flex-row sm:py-8">
+          <div  className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 my-2">
             <Link
-              to=""
+              to={`museums/${cities[0]?.id}`}
               style={firstCityImage}
               className="text-4xl rounded-3xl group overflow-hidden m-3"
             >
-              <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[0].name}</h3>
+              <div  className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
+                <h3>{cities[0]?.name}</h3>
               </div>
             </Link>
             <Link
-              to=""
+              to={`museums/${cities[1]?.id}`}
               style={seconedCityImage}
               className="text-4xl rounded-3xl group overflow-hidden m-3"
             >
               <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[1].name}</h3>
+                <h3>{cities[1]?.name}</h3>
               </div>
             </Link>
+            <Link
+              to={`museums/${cities[2]?.id}`}
+              style={thirdCityImage}
+              className="text-4xl rounded-3xl group overflow-hidden m-3"
+            >
+              <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
+                <h3>{cities[2]?.name}</h3>
+              </div>
+            </Link>
+           
+           
           </div>
         </div>
       </div>

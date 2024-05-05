@@ -60,15 +60,16 @@ function App() {
     },
     {
       path: "/",
-      element: <VisitorLayout />,
+      element: <VisitorLayout/>,
       children: [
         {
           index: true,
-          errorElement: <NotFound />,
-          element: <Home />,
+          errorElement: <NotFound/>,
+          element: <Home/>,
         },
-        { path: "/museums", element: <AllMuseums /> },
-        { path: "/museums/:museumId", element: <SpecificMuseum /> },
+        { path: "/museums/", element: <AllMuseums /> },
+        { path: "/museums/:cityId", element: <AllMuseums /> },
+        { path: "/museums/:cityId/:destination/:destinationId", element: <SpecificMuseum /> },
         { path: "/map", element: <Map /> },
         { path: "/monuments", element: <AllMonuments /> },
         { path: "/booking", element: <Booking /> },
