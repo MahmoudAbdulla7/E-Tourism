@@ -38,13 +38,13 @@ export default function SideBar() {
               {t("Home")}{" "}
             </MenuItem>
 
-            <MenuItem
+            {/* <MenuItem
               icon={<HiMiniUsers className="text-2xl" />}
               component={<Link to="/dashboard/users" />}
             >
               {" "}
               {t("Users")}{" "}
-            </MenuItem>
+            </MenuItem> */}
 
             <MenuItem
               icon={<GiLouvrePyramid className="text-2xl" />}
@@ -57,8 +57,7 @@ export default function SideBar() {
               icon={<LiaCitySolid className="text-2xl" />}
               component={<Link to="/dashboard/cities" />}
             >
-              {" "}
-              {t("Cities")}{" "}
+              {t("Cities")}
             </MenuItem>
 
             {/* <MenuItem icon={<FaKey className='fs-4' />} onClick={handleShow}>Change Password</MenuItem> */}
@@ -69,7 +68,7 @@ export default function SideBar() {
               }}
               icon={<IoIosLogOut className="fs-4" />}
             >
-              Logout
+              {t("Logout")}
             </MenuItem>
           </Menu>
         </Sidebar>

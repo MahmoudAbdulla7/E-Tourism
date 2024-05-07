@@ -9,7 +9,7 @@ export default function SpecificMuseum() {
         <div className="w-full h-full  bg-white bg-opacity-70">
           <Navbar />
           <AboutMuseum />
-          <Highlights />
+      
         </div>
       </div>
       {/* <AvailableServices/> */}

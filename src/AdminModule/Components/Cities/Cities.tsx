@@ -28,6 +28,8 @@ export default function Cities() {
   const [modalState, setModalState] = useState("close");
   const [cityData, setCityData] = useState();
   const showAddModal = () => {
+    setValue('name',"");
+    setValue('image',"")
     setModalState("add-modal");
   };
   const showDeleteModal = (Id: any) => {
@@ -146,8 +148,8 @@ export default function Cities() {
               <CityCard
                 modalDelete={() => showDeleteModal(city.id)}
                 modalUpdate={()=>showUpdateModal(city)}
-                name={city.name}
-                image={city.image.secure_url}
+                name={city?.name}
+                image={city?.image?.secure_url}
               />
             </div>
           ))}
@@ -171,7 +173,7 @@ export default function Cities() {
         >
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
             <h3 className="text-lg font-semibold text-main dark:text-white">
-              Add New City
+            {t("Add New City")}
             </h3>
             <button onClick={handleClose}>
               <IoClose />
@@ -184,7 +186,7 @@ export default function Cities() {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Name
+                  {t("Name")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto">
@@ -215,7 +217,7 @@ export default function Cities() {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  City Image
+                  {t("City Image")}
                 </label>
                 <label
                   htmlFor="dropzone-file"
@@ -238,8 +240,8 @@ export default function Cities() {
                       />
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Click to upload</span> or
-                      drag and drop
+                      <span className="font-semibold">{t("Click to upload")}</span>
+                      {t("or drag and drop")}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
@@ -275,7 +277,7 @@ export default function Cities() {
               ) : (
                 <>
                   <FaPlus className="mx-1" />
-                  Add new city
+                  {t("Add New City")}
                 </>
               )}
             </button>
@@ -290,7 +292,7 @@ export default function Cities() {
         >
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
             <h3 className="text-lg font-semibold text-main dark:text-white">
-              Delete City
+              {t("Delete City")}
             </h3>
             <button onClick={handleClose}>
               <IoClose />
@@ -302,10 +304,9 @@ export default function Cities() {
                 <img className="w-[70%]" src={dleavatar} alt="avatar" />
               </div>
               <div className="col-span-2 w-full">
-                <h4 className="text-slate-500">Delete This City ?</h4>
+                <h4 className="text-slate-500">{t("Delete This City")} ?</h4>
                 <span className="text-slate-500">
-                  are you sure you want to delete this city ? if you are sure
-                  just click on delete city
+                 {t("are you sure you want to delete this city ? if you are sure just click on delete city")}
                 </span>
               </div>
             </div>
@@ -321,7 +322,9 @@ export default function Cities() {
                 {isLoading == true ? (
                   <ImSpinner9 className="animate-spin" />
                 ) : (
-                  <>Delete city</>
+                  <>
+                  {t("Delete City")}
+                  </>
                 )}
               </button>
             </div>
@@ -337,7 +340,8 @@ export default function Cities() {
         >
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
             <h3 className="text-lg font-semibold text-main dark:text-white">
-              Update City
+             
+              {t("Update City")}
             </h3>
             <button onClick={handleClose}>
               <IoClose />
@@ -350,7 +354,7 @@ export default function Cities() {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  Name
+                  {t("Name")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto">
@@ -381,7 +385,7 @@ export default function Cities() {
                   htmlFor="name"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
-                  City Image
+                 {t("City Image")}
                 </label>
                 <label
                   htmlFor="dropzone-file"
@@ -404,8 +408,8 @@ export default function Cities() {
                       />
                     </svg>
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">Click to upload</span> or
-                      drag and drop
+                      <span className="font-semibold">{t("Click to upload")}</span> 
+                      {t("or drag and drop")}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
@@ -444,7 +448,9 @@ export default function Cities() {
                 {isLoading == true ? (
                   <ImSpinner9 className="animate-spin" />
                 ) : (
-                  <>Update city</>
+                  <>
+                  {t("Update City")}
+                  </>
                 )}
               </button>
             </div>
