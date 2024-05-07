@@ -27,6 +27,8 @@ import AdminProtectedRoute from "./ProtectedRoutes/AdminProtectedRoute";
 import { getAllCities } from "./Utls/getData";
 import { setCities } from "./Redux/CitySlice/CitySlice";
 import { setmonuments } from "./Redux/MonumentsSlice/MonumentsSlice";
+import UserProtectedRoute from "./ProtectedRoutes/UserProtectedRoute";
+import UserLayout from "./Layouts/UserLayout/UserLayout";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,8 +74,6 @@ function App() {
         { path: "/museums/:cityId/:destination/:destinationId", element: <SpecificMuseum /> },
         { path: "/map", element: <Map /> },
         { path: "/monuments", element: <AllMonuments /> },
-        { path: "/booking", element: <Booking /> },
-        { path: "/booking/personal-details", element: <PersonalDetails /> },
       ],
     },
     {
@@ -92,6 +92,23 @@ function App() {
         { path: "users", element: <Users /> },
         { path: "adminmonuments", element: <AdminMonuments /> },
         { path: "cities", element: <Cities /> },
+      ],
+    },
+    {
+      path: "/home",
+      element: (
+        <UserProtectedRoute>
+          <UserLayout />
+        </UserProtectedRoute>
+      ),
+      children: [
+        {
+          index: true,
+          errorElement: <NotFound />,
+          element: <AdminHome />,
+        },
+        { path: "booking", element: <Booking /> },
+        { path: "booking/personal-details", element: <PersonalDetails /> },
       ],
     },
   ]);

@@ -23,7 +23,7 @@ const Card = ({ monument }: museum) => {
 
   const navigate = useNavigate();
   return (
-    <article className="card overflow-hidden rounded-2xl grid shadow-lg h-[100vh]">
+    <article className="card overflow-hidden rounded-2xl grid shadow-lg h-[70vh]">
       <div>
         <img
           className="card__background w-full h-[73vh]"

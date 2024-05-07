@@ -20,20 +20,23 @@ import { login } from "../Redux/AuthSlice/AuthSlice";
             localStorage.setItem("userData",JSON.stringify(res.data));
             dispatch(login());
           };
+          if (res.data.aboutUser.role=="User") {
+            toast.success(res.data.message);
+            return navigate("/home");
+          };
           
         toast.success(res.data.message);
         navigate(navigateTo);
-        setIsLoading(false);
 
       })
       .catch((err)=>{
 
         toast.error(err.response.data.message||"Network Error");
         console.log(err.response);
-        
-        setIsLoading(false);
 
-      });
+      }).finally(()=>{
+        setIsLoading(false);
+      })
     };
 
     return {postData,isLoading};

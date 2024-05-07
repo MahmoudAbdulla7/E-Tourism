@@ -2,14 +2,15 @@ import { useTranslation } from "react-i18next";
 import Header from "../SharedModules/Components/Header/Header";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AdminHome() {
   const { t, i18n } = useTranslation();
+  const { data } = useSelector((state: any) => state.authReducer);
   return (
     <>
       <Header />
-
-      <div
+      {data.role=="Admin"?          <div
         dir={i18n.language == "ar" ? "rtl" : "ltr"}
         className="home-container mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
       >
@@ -39,7 +40,8 @@ export default function AdminHome() {
             </span>
           </Link>
         </div>
-      </div>
+      </div>    :""}
+
     </>
   );
 }

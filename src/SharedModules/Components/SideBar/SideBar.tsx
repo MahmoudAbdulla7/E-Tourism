@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { GiLouvrePyramid } from "react-icons/gi";
-import { HiMiniUsers } from "react-icons/hi2";
+import { GiLouvrePyramid, GiTicket } from "react-icons/gi";
 import { IoIosLogOut, IoMdHome } from "react-icons/io";
 import { LiaCitySolid } from "react-icons/lia";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ammon from "../../../assets/Amoon.png";
 import { logOut } from "../../../Redux/AuthSlice/AuthSlice";
-import { useDispatch } from "react-redux";
+import ammon from "../../../assets/Amoon.png";
 
 export default function SideBar() {
   const { t, i18n } = useTranslation();
   let [isCollapsed, setIsCollapsed] = useState(true);
+  const { data } = useSelector((state: any) => state.authReducer);
 
   let handleToggle = () => {
     setIsCollapsed(!isCollapsed);
@@ -32,33 +32,33 @@ export default function SideBar() {
 
             <MenuItem
               icon={<IoMdHome className="text-2xl" />}
-              component={<Link to="/dashboard" />}
+              component={<Link to={data.role=="Admin"?"/dashboard":data.role=="User"?"/home":"/"} />}
             >
-              {" "}
-              {t("Home")}{" "}
+              {t("Home")}
             </MenuItem>
 
-            {/* <MenuItem
-              icon={<HiMiniUsers className="text-2xl" />}
-              component={<Link to="/dashboard/users" />}
-            >
-              {" "}
-              {t("Users")}{" "}
-            </MenuItem> */}
-
-            <MenuItem
+            {data?.role=="Admin"?            <MenuItem
               icon={<GiLouvrePyramid className="text-2xl" />}
               component={<Link to="/dashboard/adminmonuments" />}
             >
               {t("Monuments")}{" "}
-            </MenuItem>
+            </MenuItem>:""}
 
+            {data?.role=="Admin"?
             <MenuItem
               icon={<LiaCitySolid className="text-2xl" />}
               component={<Link to="/dashboard/cities" />}
             >
               {t("Cities")}
-            </MenuItem>
+            </MenuItem>:""}
+
+            {data?.role=="User"?
+            <MenuItem
+              icon={<GiTicket className="text-2xl" />}
+              component={<Link to="/home/booking" />}
+            >
+              {t("Booking")}
+            </MenuItem>:""}
 
             {/* <MenuItem icon={<FaKey className='fs-4' />} onClick={handleShow}>Change Password</MenuItem> */}
             

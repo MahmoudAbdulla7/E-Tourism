@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 export default function Booking() {
   return (
     <div className="booking">
-      <Navbar />
-      <BookingHeader />
-      <div className="ticket-details-header  bg-white p-5 flex justify-between  my-5 mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 rounded-lg shadow-md">
+      {/* <BookingHeader /> */}
+      {/* <div className="ticket-details-header  bg-white p-5 flex justify-between  my-5 mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 rounded-lg shadow-md">
         <p className="text-main font-semibold">Ticket Details</p>
         <div className="bg-main text-white rounded-lg p-1">info and price</div>
-      </div>
+      </div> */}
+      
       <div className="ticket-details bg-white p-5 flex  my-5 mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 rounded-lg shadow-md">
         <div className="rounded-lg w-1/3">
           <img className="w-full rounded-3xl shadow-lg" src={site} alt="site" />
