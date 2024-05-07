@@ -16,12 +16,12 @@ export default function Museums() {
     backgroundPosition: 'center',
   };
   const firstCityImage = {
-    backgroundImage: `url(${cities[0]?.image.secure_url})`,
+    backgroundImage: `url(${cities[0]?.image?.secure_url})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
   const seconedCityImage = {
-    backgroundImage: `url(${cities[1]?.image.secure_url})`,
+    backgroundImage: `url(${cities[1]?.image?.secure_url})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
@@ -29,7 +29,7 @@ export default function Museums() {
   useEffect(() => {
     console.log(cities);
     
-  }, [cities]);
+  }, []);
 
 
 
@@ -89,7 +89,7 @@ export default function Museums() {
               className="text-4xl rounded-3xl group overflow-hidden m-3"
             >
               <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[0].name}</h3>
+                <h3>{cities[0]?.name}</h3>
               </div>
             </Link>
             <Link
@@ -98,7 +98,7 @@ export default function Museums() {
               className="text-4xl rounded-3xl group overflow-hidden m-3"
             >
               <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[1].name}</h3>
+                <h3>{cities[1]?.name}</h3>
               </div>
             </Link>
           </div>
