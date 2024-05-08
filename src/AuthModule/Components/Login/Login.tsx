@@ -6,21 +6,21 @@ import { useForm } from "react-hook-form";
 import Passsword from "../../../SharedModules/Components/Password/Passsword";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
 import postDataHock from "../../../Utls/HockForPostData";
-interface LoginData{
-  email:string;
-  password:string;
+import { ImSpinner9 } from "react-icons/im";
+interface LoginData {
+  email: string;
+  password: string;
 }
 export default function Login() {
-  const {isLoading,postData}=postDataHock();
+  const { isLoading, postData } = postDataHock();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: LoginData|any) => {
-    postData(data,"auth/login","/dashboard");
-    
+  const onSubmit = (data: LoginData | any) => {
+    postData(data, "auth/login", "/dashboard");
   };
 
   return (
@@ -56,12 +56,13 @@ export default function Login() {
                 <Passsword
                   {...register("password", {
                     required: "Password is required",
-                    pattern:{
-                      value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
-                      message:`The password must include at least one lowercase letter,
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+                      message: `The password must include at least one lowercase letter,
                       one uppercase letter, one digit, one special character,
-                      and be at least 6 characters long!!`
-                    }
+                      and be at least 6 characters long!!`,
+                    },
                   })}
                   placeholder="Enter your Password"
                 />
@@ -70,7 +71,18 @@ export default function Login() {
                 <ErrorMessage text={String(errors?.password?.message)} />
               )}
             </div>
-{isLoading?<Button text="Loading" />:<Button text="Log in" />}
+            {isLoading ? (
+              <button
+                type="submit"
+                className="text-white border-2  border-slate-900 hover:border-gray-50 bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none px-8 my-3 py-2 rounded-3xl hover:text-gray-50 duration-500 focus:ring-blue-300 font-medium flex items-center justify-center text-sm  w-full text-center"
+              >
+                <span>
+                  <ImSpinner9 className="text-center animate-spin" />
+                </span>
+              </button>
+            ) : (
+              <Button text="Log in" />
+            )}
 
             <div className="flex justify-between">
               <p>

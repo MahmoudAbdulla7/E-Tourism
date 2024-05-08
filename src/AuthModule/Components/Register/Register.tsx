@@ -15,7 +15,7 @@ import Button from "../../../SharedModules/Components/Button/Button";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
 import Input from "../../../SharedModules/Components/Input/Input";
 import Passsword from "../../../SharedModules/Components/Password/Passsword";
-import postDataHock from '../../../Utls/HockForPostData';
+import postDataHock from "../../../Utls/HockForPostData";
 import { ImSpinner9 } from "react-icons/im";
 
 interface UserCredentials {
@@ -25,13 +25,13 @@ interface UserCredentials {
   userName?: string;
   password?: string;
   cpassword?: string;
-};
+}
 interface UserAdditionalInfo {
   country?: string;
   gender?: string;
   image?: FileList;
   phone?: string;
-};
+}
 interface UserProfile {
   country?: string;
   cpassword?: string;
@@ -43,19 +43,19 @@ interface UserProfile {
   password?: string;
   phone?: string;
   userName?: string;
-};
+}
 interface FormDataObject {
   [key: string]: any;
   image?: FileList;
-};
+}
 
 export default function Register() {
-  const {postData,isLoading}=postDataHock();
+  const { postData, isLoading } = postDataHock();
   const {
-    register:firstFormRegister,
-    handleSubmit:handleFirstFormSubmit,
+    register: firstFormRegister,
+    handleSubmit: handleFirstFormSubmit,
     getValues,
-    formState: { errors:firstFormErrors },
+    formState: { errors: firstFormErrors },
   } = useForm();
   const {
     register,
@@ -78,7 +78,7 @@ export default function Register() {
       setActiveStep((prev) => prev - 1);
     }
   };
-  const firstFormOnSubmit=(data:UserCredentials)=>{
+  const firstFormOnSubmit = (data: UserCredentials) => {
     setFirstFormData(data);
     handleNextStep();
   };
@@ -87,8 +87,12 @@ export default function Register() {
     const formData = new FormData();
     for (const key in allFormData) {
       if (Object.prototype.hasOwnProperty.call(allFormData, key)) {
-        if (key === "image" && allFormData.image && allFormData.image.length > 0) {
-          formData.append(key, allFormData.image[0], allFormData.image[0].name); 
+        if (
+          key === "image" &&
+          allFormData.image &&
+          allFormData.image.length > 0
+        ) {
+          formData.append(key, allFormData.image[0], allFormData.image[0].name);
         } else {
           formData.append(key, allFormData[key]);
         }
@@ -100,14 +104,13 @@ export default function Register() {
   const onSubmit = (data: UserAdditionalInfo) => {
     if (!selected) {
       return setCountryError("country is required");
-    };
+    }
 
     data.country = selected;
     setCountryError("");
-    const allFormData:UserProfile={...data,...firstFormData};
-    const formData =appendFormData(allFormData);
-    postData(formData,"auth/signup","/auth");
-    
+    const allFormData: UserProfile = { ...data, ...firstFormData };
+    const formData = appendFormData(allFormData);
+    postData(formData, "auth/signup", "/auth");
   };
 
   return (
@@ -142,7 +145,9 @@ export default function Register() {
                       />
                     </div>
                     {firstFormErrors?.firstName && (
-                      <ErrorMessage text={String(firstFormErrors?.firstName.message)} />
+                      <ErrorMessage
+                        text={String(firstFormErrors?.firstName.message)}
+                      />
                     )}
                   </div>
                   <div className="my-1 flex items-center">
@@ -167,7 +172,9 @@ export default function Register() {
                       />
                     </div>
                     {firstFormErrors?.lastName && (
-                      <ErrorMessage text={String(firstFormErrors?.lastName.message)} />
+                      <ErrorMessage
+                        text={String(firstFormErrors?.lastName.message)}
+                      />
                     )}
                   </div>
                 </div>
@@ -190,7 +197,9 @@ export default function Register() {
                       />
                     </div>
                     {firstFormErrors?.userName && (
-                      <ErrorMessage text={String(firstFormErrors?.userName.message)} />
+                      <ErrorMessage
+                        text={String(firstFormErrors?.userName.message)}
+                      />
                     )}
                   </div>
                 </div>
@@ -212,7 +221,9 @@ export default function Register() {
                       />
                     </div>
                     {firstFormErrors?.email && (
-                      <ErrorMessage text={String(firstFormErrors?.email.message)} />
+                      <ErrorMessage
+                        text={String(firstFormErrors?.email.message)}
+                      />
                     )}
                   </div>
                 </div>
@@ -234,7 +245,9 @@ export default function Register() {
                     />
                   </div>
                   {firstFormErrors?.password && (
-                    <ErrorMessage text={String(firstFormErrors?.password.message)} />
+                    <ErrorMessage
+                      text={String(firstFormErrors?.password.message)}
+                    />
                   )}
                 </div>
 
@@ -257,21 +270,31 @@ export default function Register() {
                     />
                   </div>
                   {firstFormErrors?.cpassword && (
-                    <ErrorMessage text={String(firstFormErrors?.cpassword.message)} />
+                    <ErrorMessage
+                      text={String(firstFormErrors?.cpassword.message)}
+                    />
                   )}
                 </div>
 
                 <div className="text-end next-button">
                   <button
                     onClick={handleFirstFormSubmit(firstFormOnSubmit)}
-                    className={`border-2 px-8 my-3 py-1 rounded-3xl ${firstFormErrors?.password||firstFormErrors?.cpassword||firstFormErrors?.userName||firstFormErrors?.email||firstFormErrors?.firstName||firstFormErrors?.lastName?"text-gray-500 border-slate-900 bg-green-950 ":"border-gray-50 text-gray-50 bg-green-800"}`}
+                    className={`border-2 px-8 my-3 py-1 rounded-3xl ${
+                      firstFormErrors?.password ||
+                      firstFormErrors?.cpassword ||
+                      firstFormErrors?.userName ||
+                      firstFormErrors?.email ||
+                      firstFormErrors?.firstName ||
+                      firstFormErrors?.lastName
+                        ? "text-gray-500 border-slate-900 bg-green-950 "
+                        : "border-gray-50 text-gray-50 bg-green-800"
+                    }`}
                   >
                     <p className="flex items-center justify-center">
                       Next <MdNavigateNext />
                     </p>
                   </button>
                 </div>
-
               </>
             ) : (
               <>
@@ -398,7 +421,18 @@ export default function Register() {
                     </p>
                   </button>
                 </div>
-                {isLoading?<Button text="Register" />:<Button text="Register" />}
+                {isLoading ? (
+                  <button
+                    type="submit"
+                    className="text-white border-2  border-slate-900 hover:border-gray-50 bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none px-8 my-3 py-2 rounded-3xl hover:text-gray-50 duration-500 focus:ring-blue-300 font-medium flex items-center justify-center text-sm  w-full text-center"
+                  >
+                    <span>
+                      <ImSpinner9 className="text-center animate-spin" />
+                    </span>
+                  </button>
+                ) : (
+                  <Button text="Register" />
+                )}
               </>
             )}
 

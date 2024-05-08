@@ -28,8 +28,7 @@ export default function AboutMuseum() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const handleClick = () => {
-    const text =
-      "Amsterdam, the capital of the Netherlands, is a city rich in  history, culture, and architecture. Guided walking tours are a popular way for visitors to explore the city while learning about its fascinating past. Knowledgeable guides often lead these tours, taking participants through iconic neighborhoods, landmarks, and hidden gems.";
+    const text =destination?.description
     const value = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(value);
   };
