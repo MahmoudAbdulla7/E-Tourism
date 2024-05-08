@@ -13,8 +13,8 @@ import CityCard from "../../../SharedModules/Components/CityCard/CityCard";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
 import NoData from "../../../SharedModules/Components/NoData/NoData";
 import { getAllCities } from "../../../Utls/getData";
-import { baseUrl } from "./../../../Utls/BaseUrl";
 import dleavatar from "../../../assets/Study abroad-bro.svg";
+import { baseUrl } from "./../../../Utls/BaseUrl";
 export default function Cities() {
   const {
     register,
