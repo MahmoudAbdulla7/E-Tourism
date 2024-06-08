@@ -80,7 +80,6 @@ export default function Museums() {
               </div>
             </div>
           </div>
-
           <div  className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 my-2">
             <Link
               to={`museums/${cities[0]?.id}`}

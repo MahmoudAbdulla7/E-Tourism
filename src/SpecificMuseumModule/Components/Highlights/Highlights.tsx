@@ -26,26 +26,25 @@ export default function Highlights({
     setSecImage(thirdImage);
   }
   return (
-    <div className="">
-      <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 my-3">
+      <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 mt-3 pb-5">
         <div className="Highlights text-center border-[12px] rounded-xl">
           <h2 className="text-main text-6xl font-bold py-6 ">{t("Highlights")}</h2>
           <div className="my-3">
-            <div className="cardfan">
+            <div className="cardfan ">
               <img
-                src={firstImagee}
+                src={firstImage}
                 alt="Attraction-photo"
                 id="roma"
                 onClick={swap}
               />
               <img
-                src={secImagee}
+                src={secImage}
                 alt="Attraction-photo"
                 id="aqueduct"
                 onClick={swap2}
               />
               <img
-                src={thirdImagee}
+                src={thirdImage}
                 alt="Attraction-photo"
                 id="bike"
               />
@@ -79,6 +78,6 @@ export default function Highlights({
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }

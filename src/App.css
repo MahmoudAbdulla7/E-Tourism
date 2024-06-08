@@ -252,7 +252,7 @@ div.cardfan {
 div.cardfan img { 
   position: absolute; 
   width: 100%; 
-  height: auto; 
+  height: 50dvh ; 
   border: 12px solid #ffe; 
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.2); 
   transform-origin: center 400px; 
@@ -334,3 +334,4 @@ height: 100vh;
     }
 
     
+   
