@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Highlights from "../Highlights/Highlights";
 import { useTranslation } from "react-i18next";
+import Loading from "../../../SharedModules/Components/Loading/Loading";
 
 export interface destination {
   name: string;
@@ -58,6 +59,8 @@ export default function AboutMuseum() {
 
   return (
     <div className="min:h-[100vh] ">
+      {destination?
+      <>
       <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 py-6">
         <div className="navigation">
           <label className="md:text-4xl mx-2 text-xl text-main flex items-center mb-8">
@@ -125,6 +128,10 @@ export default function AboutMuseum() {
         secImagee={String(destination?.subImages[1]?.secure_url)}
         thirdImagee={String(destination?.subImages[2]?.secure_url)}
       />
+      </>
+      :
+      <Loading/>
+      }
     </div>
   );
 }

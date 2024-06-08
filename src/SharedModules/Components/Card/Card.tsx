@@ -19,7 +19,7 @@ export interface museum {
 const Card = ({ monument }: museum) => {
   const { t, i18n } = useTranslation();
 
-  console.log(monument);
+  // console.log(monument);
 
   const navigate = useNavigate();
   return (
