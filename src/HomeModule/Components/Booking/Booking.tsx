@@ -1,24 +1,25 @@
 import axios from "axios";
-import { MutableRefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Stepper } from "react-form-stepper";
 import { useForm } from "react-hook-form";
 import { FaRegClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { GiConfirmed } from "react-icons/gi";
+import { GrFormPrevious } from "react-icons/gr";
 import { ImSpinner9 } from "react-icons/im";
+import { MdVerified } from "react-icons/md";
 import { useSelector } from "react-redux";
-import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
-import { baseUrl } from "../../../Utls/BaseUrl";
 import { toast } from "react-toastify";
 import Webcam from "react-webcam";
-import { Stepper } from "react-form-stepper";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import { MdVerified } from "react-icons/md";
 import BookingHeader from "../../../SharedModules/Components/BookingHeader/BookingHeader";
+import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import { baseUrl } from "../../../Utls/BaseUrl";
 export default function Booking() {
   const [isLoading, setIsLoading] = useState(false);
   const { headers } = useSelector((state: any) => state.authReducer);
   const [activeStep, setActiveStep] = useState<number>(0);
   const steps: object[] = [{ label: "Step 1" }, { label: "Step 2" }];
+const {data}= useSelector((state:any)=>state.authReducer);
 
   const handleNextStep = () => {
     if (activeStep < steps.length) {
@@ -34,6 +35,7 @@ export default function Booking() {
   const webcamRef:any = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [faceId, setFaceId] = useState("");
+
   const capturePhoto = () => {
     const image = webcamRef.current?.getScreenshot();
     if (image) {
@@ -51,7 +53,7 @@ export default function Booking() {
       try {
         const formData = new FormData();
         formData.append("image_base64", imageSrc);
-        formData.append("person_name", "Mostafafa");
+        formData.append("person_name", data?.userName);
         const response = await axios.post(
           "https://face-matching.onrender.com/add-personBase64",
           formData,
@@ -78,6 +80,7 @@ export default function Booking() {
   };
   const Data = localStorage.getItem("destData");
   const Modified = JSON.parse(String(Data));
+
   const [count, setCount] = useState(0);
   const handleIncrement = () => {
     setCount(count + 1);
@@ -126,11 +129,9 @@ export default function Booking() {
     height: 390,
     facingMode: "user",
   };
-
   return (
     <div className="booking my-3">
       <Stepper  className=" stepper " steps={steps} activeStep={activeStep} />
-      
       {activeStep == 0 ? (
         <div className="px-5">
           <p className="text-4xl flex justify-center items-center">
@@ -320,7 +321,6 @@ export default function Booking() {
               </form>
             </div>
           </div>
-
           <div>
             <button
               onClick={handlePrevStep}

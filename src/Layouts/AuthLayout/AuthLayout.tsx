@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import Typed from "typed.js";
 export default function AuthLayout() {
@@ -14,7 +13,6 @@ export default function AuthLayout() {
       cursorChar:'☥',
     });
     return () => {
-      //Destroy Typed instance during cleanup to stop animation.
       typed.destroy();
     };
   }, []);

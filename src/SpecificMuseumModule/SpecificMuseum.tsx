@@ -1,6 +1,5 @@
 import Navbar from "../SharedModules/Components/Navbar/Navbar";
 import AboutMuseum from "./Components/AboutMuseum/AboutMuseum";
-import Highlights from "./Components/Highlights/Highlights";
 
 export default function SpecificMuseum() {
   return (
@@ -12,8 +11,7 @@ export default function SpecificMuseum() {
       
         </div>
       </div>
-      {/* <AvailableServices/> */}
-      {/* <VisitMuseum/> */}
+     
     </>
   );
 }
