@@ -28,6 +28,10 @@ import { setmonuments } from "./Redux/MonumentsSlice/MonumentsSlice";
 import NotFound from "./SharedModules/Components/NotFound/NotFound";
 import SpecificMuseum from "./SpecificMuseumModule/SpecificMuseum";
 import { getAllCities } from "./Utls/getData";
+import InspectorLayout from "./Layouts/InspectorLayout/InspectorLayout";
+import InspectorProtectedRoute from "./ProtectedRoutes/InspectorProtectedRoute";
+import InspectorHome from "./InspectorHome/InspectorHome";
+import ValidateTicket from "./ValidateTicket/ValidateTicket";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,6 +111,23 @@ function App() {
           element: <AdminHome />,
         },
         { path: "booking", element: <Booking /> },
+      ],
+    },
+    {
+      path: "/inspector",
+      element: (
+        <InspectorProtectedRoute>
+          <InspectorLayout />
+        </InspectorProtectedRoute>
+      ),
+      children: [
+        {
+          index: true,
+          errorElement: <NotFound />,
+          element: <InspectorHome />,
+        },{
+          path:":token",element:<ValidateTicket/>
+        }
       ],
     },
   ]);
