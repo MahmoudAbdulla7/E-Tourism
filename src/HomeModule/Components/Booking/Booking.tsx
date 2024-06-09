@@ -13,6 +13,7 @@ import Webcam from "react-webcam";
 import { Stepper } from "react-form-stepper";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { MdVerified } from "react-icons/md";
+import BookingHeader from "../../../SharedModules/Components/BookingHeader/BookingHeader";
 export default function Booking() {
   const [isLoading, setIsLoading] = useState(false);
   const { headers } = useSelector((state: any) => state.authReducer);
@@ -30,7 +31,7 @@ export default function Booking() {
     }
   };
 
-  const webcamRef = useRef(null);
+  const webcamRef:any = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [faceId, setFaceId] = useState("");
   const capturePhoto = () => {
@@ -127,8 +128,9 @@ export default function Booking() {
   };
 
   return (
-    <div className="booking p-1">
-      <Stepper steps={steps} activeStep={activeStep} />
+    <div className="booking my-3">
+      <Stepper  className=" stepper " steps={steps} activeStep={activeStep} />
+      
       {activeStep == 0 ? (
         <div className="px-5">
           <p className="text-4xl flex justify-center items-center">
@@ -148,6 +150,16 @@ export default function Booking() {
                 </div>
                 <div className="flex items-center justify-center">
                   <button
+                    onClick={captureAnother}
+                    className={
+                      "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
+                    }
+                  >
+                    Capture another one?
+                  </button>
+                </div>
+                <div className="flex items-center justify-center">
+                  <button
                     onClick={sendPhoto}
                     className={
                       "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
@@ -158,16 +170,6 @@ export default function Booking() {
                     ) : (
                       <>Send Photo</>
                     )}
-                  </button>
-                </div>
-                <div className="flex items-center justify-center">
-                  <button
-                    onClick={captureAnother}
-                    className={
-                      "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
-                    }
-                  >
-                    Capture another one?
                   </button>
                 </div>
               </>
@@ -203,8 +205,9 @@ export default function Booking() {
           </div>
         </div>
       ) : (
-        <div className="ticket-details p-2 mx-auto max-w-6xl px-2 sm:px-6 lg:px-8 rounded-lg shadow-md">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+        <div className="ticket-details my-2 p-1 mx-auto max-w-6xl  sm:px-6 lg:px-8 rounded-lg shadow-md">
+          <BookingHeader/>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
             <div className="rounded-lg ">
               <img
                 className="w-full rounded-3xl shadow-lg"
@@ -212,7 +215,7 @@ export default function Booking() {
                 alt="site-image"
               />
             </div>
-            <div className=" p-2  col-span-2">
+            <div className="rounded-lg  lg:col-span-2">
               <div className="left-header flex justify-between items-center">
                 <h1 className="text-main text-2xl font-bold">
                   {Modified?.name}
@@ -317,6 +320,7 @@ export default function Booking() {
               </form>
             </div>
           </div>
+
           <div>
             <button
               onClick={handlePrevStep}
