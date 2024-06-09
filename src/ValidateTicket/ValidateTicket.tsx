@@ -1,13 +1,13 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { baseUrl } from "../Utls/BaseUrl";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { MdVerified } from "react-icons/md";
+import { useEffect, useRef, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import { MdVerified } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Webcam from "react-webcam";
+import { baseUrl } from "../Utls/BaseUrl";
 
 interface TokenData {
   orderId: string;
@@ -31,8 +31,6 @@ export default function ValidateTicket() {
           toast.error("User must pay first for entering");
         } else {
           setTicket(res.data.orders);
-          console.log(res.data.orders);
-          
         }
 
       })
@@ -43,8 +41,7 @@ export default function ValidateTicket() {
 
   const webcamRef:any = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
-  const [faceId, setFaceId] = useState("");
-
+  
   const capturePhoto = () => {
     const image = webcamRef.current?.getScreenshot();
     if (image) {
@@ -61,7 +58,6 @@ export default function ValidateTicket() {
     setIsLoading(true);
     if (imageSrc) {
       try {
-
         const formData = new FormData();
         formData.append("image_base64", imageSrc);
         formData.append("person_id", ticket?.faceId );
@@ -75,14 +71,18 @@ export default function ValidateTicket() {
           }
         );
         if (response.status === 200) {
-
           setIsLoading(false);
           console.log(response);
+          if(Number(response.data.score.split(".")[0]) >= 80)
+            {
+              toast.success("Accepted User")
+            }else{
+              toast.error("Not Accepted User")
+
+            }
 
         } else {
-
           toast.error("Failed to send photo");
-          
         }
       } catch (error) {
         console.error("Error sending photo:", error);

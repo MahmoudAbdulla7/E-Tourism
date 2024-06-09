@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
 import { Modal } from "flowbite-react";
+import React, { useRef } from "react";
 import { IoClose } from "react-icons/io5";
 interface props {
   openModal: boolean;
@@ -11,23 +11,6 @@ interface props {
 const SharedModal: React.FC<props> = ({ openModal, children, title, onclose }) => {
 
   const modalContentRef = useRef<HTMLDivElement>(null);
-//   const handleOutsideClick = (event: MouseEvent) => {
-
-//     if (!modalContentRef.current?.contains(event.target as Node)) {
-//         onclose(); 
-//       }
-
-//   };
-//   useEffect(() => {
-//     if (openModal) {
-//       document.addEventListener("mousedown", handleOutsideClick);
-//     } else {
-//       document.removeEventListener("mousedown", handleOutsideClick);
-//     }
-//     return () => {
-//       document.removeEventListener("mousedown", handleOutsideClick);
-//     };
-//   }, [openModal]);
 
   return (
     <div className="w-full">

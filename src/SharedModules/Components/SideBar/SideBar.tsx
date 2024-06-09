@@ -1,19 +1,17 @@
+import { Modal } from "flowbite-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FaKey } from "react-icons/fa";
 import { GiLouvrePyramid, GiTicket } from "react-icons/gi";
 import { IoIosLogOut, IoMdHome } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import { LiaCitySolid } from "react-icons/lia";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ChangePassword from "../../../AuthModule/Components/ChangePassword/ChangePassword";
 import { logOut } from "../../../Redux/AuthSlice/AuthSlice";
 import ammon from "../../../assets/Amoon.png";
-import { FaKey, FaPlus } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { ImSpinner9 } from "react-icons/im";
-import { Modal } from "flowbite-react";
-import ChangePassword from "../../../AuthModule/Components/ChangePassword/ChangePassword";
 
 export default function SideBar() {
   const { t, i18n } = useTranslation();
