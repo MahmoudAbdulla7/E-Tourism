@@ -24,6 +24,10 @@ import { login } from "../Redux/AuthSlice/AuthSlice";
             toast.success(res.data.message);
             return navigate("/home");
           };
+          if (res.data.aboutUser.role=="Inspector") {
+            toast.success(res.data.message);
+            return navigate("/inspector");
+          };
           
         toast.success(res.data.message);
         navigate(navigateTo);

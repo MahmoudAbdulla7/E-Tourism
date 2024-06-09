@@ -6,7 +6,7 @@ const initialState = {
   data: storedData ? JSON.parse(storedData).aboutUser : null,
   headers: {
     headers: {
-      authorization: storedData ? JSON.parse(storedData).accessToken : null,
+      authorization: storedData ?`Hamada__${JSON.parse(storedData).accessToken}`  : null,
     },
   },
 };
