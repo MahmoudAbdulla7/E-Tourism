@@ -9,6 +9,7 @@ import Highlights from "../Highlights/Highlights";
 import { useTranslation } from "react-i18next";
 import Loading from "../../../SharedModules/Components/Loading/Loading";
 import { Table } from "flowbite-react";
+import { IoLogoYoutube } from "react-icons/io5";
 
 export interface destination {
   name: string;
@@ -21,6 +22,7 @@ export interface destination {
     _id: string;
   };
   _id: string;
+  video: string;
   subImages: {
     secure_url: string;
   }[];
@@ -37,7 +39,6 @@ export default function AboutMuseum() {
     const text = destination?.description;
     const value = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(value);
-   
   };
 
   const handlePause = () => {
@@ -105,11 +106,22 @@ export default function AboutMuseum() {
               </div>
               <div className="lg:col-span-3 p-4 flex flex-col justify-between">
                 <div className="name">
-                  <h2 className="text-3xl font-semibold mb-2">
-                    {destination?.name}
-                  </h2>
-                  <p className="text-lg">{destination?.description}</p>
+                  <div className=" flex justify-between items-center">
+                    <h2 className="text-3xl font-semibold mb-2">
+                      {destination?.name}
+                    </h2>
+                    <div className="youtube flex items-center my-2">
+                      <div className="clock border border-red-950 block p-2 cursor-pointer rounded-full shadow-sm border-dashed">
+                        <Link target="_blank" to={destination?.video}>
+                          <IoLogoYoutube className="text-xl text-red-700" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                <p className="text-lg">{destination?.description}</p>
                 </div>
+
+
                 <div className="booking grid sm:grid-cols-2 grid-cols-1  mt-8">
                   <div>
                     <p className="flex text-main items-center">
@@ -128,7 +140,6 @@ export default function AboutMuseum() {
                     >
                       {t("Book Now")}
                     </button>
-
                     <button
                       onClick={isSpeaking ? handlePause : handleSpeak}
                       className="px-4  py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
