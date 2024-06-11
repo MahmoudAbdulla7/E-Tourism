@@ -96,7 +96,6 @@ export default function Cities() {
   };
   //---------------------updateCity--------------------
   const updateCity = (data:any) => {
-      console.log(data);
       const addFormData = new FormData();
     addFormData.append("name", data["name"]);
     addFormData.append("image", data["image"][0]);
@@ -434,10 +433,6 @@ export default function Cities() {
               </div>
             </div>
             <div className="text-end">
-              {/* <div className="bg-red-500">
-                555555555555
-                <img src={`https://e-tourism-backend.vercel.app/`+ cityData?.image?.secure_url} alt="" />
-              </div> */}
               <button
                 type="submit"
                 className={

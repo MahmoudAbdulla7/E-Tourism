@@ -231,7 +231,7 @@ const {data}= useSelector((state:any)=>state.authReducer);
                 className="text-main"
               >
                 <div className="flex items-center">
-                  <FaLocationDot /> Location
+                  <FaLocationDot className="text-red-700 text-xl" /> Location
                 </div>
               </a>
               <div className="openning-hours  flex items-center my-2">
