@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import amoon from "../../../assets/Amoon.png";
-import { Carousel } from "flowbite-react";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import Slider from "react-slick";
+import amoon from "../../../assets/Amoon.png";
 export default function Museums() {
   const { t, i18n } = useTranslation();
   const { monuments } = useSelector((state: any) => state.MonumentsReducer);
@@ -14,12 +12,13 @@ export default function Museums() {
 
   var settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 2000,
+    speed: 700,
     cssEase: "linear",
+    arrows: true,
     initialSlide: 0,
     responsive: [
       {
@@ -54,21 +53,6 @@ export default function Museums() {
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
-  const firstCityImage = {
-    backgroundImage: `url(${cities[0]?.image?.secure_url})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
-  const seconedCityImage = {
-    backgroundImage: `url(${cities[1]?.image?.secure_url})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
-  const thirdCityImage = {
-    backgroundImage: `url(${cities[2]?.image.secure_url})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  };
 
   useEffect(() => {
     console.log(cities);
@@ -76,7 +60,7 @@ export default function Museums() {
 
   return (
     <div className="Museums">
-      <div className="h-full w-full bg-white bg-opacity-40 py-20">
+      <div className="h-full w-full bg-white bg-opacity-40 py-16">
         <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2">
             <div className="border-y-[4vh] w-10/12 border-t-main rounded-[28%] mx-6 border-b-gray-400 px-8 my-3">
@@ -122,53 +106,30 @@ export default function Museums() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center mt-9">
-            {/* <Link
-              to={`museums/${cities[0]?.id}`}
-              style={firstCityImage}
-              className="text-4xl rounded-3xl group overflow-hidden m-3"
-            >
-              <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[0]?.name}</h3>
-              </div>
-            </Link>
-
-            <Link
-              to={`museums/${cities[1]?.id}`}
-              style={seconedCityImage}
-              className="text-4xl rounded-3xl group overflow-hidden m-3"
-            >
-              <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[1]?.name}</h3>
-              </div>
-            </Link>
-
-            <Link
-              to={`museums/${cities[2]?.id}`}
-              style={thirdCityImage}
-              className="text-4xl rounded-3xl group overflow-hidden m-3"
-            >
-              <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                <h3>{cities[2]?.name}</h3>
-              </div>
-            </Link> */}
-          </div>
-          <div className="slider-container ">
-            <Slider autoplaySpeed={2000} {...settings}>
-              <div className="mx-2">
-                {cities.map((city: any, idx: number) => {
-                  <Link
+          <div className="slider-container bg-transparent mt-8">
+            <Slider autoplaySpeed={1000} {...settings}>
+              {cities.map((city: any, idx: number) => (
+                <div className="h-[30vh]">
+                  <div
+                    style={{
+                      backgroundImage: `url(${city?.image?.secure_url})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",height:"100%",margin:"0 6px"
+                    }}
+                    className="rounded-3xl"
                     key={idx}
-                    to={`museums/${city?.id}`}
-                    style={firstCityImage}
-                    className="text-4xl rounded-3xl group overflow-hidden m-3 px-2"
                   >
-                    <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-                      <h3>{city?.name}</h3>
+                    <div className="bg-black bg-opacity-30 rounded-3xl text-gray-300 font-extrabold group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700 h-full flex items-center justify-center">
+                    <Link
+                      to={`museums/${city?.id}`}
+                      className="text-5xl group overflow-hidden h-full w-full text-center flex items-center mx-8"
+                    >
+                        {city?.name}
+                    </Link>
                     </div>
-                  </Link>;
-                })}
-              </div>
+                  </div>
+                </div>
+              ))}
             </Slider>
           </div>
         </div>

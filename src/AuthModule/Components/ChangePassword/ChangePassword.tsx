@@ -43,7 +43,7 @@ const dispatch=useDispatch()
           Change Password
         </h3>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="px-5 md:pb-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="px-5 md:pb-2">
         <div className="grid gap-4 mb-4 grid-cols-2">
           <div className="col-span-2">
             <label
