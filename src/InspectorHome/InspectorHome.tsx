@@ -4,22 +4,30 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { baseUrl } from "../Utls/BaseUrl";
 import TicketCard from "../SharedModules/Components/TicketCard/TicketCard";
+import Loading from "../SharedModules/Components/Loading/Loading";
+import NoData from "../SharedModules/Components/NoData/NoData";
 export default function InspectorHome() {
   const [tickets, setTickets] = useState([]);
   const [checked, setIsChecked] = useState();
   const { headers } = useSelector((state: any) => state.authReducer);
+  const [loading, setIsLoading] = useState(false);
   useEffect(() => {
     getTickets();
   }, [checked]);
 
   const getTickets = () => {
+    setIsLoading(true);
     axios
       .get(`${baseUrl}order/filter-by-day/${checked}`, headers)
       .then((res) => {
         setTickets(res.data.orders || res.data.filteredOreders);
+        setIsLoading(false);
+        console.log(res.data.orders || res.data.filteredOreders);
+        
       })
       .catch((err) => {
         toast.error(err.response.data.message || "network error");
+        setIsLoading(false);
       });
   };
 
@@ -45,12 +53,26 @@ export default function InspectorHome() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-4 gap-2 my-3 grid-cols-2">
-        {tickets?.map((ticket, idx: number) => (
-          <div key={idx}>
-            <TicketCard ticket={ticket} />
+      <div>
+        {tickets.length > 0 ? (
+          !loading ? (
+            <div className="grid md:grid-cols-4 gap-6 my-3 grid-cols-2">
+              {tickets?.map((ticket, idx: number) => (
+                <div key={idx}>
+                  <TicketCard ticket={ticket} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Loading />
+          )
+        ) : (
+          <div className="w-full flex justify-center items-center">
+            <div className="w-[40%]">
+              <NoData />
+            </div>
           </div>
-        ))}
+        )}
       </div>
     </>
   );

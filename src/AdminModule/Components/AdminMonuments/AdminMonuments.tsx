@@ -152,17 +152,20 @@ export default function AdminMonuments() {
     .then((res) => {
       
       setMonumentName(res.data.touristDestinations[0].name)
-      if (res.data.touristDestinations[0]) {
-        for (const key in res.data.touristDestinations[0]) {
-          if (Object.prototype.hasOwnProperty.call(res.data.touristDestinations[0], key)) {
-            setUpdateModalValues(key, res.data.touristDestinations[0][key]);
+      if (res?.data?.touristDestinations[0]) {
+        for (const key in res?.data?.touristDestinations[0]) {
+          if (Object.prototype.hasOwnProperty.call(res?.data?.touristDestinations[0], key)) {
+            setUpdateModalValues(key, res?.data?.touristDestinations[0][key]);
           }
         }
       }
 
     })
-    .catch(() => {
-      toast.error("network error");
+    .catch((err) => {
+      // toast.error("network error");
+      toast.error("sssssssss")
+      console.log(err);
+      
     })
     .finally(() => {
       setUpdateModalLoading(false);

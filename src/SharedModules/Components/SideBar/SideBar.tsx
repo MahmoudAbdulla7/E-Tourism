@@ -60,13 +60,15 @@ export default function SideBar() {
                       ? "/dashboard"
                       : data.role == "User"
                       ? "/home"
-                      : "/"
+                      :data.role=="Inspector"?
+                      "/inspector":"/"
                   }
                 />
               }
             >
               {t("Home")}
             </MenuItem>
+
 
             {data?.role == "Admin" ? (
               <MenuItem

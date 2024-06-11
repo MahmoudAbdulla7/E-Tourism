@@ -97,11 +97,23 @@ body{
 .start-journey:hover .layer{
   background-color: rgba(0, 0, 0, 0.322);
 }
-.byramid{
-  background-image: url("assets/pyramid.jpeg");
+
+.bg1{
+  background-image: url("assets/unsplash_oCkZ6WicY8Q.jpg");
   background-size: cover;
   background-position: center center;
 }
+.bg2{
+  background-image: url("assets/unsplash_xcSzpi6zbW0.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+.bg3{
+  background-image: url("assets/unsplash_2DrKpUBUAjo.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
 .amoon-image{
   transform: translateX(-50%);
 }
@@ -309,7 +321,6 @@ img#roma:hover {
 .sidebar-container .ps-sidebar-container{
   background-color: rgb(1, 1, 45);
   color: #fff;
-  /* border-top-right-radius:50px; */
 }
 .side{
   border-top-right-radius:60px;

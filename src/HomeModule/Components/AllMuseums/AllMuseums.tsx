@@ -53,14 +53,13 @@ export default function AllMuseums() {
           <div className="mb-1 "></div>
           <div className="flex justify-center items-center">
             <label
-              className="bg-red-100 p-2 rounded-l-lg border-y-2 border-l-2 border-orange-300  font-medium"
+              className=" p-2 rounded-l-lg border-y-2 border-l-2 border-main  font-medium"
               htmlFor="citty"
             >
               Select The City:
             </label>
-
             <select
-              className="w-[50%] bg-red-100 rounded-r-lg border-orange-300  border-y-2 border-r-2  outline-none focus:outline-none"
+              className="w-[50%] bg-transparent rounded-r-lg border-main  border-y-2 border-r-2"
               onChange={getCityValue}
               name="cities"
               id="citty"

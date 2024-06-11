@@ -62,5 +62,16 @@
   "Highlights":"Repères culturels",
   "Prices may vary depending on selected date":"Les prix peuvent varier en fonction de la date sélectionnée.",
   "Speak":"Parler",
-  "Book Now":"Reserve maintenant"
+  "Book Now":"Reserve maintenant",
+   "Opening Hours":"Horaires d'ouvertures",
+   "MON":"LUN",
+   "TUE":"MAR",
+   "WED":"MER",
+   "THU":"JEU",
+   "FRI":"VEN",
+   "SAT":"SAM",
+   "SUN":"DIM",
+   "9:00 AM":"9:00 AM",
+   "To":"À",
+   "6:00 PM":"6:00 PM"
 }

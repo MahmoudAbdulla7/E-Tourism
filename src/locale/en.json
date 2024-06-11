@@ -62,5 +62,16 @@
     "Highlights":"Highlights",
     "Prices may vary depending on selected date":"Prices may vary depending on selected date",
     "Speak":"Speak",
-    "Book Now":"Book Now"
+    "Book Now":"Book Now",
+    "Opening Hours":"Opening Hours",
+    "MON":"MON",
+    "TUE":"TUE",
+    "WED":"WED",
+    "THU":"THU",
+    "FRI":"FRI",
+    "SAT":"SAT",
+    "SUN":"SUN",
+    "9:00 AM":"9:00 AM",
+    "To":"To",
+    "6:00 PM":"6:00 PM"
 }
