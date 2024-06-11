@@ -4,41 +4,79 @@ import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import amoon from "../../../assets/Amoon.png";
+import { Carousel } from "flowbite-react";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import Slider from "react-slick";
 export default function Museums() {
   const { t, i18n } = useTranslation();
   const { monuments } = useSelector((state: any) => state.MonumentsReducer);
   const { cities } = useSelector((state: any) => state.CitiesReducer);
 
+  var settings = {
+    dots: false,
+    infinite: false,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    cssEase: "linear",
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   const monumentImage = {
     backgroundImage: `url(${monuments[0]?.image.secure_url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   };
   const firstCityImage = {
     backgroundImage: `url(${cities[0]?.image?.secure_url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   };
   const seconedCityImage = {
     backgroundImage: `url(${cities[1]?.image?.secure_url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   };
   const thirdCityImage = {
     backgroundImage: `url(${cities[2]?.image.secure_url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   };
- 
 
   useEffect(() => {
     console.log(cities);
   }, []);
 
-
   return (
     <div className="Museums">
-      <div className="h-full w-full bg-white bg-opacity-40 py-16">
+      <div className="h-full w-full bg-white bg-opacity-40 py-20">
         <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2">
             <div className="border-y-[4vh] w-10/12 border-t-main rounded-[28%] mx-6 border-b-gray-400 px-8 my-3">
@@ -67,11 +105,14 @@ export default function Museums() {
               </div>
             </div>
 
-            <div style={monumentImage} className=" rounded-lg group md:h-[100%] h-[35vh]  duration-500 m-3 ">
+            <div
+              style={monumentImage}
+              className=" rounded-lg group md:h-[100%] h-[35vh]  duration-500 m-3 "
+            >
               <div className="museum-details flex items-center justify-center w-full h-full text-white px-3 overflow-hidden">
                 <div className="text-center">
                   <h2 className="text-xl block group-hover:translate-x-[110%] py-3 group-hover:duration-500 rounded-xl bg-black bg-opacity-40 translate-y-2/3">
-                   {monuments[0]?.name}
+                    {monuments[0]?.name}
                   </h2>
                   <p className="py-3 translate-y-96 group-hover:translate-y-[-30px] rounded-xl bg-black bg-opacity-60 text-center group-hover:duration-500">
                     {monuments[0]?.description}
@@ -80,18 +121,18 @@ export default function Museums() {
               </div>
             </div>
           </div>
-          <div  className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 my-2">
-            <Link
+
+          <div className="flex justify-center items-center mt-9">
+            {/* <Link
               to={`museums/${cities[0]?.id}`}
               style={firstCityImage}
               className="text-4xl rounded-3xl group overflow-hidden m-3"
             >
-
               <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
-
                 <h3>{cities[0]?.name}</h3>
               </div>
             </Link>
+
             <Link
               to={`museums/${cities[1]?.id}`}
               style={seconedCityImage}
@@ -99,9 +140,9 @@ export default function Museums() {
             >
               <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
                 <h3>{cities[1]?.name}</h3>
-
               </div>
             </Link>
+
             <Link
               to={`museums/${cities[2]?.id}`}
               style={thirdCityImage}
@@ -109,11 +150,26 @@ export default function Museums() {
             >
               <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
                 <h3>{cities[2]?.name}</h3>
-
               </div>
-            </Link>
-           
-           
+            </Link> */}
+          </div>
+          <div className="slider-container ">
+            <Slider autoplaySpeed={2000} {...settings}>
+              <div className="mx-2">
+                {cities.map((city: any, idx: number) => {
+                  <Link
+                    key={idx}
+                    to={`museums/${city?.id}`}
+                    style={firstCityImage}
+                    className="text-4xl rounded-3xl group overflow-hidden m-3 px-2"
+                  >
+                    <div className="py-16 px-32 bg-black bg-opacity-30 text-white group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700">
+                      <h3>{city?.name}</h3>
+                    </div>
+                  </Link>;
+                })}
+              </div>
+            </Slider>
           </div>
         </div>
       </div>

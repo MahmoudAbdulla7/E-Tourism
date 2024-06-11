@@ -13,6 +13,7 @@ export default function Welcome() {
           <p className="text-4xl font-semibold text-main my-8 mx-3">{t("Unlock the secrets of the Pharaohs")}</p>
         </div>
       </div>
+
     </div>
   );
 }

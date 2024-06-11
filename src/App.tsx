@@ -47,7 +47,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/auth",
-      errorElement: <NotFound />,
+      errorElement:<NotFound/>,
       element: <AuthLayout />,
       children: [
         { index: true, element: <Login /> },
@@ -60,6 +60,7 @@ function App() {
     {
       path: "/",
       element: <VisitorLayout/>,
+      errorElement:<NotFound/>,
       children: [
         {
           index: true,
@@ -73,6 +74,7 @@ function App() {
     },
     {
       path: "/dashboard",
+      errorElement:<NotFound/>,
       element: (
         <AdminProtectedRoute>
           <MasterLayout />
@@ -91,6 +93,7 @@ function App() {
     },
     {
       path: "/home",
+      errorElement:<NotFound/>,
       element: (
         <UserProtectedRoute>
           <UserLayout />
@@ -107,6 +110,7 @@ function App() {
     },
     {
       path: "/inspector",
+      errorElement:<NotFound/>,
       element: (
         <InspectorProtectedRoute>
           <InspectorLayout />

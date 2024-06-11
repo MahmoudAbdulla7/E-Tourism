@@ -29,13 +29,25 @@ export interface destination {
 export default function AboutMuseum() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const handleClick = () => {
+
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const handleSpeak = () => {
+    setIsSpeaking(true);
     const text = destination?.description;
     const value = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(value);
+   
   };
+
+  const handlePause = () => {
+    window.speechSynthesis.pause();
+    setIsSpeaking(false);
+  };
+
   let { cityId, destinationId } = useParams();
   const [destination, setDestination] = useState<destination>();
+
   const getSpecificAttraction = () => {
     axios
       .get(`${baseUrl}city/${cityId}/destination/${destinationId}`)
@@ -88,7 +100,7 @@ export default function AboutMuseum() {
                 <img
                   className="w-full rounded-3xl"
                   src={destination?.image?.secure_url}
-                  alt=""
+                  alt="mesume-photo"
                 />
               </div>
               <div className="lg:col-span-3 p-4 flex flex-col justify-between">
@@ -112,15 +124,16 @@ export default function AboutMuseum() {
                   <div className="btn text-end">
                     <button
                       onClick={bookNow}
-                      className="px-4 py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                      className="px-4   py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
                     >
                       {t("Book Now")}
                     </button>
+
                     <button
-                      onClick={handleClick}
-                      className="px-4 py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                      onClick={isSpeaking ? handlePause : handleSpeak}
+                      className="px-4  py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
                     >
-                      {t("Speak")}
+                      {!isSpeaking ? "Speak" : "Pause"}
                     </button>
                   </div>
                 </div>
@@ -145,65 +158,65 @@ export default function AboutMuseum() {
                       colSpan={4}
                       className=" text-center text-3xl bg-main text-white"
                     >
-                      Opening Hours
+                      {t("Opening Hours")}
                     </Table.HeadCell>
                   </Table.Head>
                   <Table.Body className="divide-zinc-800 divide-y-8">
                     <Table.Row className="bg-blue-200  ">
                       <Table.Cell className="font-medium text-gray-900">
-                        MON
+                        {t("MON")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="bg-blue-200  ">
                       <Table.Cell className="font-medium text-gray-900">
-                        TUE
+                        {t("TUE")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="bg-blue-200 ">
                       <Table.Cell className="font-medium text-gray-900">
-                        WED
+                        {t("WED")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="bg-blue-200  ">
                       <Table.Cell className="font-medium text-gray-900">
-                        THU
+                        {t("THU")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="bg-blue-200 ">
                       <Table.Cell className="font-medium text-gray-900">
-                        FRI
+                        {t("FRI")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="bg-blue-200  ">
                       <Table.Cell className="font-medium text-gray-900">
-                        SAT
+                        {t("SAT")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                     <Table.Row className="bg-blue-200">
                       <Table.Cell className="font-medium text-gray-900">
-                        SUN
+                        {t("SUN")}
                       </Table.Cell>
-                      <Table.Cell>9:00 AM</Table.Cell>
-                      <Table.Cell>To</Table.Cell>
-                      <Table.Cell>6:00 PM</Table.Cell>
+                      <Table.Cell>{t("9:00 AM")}</Table.Cell>
+                      <Table.Cell>{t("To")}</Table.Cell>
+                      <Table.Cell>{t("6:00 PM")}</Table.Cell>
                     </Table.Row>
                   </Table.Body>
                 </Table>

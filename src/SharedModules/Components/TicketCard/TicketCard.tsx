@@ -11,28 +11,29 @@ interface Ticket {
     };
     touristDestination: {
       name: string;
+      quantity:number;
     };
     DateOfVisit: string;
     status: string;
   };
 }
 
-export default function TicketCard({ ticket }: Ticket) {
+export default function TicketCard ({ ticket }: Ticket) {
   return (
-    <div className="rounded-xl border border-gray-700 bg-blue-200 p-4">
+    <div className={`rounded-xl border border-gray-700 p-4 ${ticket?.status=="placed"? "bg-green-400" : ticket?.status=="waitPayment"? "bg-yellow-200": "bg-red-400" }`}>
       <div className="flex items-center gap-4">
         <img
           alt=""
-          src={`${ticket.userId.image.secure_url}`}
+          src={`${ticket?.userId?.image?.secure_url}`}
           className="size-16 rounded-full object-cover"
         />
 
         <div>
-          <h2 className="text-lg font-bold text-main">{`${ticket.userId.firstName} ${ticket.userId.lastName}`}</h2>
+          <h2 className="text-lg font-bold text-main">{`${ticket?.userId?.firstName} ${ticket?.userId?.lastName}`}</h2>
 
           <div className="flow-root">
             <p className="text-main text-sm">
-              <strong>Country: </strong>{`${ticket.userId.country}`}
+              <strong>Country: </strong>{`${ticket?.userId?.country}`}
             </p>
           </div>
         </div>
@@ -40,14 +41,18 @@ export default function TicketCard({ ticket }: Ticket) {
 
       <div className="my-3">
         <div className="block h-full rounded-lg border border-gray-700 p-4 duration-300 hover:border-pink-600">
-          <strong className="font-bold text-main">Dest Name</strong>
+          <strong className="font-bold text-main">{`${ticket?.touristDestination?.name}`}</strong> 
           <div className="text-main text-sm my-1">
             <p>
               <strong>Ticket Status: </strong>
-              {`${ticket.status}`}
+              {`${ticket?.status}`}
             </p>
             <p>
-              <strong>Day of Visit: </strong>{ticket.DateOfVisit.split("T")[0]}
+              <strong>No of Tickets: </strong>
+              {`${ticket?.touristDestination?.quantity}`}
+            </p>
+            <p>
+              <strong>Day of Visit: </strong>{ticket?.DateOfVisit?.split("T")[0]}
             </p>
           </div>
         </div>

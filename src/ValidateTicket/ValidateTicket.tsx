@@ -8,40 +8,104 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Webcam from "react-webcam";
 import { baseUrl } from "../Utls/BaseUrl";
+import { Stepper } from "react-form-stepper";
+import TicketCard from "../SharedModules/Components/TicketCard/TicketCard";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import Loading from "../SharedModules/Components/Loading/Loading";
 
 interface TokenData {
   orderId: string;
   faceId: string;
   status: string;
 }
+interface NewTicket {
+  userId: {
+    image: {
+      secure_url: string;
+    };
+    lastName: string;
+    firstName: string;
+    country: string;
+  };
+  touristDestination: {
+    name: string;
+    quantity: number;
+  };
+  DateOfVisit: string;
+  status: string;
+}
+interface TicketCardProps {
+  ticket: NewTicket | null;
+}
+
 
 export default function ValidateTicket() {
   const { token } = useParams();
   const tokenData: TokenData = jwtDecode(String(token));
   const [ticket, setTicket] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [newTicket, setNewTicket] = useState<any>();
+  const [isAccepted, setIsAccepted] = useState<boolean>(false);
+  const steps: object[] = [
+    { label: "Step 1" },
+    { label: "Step 2" },
+    { label: "Step 3" },
+  ];
+
   const { headers } = useSelector((state: any) => state.authReducer);
 
   const getTicket = () => {
     axios
       .get(`${baseUrl}order/filter-by-id/${tokenData.orderId}`, headers)
       .then((res) => {
-
-        if (res.data.orders.status !== "placed") {
-          toast.error("User must pay first for entering");
-        } else {
-          setTicket(res.data.orders);
+        setTicket(res.data.orders);
+        if (isAccepted) {
+          setNewTicket(res.data.orders);
         }
-
       })
       .catch(() => {
         toast.error("network error");
       });
   };
 
-  const webcamRef:any = useRef(null);
+  const updateTicket = () => {
+    setIsLoading(true);
+    axios
+      .patch(
+        `${baseUrl}order/update-by-inspector/${tokenData.orderId}`,
+        { status: "delivered" },
+        headers
+      )
+      .then((res) => {
+        getTicket();
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleNextStep = () => {
+    if (activeStep < steps.length) {
+      setActiveStep((prev) => prev + 1);
+      if (isAccepted) {
+        updateTicket();
+      }
+    }
+  };
+  const handlePrevStep = () => {
+    if (activeStep > 0) {
+      setActiveStep((prev) => prev - 1);
+    }
+  };
+
+  const webcamRef: any = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
-  
+
   const capturePhoto = () => {
     const image = webcamRef.current?.getScreenshot();
     if (image) {
@@ -50,8 +114,15 @@ export default function ValidateTicket() {
       toast.error("Failed to capture screenshot from webcam");
     }
   };
+
   const captureAnother = () => {
     setImageSrc(null);
+  };
+
+  const videoConstraints = {
+    width: 390,
+    height: 390,
+    facingMode: "user",
   };
 
   const sendPhoto = async () => {
@@ -60,7 +131,7 @@ export default function ValidateTicket() {
       try {
         const formData = new FormData();
         formData.append("image_base64", imageSrc);
-        formData.append("person_id", ticket?.faceId );
+        formData.append("person_id", ticket?.faceId);
         const response = await axios.post(
           "https://face-matching.onrender.com/face-matchingBase64",
           formData,
@@ -73,14 +144,13 @@ export default function ValidateTicket() {
         if (response.status === 200) {
           setIsLoading(false);
           console.log(response);
-          if(Number(response.data.score.split(".")[0]) >= 80)
-            {
-              toast.success("Accepted User")
-            }else{
-              toast.error("Not Accepted User")
-
-            }
-
+          if (Number(response?.data?.score?.split(".")[0]) >= 80) {
+            toast.success("Accepted User");
+            setIsAccepted(true);
+          } else {
+            toast.error("Not Accepted User");
+            setIsAccepted(false);
+          }
         } else {
           toast.error("Failed to send photo");
         }
@@ -95,86 +165,159 @@ export default function ValidateTicket() {
     getTicket();
   }, []);
 
-  const videoConstraints = {
-    width: 390,
-    height: 390,
-    facingMode: "user",
-  };
-
   return (
     <>
-            <div className="px-5">
-          <p className="text-4xl flex justify-center items-center">
-            Face Matching <MdVerified className="text-green-500" />
-          </p>
-          <div>
-            {imageSrc ? (
-              <>
-                <div className="flex items-center justify-center">
-                  {imageSrc && (
-                    <img
-                      className="rounded-full"
-                      src={imageSrc}
-                      alt="Captured"
-                    />
-                  )}
+      <div className="validate-ticket">
+        <Stepper
+          className=" stepper my-8 "
+          steps={steps}
+          activeStep={activeStep}
+        />
+        {activeStep == 0 ? (
+          ticket ? (
+            <div className="ticket and nextbtn">
+              <div className="flex justify-center items-center my-5">
+                <div className="w-[40%]">
+                  <TicketCard ticket={ticket} />
                 </div>
-                <div className="flex items-center justify-center">
+              </div>
+              <div className="flex justify-end  px-10 ">
+                {ticket.status == "placed" ? (
                   <button
-                    onClick={sendPhoto}
-                    className={
-                      "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
-                    }
+                    onClick={handleNextStep}
+                    className=" bg-green-800 px-8 my-2 py-1 rounded-3xl text-gray-50 flex items-center justify-center"
                   >
-                    {isLoading == true ? (
-                      <ImSpinner9 className="animate-spin" />
-                    ) : (
-                      <>Send Photo</>
+                    Next
+                    <GrFormNext />
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          ) : (
+            ""
+          )
+        ) : activeStep == 1 ? (
+          <div className="px-5">
+            <p className="text-4xl flex justify-center items-center">
+              Face Matching <MdVerified className="text-green-500" />
+            </p>
+            <div>
+              {imageSrc ? (
+                <>
+                  <div className="flex items-center justify-center">
+                    {imageSrc && (
+                      <img
+                        className="rounded-full"
+                        src={imageSrc}
+                        alt="Captured"
+                      />
                     )}
-                  </button>
-                </div>
-                <div className="flex items-center justify-center">
-                  <button
-                    onClick={captureAnother}
-                    className={
-                      "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
-                    }
-                  >
-                    Capture another one?
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="flex justify-center items-center">
-                  <Webcam
-                    className="rounded-full my-4"
-                    audio={false}
-                    ref={webcamRef}
-                    imageSmoothing={true}
-                    videoConstraints={videoConstraints}
-                    screenshotFormat="image/jpeg"
-                    width={320}
-                    height={240}
-                  />
-                </div>
-                <div className="flex items-center justify-center">
-                  <p className="text-slate-500">
-                    Click capture photo button then click on the send button
-                  </p>
-                </div>
-                <div className="flex justify-center items-center">
-                  <button
-                    className="bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
-                    onClick={capturePhoto}
-                  >
-                    Capture Photo
-                  </button>
-                </div>
-              </>
-            )}
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={sendPhoto}
+                      className={
+                        "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
+                      }
+                    >
+                      {isLoading == true ? (
+                        <ImSpinner9 className="animate-spin" />
+                      ) : (
+                        <>Send Photo</>
+                      )}
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={captureAnother}
+                      className={
+                        "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
+                      }
+                    >
+                      Capture another one?
+                    </button>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="">
+                      <button
+                        onClick={handlePrevStep}
+                        className=" bg-green-800 px-8 my-2 py-1 rounded-3xl text-gray-50 flex items-center justify-center"
+                      >
+                        <GrFormPrevious />
+                        Prev
+                      </button>
+                    </div>
+
+                    <div className="">
+                      {isAccepted ? (
+                        <button
+                          id="nextBtn"
+                          onClick={handleNextStep}
+                          className="bg-green-800 px-8 my-2 py-1 rounded-3xl text-gray-50 flex items-center justify-center"
+                        >
+                          Next
+                          <GrFormNext />
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex justify-center items-center">
+                    <Webcam
+                      className="rounded-full my-4"
+                      audio={false}
+                      ref={webcamRef}
+                      imageSmoothing={true}
+                      videoConstraints={videoConstraints}
+                      screenshotFormat="image/jpeg"
+                      width={320}
+                      height={240}
+                    />
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <p className="text-slate-500">
+                      Click capture photo button then click on the send button
+                    </p>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <button
+                      className="bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
+                      onClick={capturePhoto}
+                    >
+                      Capture Photo
+                    </button>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="">
+                      <button
+                        onClick={handlePrevStep}
+                        className=" bg-green-800 px-8 my-2 py-1 rounded-3xl text-gray-50 flex items-center justify-center"
+                      >
+                        <GrFormPrevious />
+                        Prev
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        ) : isLoading ? (
+          <Loading />
+        ) : (
+          <div className="flex justify-center items-center my-5">
+            <div className="w-[40%]">
+              <TicketCard ticket={newTicket} />
+            </div>
+          </div>
+        )}
+      </div>
     </>
-  )
+  );
 }
