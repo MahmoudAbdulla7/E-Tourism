@@ -49,7 +49,7 @@ export default function AdminMonuments() {
   } = useForm();
 
   const {
-    register:updateRegister,
+    register:updateRegister,getValues:updateModalValues,
     handleSubmit:handleSubmitUpdateModal,
     setValue:setUpdateModalValues,
     formState: { errors:updateErrors },
@@ -74,6 +74,7 @@ export default function AdminMonuments() {
     formData.append("type", monumentObject.type);
     formData.append("location", monumentObject.location);
     formData.append("description", monumentObject.description);
+    formData.append("video", monumentObject.video);
 
     if (Object.keys(monumentObject.image).length > 0) {
       formData.append("image", monumentObject.image["0"]);
@@ -150,19 +151,21 @@ export default function AdminMonuments() {
     axios
     .get(`${baseUrl}city/${cityId}/destination/${id}`)
     .then((res) => {
-      
-      setMonumentName(res.data.touristDestinations[0].name)
-      if (res?.data?.touristDestinations[0]) {
-        for (const key in res?.data?.touristDestinations[0]) {
-          if (Object.prototype.hasOwnProperty.call(res?.data?.touristDestinations[0], key)) {
-            setUpdateModalValues(key, res?.data?.touristDestinations[0][key]);
-          }
-        }
+
+      console.log(res);
+      if (res?.data?.touristDestination) {
+        setUpdateModalValues("name", res?.data?.touristDestination.name);
+        setUpdateModalValues("ticketPrice", res?.data?.touristDestination.ticketPrice);
+        setUpdateModalValues("type", res?.data?.touristDestination.type);
+        setUpdateModalValues("city", res?.data?.touristDestination?.cityId?.name);
+        setUpdateModalValues("location", res?.data?.touristDestination.location);
+        setUpdateModalValues("video", res?.data?.touristDestination.video);
+        setUpdateModalValues("description", res?.data?.touristDestination.description);
       }
+      console.log(res?.data?.touristDestination?.cityId?.name);
 
     })
     .catch((err) => {
-      // toast.error("network error");
       toast.error("sssssssss")
       console.log(err);
       
@@ -184,16 +187,19 @@ export default function AdminMonuments() {
 
     const formData = new FormData();
 
-    if (monumentName!==data.name) {formData.append("name", data.name);}
+    if (monumentName!==data.name) {
+    formData.append("name", data.name);}
     formData.append("ticketPrice", data.ticketPrice);
     formData.append("type", data.type);
     formData.append("location", data.location);
+    formData.append("video", data.video);
     formData.append("description", data.description);
     sendUpdatedData(formData);
-
+    console.log(updateModalValues());
   }
 
   const sendUpdatedData=(formData:any)=>{
+    setIsLoading(true);
     axios
     .put(`${baseUrl}city/${cityId}/destination/${id}`, formData, headers)
     .then((res) => {
@@ -302,7 +308,7 @@ export default function AdminMonuments() {
 
               <div>
                 <label
-                  htmlFor="ticketPrice"
+                  htmlFor="type"
                   className="block mb-2 text-sm font-medium text-main dark:text-white"
                 >
                   {t("Type")}
@@ -334,7 +340,7 @@ export default function AdminMonuments() {
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
                     <Select
-                      {...updateRegister("cityID", { required: "City is required" })}
+                      {...updateRegister("city", { required: "City is required" })}
                     >
                       {cities?.length > 0
                         ? cities.map((city: any, idx: number) => (
@@ -345,8 +351,8 @@ export default function AdminMonuments() {
                         : ""}
                     </Select>
                   </div>
-                  {updateErrors?.cityID && (
-                    <ErrorMessage text={String(updateErrors?.cityID?.message)} />
+                  {updateErrors?.city && (
+                    <ErrorMessage text={String(updateErrors?.city?.message)} />
                   )}
                 </div>
               </div>
@@ -376,6 +382,31 @@ export default function AdminMonuments() {
                 </div>
               </div>
 
+              <div>
+              <label
+                htmlFor="video"
+                className="block mb-2 text-sm font-medium text-main dark:text-white"
+              >
+                Video
+              </label>
+              <div className="flex items-center">
+                <div className="flex-auto mx-1">
+                  <input
+                    type="text"
+                    {...updateRegister("video", {
+                      required: "video is required",
+                    })}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Video Link for it"
+                    id="video"
+                  />
+                </div>
+                {errors?.video && (
+                  <ErrorMessage text={String(errors?.video?.message)} />
+                )}
+              </div>
+            </div>
+
               <div className="col-span-2">
                 <label
                   htmlFor="description"
@@ -402,14 +433,14 @@ export default function AdminMonuments() {
                 </div>
               </div>
             </div>
+            
             <button
               type="submit"
               className="text-white bg-gray-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
             >
               {!isLoading ? (
                 <span className="flex items-center">
-                  <FaPlus className="mx-2" />
-                  {t("Add new Monument")}
+                  {t("Update Monument")}
                 </span>
               ) : (
                 <ImSpinner9 className="animate-spin" />
@@ -546,6 +577,32 @@ export default function AdminMonuments() {
                 </div>
                 {errors?.location && (
                   <ErrorMessage text={String(errors?.location?.message)} />
+                )}
+              </div>
+            </div>
+
+
+            <div>
+              <label
+                htmlFor="video"
+                className="block mb-2 text-sm font-medium text-main dark:text-white"
+              >
+                Video
+              </label>
+              <div className="flex items-center">
+                <div className="flex-auto mx-1">
+                  <input
+                    type="text"
+                    {...register("video", {
+                      required: "video is required",
+                    })}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Video Link for it"
+                    id="video"
+                  />
+                </div>
+                {errors?.video && (
+                  <ErrorMessage text={String(errors?.video?.message)} />
                 )}
               </div>
             </div>

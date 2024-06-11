@@ -7,15 +7,12 @@ import Footerr from "../SharedModules/Components/Footerr/Footerr";
 export default function Home() {
   return (
     <>
-      <div className="bg-auth-button-color">
-        <div className="h-screen sm:h-64 xl:h-80 2xl:h-screen">
+     <div className="bg-auth-button-color">
+        <div className="h-screen sm:h-64 xl:h-screen">
           <Carousel indicators={false}>
-
-            <div className="f byramid h-screen bg1   ">
-          
-
+            <div className="h-screen bg1   ">
               <Navbar />
-              
+
               <Welcome />
             </div>
             <div className=" h-screen bg2  ">
@@ -32,7 +29,7 @@ export default function Home() {
         </div>
       </div>
       <Museums />
-      <Footerr/>
+      <Footerr />
     </>
   );
 }

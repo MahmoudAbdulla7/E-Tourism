@@ -56,7 +56,7 @@ export default function InspectorHome() {
       <div>
         {tickets.length > 0 ? (
           !loading ? (
-            <div className="grid md:grid-cols-4 gap-6 my-3 grid-cols-2">
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 my-3 grid-cols-1 pr-2">
               {tickets?.map((ticket, idx: number) => (
                 <div key={idx}>
                   <TicketCard ticket={ticket} />
