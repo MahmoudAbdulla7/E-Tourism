@@ -7,10 +7,10 @@ export default function Welcome() {
     const welcome =document.getElementById("welcome");
 
     if (window.scrollY>10) {
-      welcome?.classList.add("top-10");
+      welcome?.classList.add("top-14");
       welcome?.classList.remove("top-0");
       }else{
-        welcome?.classList.remove("top-10");
+        welcome?.classList.remove("top-14");
         welcome?.classList.add("top-0");
     }
 

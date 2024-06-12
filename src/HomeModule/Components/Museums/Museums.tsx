@@ -114,21 +114,23 @@ export default function Museums() {
                     style={{
                       backgroundImage: `url(${city?.image?.secure_url})`,
                       backgroundSize: "cover",
-                      backgroundPosition: "center",height:"100%",margin:"0 6px"
+                      backgroundPosition: "center",
+                      height: "100%",
+                      margin: "0 6px",
                     }}
                     className="rounded-3xl"
                   >
                     <div className="bg-black bg-opacity-30 rounded-3xl text-gray-300 font-extrabold group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700 h-full flex items-center justify-center">
-                    <Link
-                      to={`museums/${city?.id}`}
-                      className="text-5xl group overflow-hidden h-full w-full text-center flex items-center mx-8"
-                    >
+                      <Link
+                        to={`museums/${city?.id}`}
+                        className="text-5xl group overflow-hidden h-full w-full text-center flex items-center mx-8"
+                      >
                         {city?.name}
-                    </Link>
-
+                      </Link>
                     </div>
-                  ))
-                : ""}
+                  </div>
+                </div>
+              ))}
             </Slider>
           </div>
         </div>
