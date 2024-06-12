@@ -5,24 +5,27 @@ import Welcome from "./Components/Welcome/Welcome";
 import Footerr from "../SharedModules/Components/Footerr/Footerr";
 
 export default function Home() {
+
+  
   return (
     <>
      <div className="bg-auth-button-color">
-        <div className="h-screen sm:h-64 xl:h-screen">
-          <Carousel indicators={false}>
+        <div className="h-screen  xl:h-screen relative" >
+
+          <Carousel indicators={false} leftControl={true} rightControl={true}>
+
             <div className="h-screen bg1   ">
-              <Navbar />
-              <Welcome />
+            {/* <Navbar /> */}
             </div>
             <div className=" h-screen bg2  ">
-              <Navbar />
-              <Welcome />
+              {/* <Navbar /> */}
+
             </div>
             <div className=" h-screen bg3  ">
-              <Navbar />
-              <Welcome />
             </div>
+              {/* <Navbar /> */}
           </Carousel>
+              <Welcome />
         </div>
       </div>
       <Museums />
