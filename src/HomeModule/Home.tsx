@@ -12,17 +12,14 @@ export default function Home() {
           <Carousel indicators={false}>
             <div className="h-screen bg1   ">
               <Navbar />
-
               <Welcome />
             </div>
             <div className=" h-screen bg2  ">
               <Navbar />
-
               <Welcome />
             </div>
             <div className=" h-screen bg3  ">
               <Navbar />
-
               <Welcome />
             </div>
           </Carousel>

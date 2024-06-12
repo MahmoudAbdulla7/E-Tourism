@@ -86,30 +86,27 @@ body{
     animation: typingText 5s steps(100) infinite;
   }
 
-.start-journey{
-  background-image: url("assets/planet.jpeg");
-  background-size: cover;
-  background-position: center center;
-}
+
 .layer{
   transition: all .5s;
 }
+
 .start-journey:hover .layer{
   background-color: rgba(0, 0, 0, 0.322);
 }
 
 .bg1{
-  background-image: url("assets/unsplash_oCkZ6WicY8Q.jpg");
+  background-image: url("assets/camel.jpg");
   background-size: cover;
   background-position: center center;
 }
 .bg2{
-  background-image: url("assets/unsplash_xcSzpi6zbW0.jpg");
+  background-image: url("assets/boat.jpg");
   background-size: cover;
   background-position: center center;
 }
 .bg3{
-  background-image: url("assets/unsplash_JXQoqzSzpAw.jpg");
+  background-image: url("assets/temple.jpg");
   background-size: cover;
   background-position: center center;
 }

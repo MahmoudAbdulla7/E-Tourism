@@ -56,16 +56,19 @@ export default function ValidateTicket() {
   const { headers } = useSelector((state: any) => state.authReducer);
 
   const getTicket = () => {
+    setIsLoading(true)
     axios
       .get(`${baseUrl}order/filter-by-id/${tokenData.orderId}`, headers)
       .then((res) => {
         setTicket(res.data.orders);
+        setIsLoading(false)
         if (isAccepted) {
           setNewTicket(res.data.orders);
         }
       })
       .catch(() => {
         toast.error("network error");
+        setIsLoading(false)
       });
   };
 
@@ -177,7 +180,7 @@ export default function ValidateTicket() {
           ticket ? (
             <div className="ticket and nextbtn">
               <div className="flex justify-center items-center my-5">
-                <div className="w-[40%]">
+                <div className="w-[80%] lg:w-[40%]">
                   <TicketCard ticket={ticket} />
                 </div>
               </div>
@@ -312,7 +315,7 @@ export default function ValidateTicket() {
           <Loading />
         ) : (
           <div className="flex justify-center items-center my-5">
-            <div className="w-[40%]">
+            <div className="w-[80%] lg:w-[40%] ">
               <TicketCard ticket={newTicket} />
             </div>
           </div>
