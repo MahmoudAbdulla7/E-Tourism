@@ -3,14 +3,30 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+
+
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState<string>("En")
 
+  document.addEventListener("scroll",()=>{
+    const nav =document.getElementById("navbar");
+
+    if (window.scrollY>100) {
+      nav?.classList.add("bg-zinc-100");
+    nav?.classList.remove("bg-transparent");
+      }else{
+        nav?.classList.remove("bg-zinc-100");
+        nav?.classList.add("bg-transparent");
+    }
+
+  })
+
+
   return (
-    <div
+    <div id="navbar"
       dir={i18n.language == "ar" ? "rtl" : "ltr"}
-      className="shadow-md bg-transparent sticky top-0 z-10"
+      className="shadow-md bg-transparent sticky top-0 z-10 bg-opacity-70"
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
