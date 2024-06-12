@@ -22,7 +22,6 @@ export default function Home() {
 
             </div>
             <div className=" h-screen bg3  ">
-
             </div>
               {/* <Navbar /> */}
           </Carousel>

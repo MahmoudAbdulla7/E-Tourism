@@ -125,10 +125,10 @@ export default function Museums() {
                     >
                         {city?.name}
                     </Link>
+
                     </div>
-                  </div>
-                </div>
-              ))}
+                  ))
+                : ""}
             </Slider>
           </div>
         </div>

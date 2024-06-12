@@ -10,7 +10,7 @@ export default function InspectorHome() {
   const [tickets, setTickets] = useState([]);
   const [checked, setIsChecked] = useState();
   const { headers } = useSelector((state: any) => state.authReducer);
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getTickets();
   }, [checked]);
@@ -22,8 +22,6 @@ export default function InspectorHome() {
       .then((res) => {
         setTickets(res.data.orders || res.data.filteredOreders);
         setIsLoading(false);
-        console.log(res.data.orders || res.data.filteredOreders);
-        
       })
       .catch((err) => {
         toast.error(err.response.data.message || "network error");
@@ -55,7 +53,7 @@ export default function InspectorHome() {
 
       <div>
         {tickets.length > 0 ? (
-          !loading ? (
+          !isLoading ? (
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 my-3 grid-cols-1 pr-2">
               {tickets?.map((ticket, idx: number) => (
                 <div key={idx}>
