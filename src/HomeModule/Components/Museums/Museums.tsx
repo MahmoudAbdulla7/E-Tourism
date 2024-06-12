@@ -11,14 +11,14 @@ export default function Museums() {
   const { cities } = useSelector((state: any) => state.CitiesReducer);
 
   var settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     speed: 700,
     cssEase: "linear",
-    arrows: true,
+    arrows: false,
     initialSlide: 0,
     responsive: [
       {
@@ -109,7 +109,7 @@ export default function Museums() {
           <div className="slider-container bg-transparent mt-8">
             <Slider autoplaySpeed={1000} {...settings}>
               {cities.map((city: any, idx: number) => (
-                <div className="h-[30vh]">
+                <div key={idx} className="h-[30vh]">
                   <div
                     style={{
                       backgroundImage: `url(${city?.image?.secure_url})`,
@@ -117,7 +117,6 @@ export default function Museums() {
                       backgroundPosition: "center",height:"100%",margin:"0 6px"
                     }}
                     className="rounded-3xl"
-                    key={idx}
                   >
                     <div className="bg-black bg-opacity-30 rounded-3xl text-gray-300 font-extrabold group-hover:bg-black  group-hover:bg-opacity-50 group-hover:duration-700 h-full flex items-center justify-center">
                     <Link

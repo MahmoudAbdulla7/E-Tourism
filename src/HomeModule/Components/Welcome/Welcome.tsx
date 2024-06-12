@@ -1,9 +1,26 @@
 import { useTranslation } from "react-i18next";
+import Navbar from "../../../SharedModules/Components/Navbar/Navbar";
 export default function Welcome() {
   const { t, i18n } = useTranslation();
+
+  document.addEventListener("scroll",()=>{
+    const welcome =document.getElementById("welcome");
+
+    if (window.scrollY>10) {
+      welcome?.classList.add("top-10");
+      welcome?.classList.remove("top-0");
+      }else{
+        welcome?.classList.remove("top-10");
+        welcome?.classList.add("top-0");
+    }
+
+  })
+
   return (
-    <div className="">
-      <div className="mx-auto h-[81vh]  max-w-7xl pl-1 sm:px-6 lg:px-8 my-14 flex flex-col justify-between">
+    <>
+    <div id="welcome" className="absolute top-0 w-full z-10">
+    <Navbar/>
+      <div className=" h-[81vh] md:mx-10 mx-2 max-w-7xl pl-1 sm:px-6 lg:px-8 my-14 flex flex-col justify-between">
         <div>
           <h2 className="text-8xl font-bold text-yellow-400">
             {t("Explore")}
@@ -15,5 +32,6 @@ export default function Welcome() {
       </div>
 
     </div>
+    </>
   );
 }
