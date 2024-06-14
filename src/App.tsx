@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { RouterProvider, createBrowserRouter, createHashRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import AdminHome from "./AdminModule/AdminHome";
 import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
 import Cities from "./AdminModule/Components/Cities/Cities";
@@ -26,10 +26,10 @@ import { login } from "./Redux/AuthSlice/AuthSlice";
 import { setCities } from "./Redux/CitySlice/CitySlice";
 import { setmonuments } from "./Redux/MonumentsSlice/MonumentsSlice";
 import NotFound from "./SharedModules/Components/NotFound/NotFound";
+import Profile from "./SharedModules/Components/Profile/Profile";
 import SpecificMuseum from "./SpecificMuseumModule/SpecificMuseum";
 import { getAllCities } from "./Utls/getData";
 import ValidateTicket from "./ValidateTicket/ValidateTicket";
-import Profile from "./SharedModules/Components/Profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
