@@ -26,7 +26,7 @@ export default function Cities() {
   const [isLoading, setIsLoading] = useState(false);
   const [cityId, setCityId] = useState(0);
   const [modalState, setModalState] = useState("close");
-  const [cityData, setCityData] = useState();
+  // const [cityData, setCityData] = useState();
   const showAddModal = () => {
     setValue('name',"");
     setValue('image',"")
@@ -39,7 +39,7 @@ export default function Cities() {
   };
 
   const showUpdateModal = (city:any) => {
-    setCityData(city);
+    // setCityData(city);
     setValue('name',city?.name);
     setValue('image',city?.image?.secure_url)
     setCityId(city?.id)

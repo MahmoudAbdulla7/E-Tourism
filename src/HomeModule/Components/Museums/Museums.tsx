@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import amoon from "../../../assets/Amoon.png";
 export default function Museums() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { monuments } = useSelector((state: any) => state.MonumentsReducer);
   const { cities } = useSelector((state: any) => state.CitiesReducer);
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, createHashRouter } from "react-router-dom";
 import AdminHome from "./AdminModule/AdminHome";
 import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
 import Cities from "./AdminModule/Components/Cities/Cities";
@@ -45,7 +45,7 @@ function App() {
     dispatch(login());
   }, []);
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/auth",
       errorElement:<NotFound/>,
