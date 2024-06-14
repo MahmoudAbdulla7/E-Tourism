@@ -32,6 +32,7 @@ export default function Cities() {
     setValue('image',"")
     setModalState("add-modal");
   };
+  
   const showDeleteModal = (Id: any) => {
     setCityId(Id);
     setModalState("delete-modal");
