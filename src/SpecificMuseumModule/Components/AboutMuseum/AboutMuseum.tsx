@@ -13,8 +13,10 @@ import { IoClose, IoLogoYoutube } from "react-icons/io5";
 import { ImSpinner9 } from "react-icons/im";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 export interface destination {
   name: string;
@@ -33,7 +35,22 @@ export interface destination {
   }[];
 }
 
-interface reviews {
+interface Review {
+  comment: string;
+  _id: string;
+  createdBy: {
+    firstName: string;
+    lastName: string;
+    userName: string;
+    _id: string;
+    image: {
+      secure_url: string;
+    };
+  };
+}
+
+type Reviews = Review[];
+interface ReviewFormData {
   comment: string;
 }
 
@@ -43,18 +60,18 @@ export default function AboutMuseum() {
   const [modalState, setModalState] = useState("close");
   const handleClose = () => setModalState("close");
   const [isLoading, setIsLoading] = useState(false);
-  const { headers } = useSelector((state: any) => state.authReducer);
+  const { headers, data } = useSelector((state: any) => state.authReducer);
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors },setValue
+  } = useForm<ReviewFormData>();
 
   const [isSpeaking, setIsSpeaking] = useState(false);
-  
-    let { cityId, destinationId } = useParams();
-    const [destination, setDestination] = useState<destination>();
-    const [reviewss, setReviewss] = useState<reviews>();
+  let { cityId, destinationId } = useParams();
+  const [destination, setDestination] = useState<destination>();
+  const [reviewss, setReviewss] = useState<Reviews>([]);
+  const [reviewId, setReviewId] = useState("")
 
   const handleSpeak = () => {
     setIsSpeaking(true);
@@ -113,8 +130,8 @@ export default function AboutMuseum() {
     axios
       .get(`${baseUrl}city/${cityId}/destination/${destinationId}/review`)
       .then((res) => {
-        console.log(res.data.reviews[0]);
         setReviewss(res.data.reviews);
+        console.log(res.data.reviews);
       })
       .catch((err) => {
         console.log(err);
@@ -130,6 +147,52 @@ export default function AboutMuseum() {
     localStorage.setItem("destData", JSON.stringify(destination));
     navigate("/home/booking");
   };
+
+  //Update Review
+
+  const updateReview=(comment:string,reviewId:string)=>{
+    setModalState("update-modal");
+    setValue("comment",comment);
+    setReviewId(reviewId);
+  }
+
+  const putUpdatedReview : SubmitHandler<ReviewFormData>=(data:{comment:string})=>{
+    setIsLoading(true)
+    axios.put(`${baseUrl}city/${cityId}/destination/${destinationId}/review/${reviewId}`,data,headers).then((res)=>{
+
+      toast.success(res.data.message);
+      setModalState("close");
+
+    }).catch((err)=>{
+
+      toast.error(err.response.data.message||"network error");
+
+    }).finally(()=>{
+
+      setIsLoading(false);
+
+    })
+    
+    
+  }
+
+
+  const deleteReview=(reviewId:string)=>{
+    setModalState("delete-modal");
+    setReviewId(reviewId);
+  }
+
+  const requestFordeletingReview =()=>{
+    axios.delete(`${baseUrl}city/${cityId}/destination/${destinationId}/review/${reviewId}`,headers).then((res)=>{
+      toast.success(res.data.success);
+      getReviews();
+      
+    }).catch((err)=>{
+      toast.error(err.response.data.message||"network error");
+    })
+    
+    
+  }
 
   return (
     <div className="min:h-[100vh] ">
@@ -307,35 +370,67 @@ export default function AboutMuseum() {
             </div>
           </div>
 
-        {reviewss?.length>0?
-          <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 mt-3 pb-5 ">
-          <div className="Highlights text-center border-[12px] rounded-xl ">
-            <h2 className="text-main text-3xl md:text-6xl font-bold py-6 ">
-              {t("Reviews")}
-            </h2>
-            
-            <div className="overflow-x-auto w-[95%] md:w-[70%]  md:h-[auto] m-auto  py-0 md:py-2 mb-0 md:mb-5">
-              {reviewss?.map((review: reviews, idx: any) => (
-                <div key={idx} className="bg-auth-button-color shadow-lg rounded-lg p-4 mb-4">
-                  <div className="flex items-start mb-2">
-                    <FaQuoteLeft className="text-gray-500 mr-2" />
-                    <div className="text-gray-700">{review?.comment}</div>
-                  </div>
+          {reviewss?.length > 0 ? (
+            <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 mt-3 pb-5 ">
+              <div className="Highlights text-center border-[12px] rounded-xl ">
+                <h2 className="text-main text-3xl md:text-6xl font-bold py-6 ">
+                  {t("Reviews")}
+                </h2>
+
+                <div className="overflow-x-auto w-[95%] md:w-[70%]  md:h-[auto] m-auto  py-0 md:py-2 mb-0 md:mb-5">
+                  {reviewss?.map((review, idx: number) => (
+                    <div
+                      key={idx}
+                      className="p-2 my-2 bg-blue-200 hover:bg-white duration-300 shadow-lg rounded-lg"
+                    >
+                      <div className="flex items-start">
+                        <img
+                          className="w-10 h-10 rounded-full mr-4"
+                          src={review.createdBy.image.secure_url}
+                          alt={`${review.createdBy.firstName} ${review.createdBy.lastName}`}
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <p className="text-lg font-bold">{`${review.createdBy.firstName} ${review.createdBy.lastName}`}</p>
+                            </div>
+                            <div className="flex items center justify-center">
+                              {data.id == review.createdBy._id ? (
+                                <>
+                                  <button onClick={()=>{updateReview(review.comment,String(review?._id))}}>
+                                    <FiEdit className="mx-2 text-yellow-400" />
+                                  </button>
+                                  <button onClick={()=>{deleteReview(String(review?._id))}}>
+                                    <RiDeleteBin6Line className="text-red-400" />
+                                  </button>
+                                </>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          </div>
+                          <p className="flex items-center justify-center ">
+                            <FaQuoteLeft className="text-gray-500 mr-2" />
+                            {review.comment}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </div>
-      :""
-      }
-{/* add-modal */}
+          ) : (
+            ""
+          )}
+          {/* add-modal */}
           <Modal
             show={modalState == "add-modal"}
             size="md"
             onClose={handleClose}
             popup
           >
-            <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
+            <div className="flex items-center justify-between px-4 py-2  rounded-t">
               <h3 className="text-lg font-semibold text-main dark:text-white">
                 {t("Add Review")}
               </h3>
@@ -344,6 +439,77 @@ export default function AboutMuseum() {
               </button>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="px-5 md:pb-5">
+              <div className="grid gap-4 mb-2 grid-cols-2">
+                <div className="col-span-2">
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  >
+                    {t("Review")}
+                  </label>
+                  <div className="flex items-center">
+                    <div className="flex-auto">
+                      <textarea
+                        id="comment"
+                        rows={5}
+                        cols={40}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="Type Your Comment"
+                        {...register("comment", {
+                          required: true,
+                          minLength: {
+                            value: 2,
+                            message:
+                              "Review shouldn't be less than two character",
+                          },
+                        })}
+                      ></textarea>
+                    </div>
+                    {errors?.comment && (
+                      <ErrorMessage
+                        text={String(
+                          errors?.comment?.message || "comment is required"
+                        )}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                className={
+                  "text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500 md:mb-0 mb-2" +
+                  (isLoading ? " disabled" : " ")
+                }
+              >
+                {isLoading == true ? (
+                  <ImSpinner9 className="animate-spin" />
+                ) : (
+                  <>
+                    <FaPlus className="mx-1" />
+                    {t("Add  Review")}
+                  </>
+                )}
+              </button>
+            </form>
+          </Modal>
+
+          {/* update-modal */}
+          <Modal
+            show={modalState == "update-modal"}
+            size="md"
+            onClose={handleClose}
+            popup
+          >
+            <div className="flex items-center justify-between px-4 py-2  rounded-t">
+              <h3 className="text-lg font-semibold text-main dark:text-white">
+                {t("Update Review")}
+              </h3>
+              <button onClick={handleClose}>
+                <IoClose />
+              </button>
+            </div>
+            <form onSubmit={handleSubmit(putUpdatedReview)} className="px-5 md:pb-5">
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
@@ -383,7 +549,44 @@ export default function AboutMuseum() {
               <button
                 type="submit"
                 className={
-                  "text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
+                  "text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none md:mb-0 mb-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
+                  (isLoading ? " disabled" : " ")
+                }
+              >
+                {isLoading == true ? (
+                  <ImSpinner9 className="animate-spin" />
+                ) : (
+                  <>
+                    <FaPlus className="mx-1" />
+                    {t("Update  Review")}
+                  </>
+                )}
+              </button>
+            </form>
+          </Modal>
+
+          {/* delete-modal */}
+          <Modal
+            show={modalState == "delete-modal"}
+            size="md"
+            onClose={handleClose}
+            popup
+          >
+
+
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg p-3 shadow-lg">
+        <h2 className="font-bold text-lg">Delete Review</h2>
+        <div className="md:flex justify-center items-center">
+        <p className="m-2">Are you sure you want to delete your comment?</p>
+        <div className="flex items-center justify-center my-2">
+        <button className="mr-2 px-4 py-2 bg-gray-500 hover:bg-gray-700 duration-300 text-white rounded-lg" onClick={()=>{setModalState("close")}}>
+            Cancel
+          </button>
+          <button
+                onClick={requestFordeletingReview}
+                className={
+                  "text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
                   (isLoading ? " disabled" : " ")
                 }
               >
@@ -396,9 +599,14 @@ export default function AboutMuseum() {
                   </>
                 )}
               </button>
-            </form>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+           
           </Modal>
-          
         </>
       ) : (
         <Loading />
