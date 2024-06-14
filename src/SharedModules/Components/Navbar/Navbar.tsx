@@ -1,30 +1,29 @@
 import { Dropdown } from "flowbite-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
-
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState<string>("En")
+  const [language, setLanguage] = useState<string>("En");
+  const { data } = useSelector((state: any) => state.authReducer);
+console.log(data);
 
-  document.addEventListener("scroll",()=>{
-    const nav =document.getElementById("navbar");
-
-    if (window.scrollY>100) {
+  document.addEventListener("scroll", () => {
+    const nav = document.getElementById("navbar");
+    if (window.scrollY > 100) {
       nav?.classList.add("bg-zinc-100");
-    nav?.classList.remove("bg-transparent");
-      }else{
-        nav?.classList.remove("bg-zinc-100");
-        nav?.classList.add("bg-transparent");
+      nav?.classList.remove("bg-transparent");
+    } else {
+      nav?.classList.remove("bg-zinc-100");
+      nav?.classList.add("bg-transparent");
     }
-
-  })
-
+  });
 
   return (
-    <div id="navbar"
+    <div
+      id="navbar"
       dir={i18n.language == "ar" ? "rtl" : "ltr"}
       className="shadow-md bg-transparent sticky top-0 z-10 bg-opacity-70"
     >
@@ -99,35 +98,74 @@ export default function Navbar() {
             </div>
           </div>
 
-            <Dropdown label={language} inline>
-              <Dropdown.Item
-                onClick={() => {
-                  i18n.changeLanguage("ar");
-                  setLanguage("Ar")
-                }}
-              >
-                <span>Ar</span>
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  i18n.changeLanguage("en");
-                  setLanguage("En")
+          <div className="flex  items-center justify-evenly">
+            <div className="flex justify-between items-center">
+              {data.role=="User"? (
+                <Link to={`/home/profile`} className="text-main text-sm sm:text-xs md:text-lg font-medium">
+                  {t("Welcome")}
+                  <span className="text-main">{`, ${data.firstName} ${data.lastName}`}</span>
+                </Link>
+              ) :
+              data.role=="Admin"?
+              <Link to={`/dashboard/profile`} className="text-main text-sm sm:text-xs md:text-lg font-medium">
+              {t("Welcome")}
+              <span className="text-main">{`, ${data.firstName} ${data.lastName}`}</span>
+            </Link>
+              :
+              data.role=="Inspector"?
+              <Link to={`/inspector/profile`} className="text-main text-sm sm:text-xs md:text-lg font-medium">
+              {t("Welcome")}
+              <span className="text-main">{`, ${data.firstName} ${data.lastName}`}</span>
+            </Link>:
+              (
+                <>
+                  <div className="mx-1">
+                    <Link to={"/auth/login"}>
+                      <button className="px-4  py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-sky-900 border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent">
+                        Login
+                      </button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to={"/auth/register"}>
+                      <button className="px-4   py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-sky-900 border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent">
+                        Register
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
 
-                }}
-              >
-                <span>En</span>
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  i18n.changeLanguage("fr");
-                  setLanguage("Fr")
-
-                }}
-              >
-                <span>Fr</span>
-              </Dropdown.Item>
-            </Dropdown>
-
+            <div className="ms-6">
+              <Dropdown label={language} inline>
+                <Dropdown.Item
+                  onClick={() => {
+                    i18n.changeLanguage("ar");
+                    setLanguage("Ar");
+                  }}
+                >
+                  <span>Ar</span>
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    i18n.changeLanguage("en");
+                    setLanguage("En");
+                  }}
+                >
+                  <span>En</span>
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    i18n.changeLanguage("fr");
+                    setLanguage("Fr");
+                  }}
+                >
+                  <span>Fr</span>
+                </Dropdown.Item>
+              </Dropdown>
+            </div>
+          </div>
         </div>
       </div>
     </div>

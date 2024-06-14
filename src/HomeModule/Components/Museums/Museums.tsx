@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
@@ -54,9 +53,9 @@ export default function Museums() {
     backgroundPosition: "center",
   };
 
-  useEffect(() => {
-    console.log(cities);
-  }, []);
+  // useEffect(() => {
+  //   console.log(cities);
+  // }, []);
 
   return (
     <div className="Museums">
@@ -107,7 +106,7 @@ export default function Museums() {
           </div>
 
           <div className="slider-container bg-transparent mt-8">
-            <Slider autoplaySpeed={1000} {...settings}>
+            <Slider autoplaySpeed={2500} {...settings}>
               {cities.map((city: any, idx: number) => (
                 <div key={idx} className="h-[30vh]">
                   <div

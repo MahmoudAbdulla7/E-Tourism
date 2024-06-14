@@ -29,6 +29,7 @@ import NotFound from "./SharedModules/Components/NotFound/NotFound";
 import SpecificMuseum from "./SpecificMuseumModule/SpecificMuseum";
 import { getAllCities } from "./Utls/getData";
 import ValidateTicket from "./ValidateTicket/ValidateTicket";
+import Profile from "./SharedModules/Components/Profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -89,6 +90,8 @@ function App() {
         { path: "users", element: <Users /> },
         { path: "adminmonuments", element: <AdminMonuments /> },
         { path: "cities", element: <Cities /> },
+        { path: "profile", element: <Profile /> },
+
       ],
     },
     {
@@ -106,6 +109,7 @@ function App() {
           element: <AdminHome />,
         },
         { path: "booking", element: <Booking /> },
+        { path: "profile", element: <Profile /> },
       ],
     },
     {
@@ -122,8 +126,11 @@ function App() {
           errorElement: <NotFound />,
           element: <InspectorHome />,
         },{
-          path:":token",element:<ValidateTicket/>
-        }
+          path:":token",element:<ValidateTicket/>,
+          
+        },
+        { path: "profile", element: <Profile /> },
+
       ],
     },
   ]);
