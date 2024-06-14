@@ -19,11 +19,10 @@ export interface museum {
 const Card = ({ monument }: museum) => {
   const { t, i18n } = useTranslation();
 
-  console.log(monument);
 
   const navigate = useNavigate();
   return (
-    <article className="card overflow-hidden rounded-2xl grid shadow-lg h-[100vh]">
+    <article className="card overflow-hidden rounded-2xl grid  shadow-lg h-[100vh]  ">
       <div>
         <img
           className="card__background w-full h-[100%]"

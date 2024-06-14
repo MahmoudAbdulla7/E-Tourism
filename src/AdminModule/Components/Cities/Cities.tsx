@@ -38,7 +38,6 @@ export default function Cities() {
   };
 
   const showUpdateModal = (city:any) => {
-    console.log(city);
     setCityData(city);
     setValue('name',city?.name);
     setValue('image',city?.image?.secure_url)
@@ -56,12 +55,10 @@ export default function Cities() {
     const addFormData = new FormData();
     addFormData.append("name", data["name"]);
     addFormData.append("image", data["image"][0]);
-    console.log(addFormData);
     setIsLoading(true);
     axios
       .post(`${baseUrl}city`, addFormData, headers)
       .then((res) => {
-        console.log(res);
         setIsLoading(false);
         handleClose();
         toast.success(res?.data?.message);
@@ -70,7 +67,6 @@ export default function Cities() {
         });
       })
       .catch((err) => {
-        console.log(err);
         setIsLoading(false);
         toast.error(err?.response?.data?.message);
       });
@@ -89,7 +85,6 @@ export default function Cities() {
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err?.response?.data?.message || "Axios error!!");
         setIsLoading(false);
       });
@@ -99,7 +94,6 @@ export default function Cities() {
       const addFormData = new FormData();
     addFormData.append("name", data["name"]);
     addFormData.append("image", data["image"][0]);
-    console.log(addFormData);
       setIsLoading(true);
       axios.put(`${baseUrl}city/${cityId}`,addFormData, headers)
         .then((res) => {

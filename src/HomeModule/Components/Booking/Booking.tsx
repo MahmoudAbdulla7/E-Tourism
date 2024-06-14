@@ -44,9 +44,17 @@ const {data}= useSelector((state:any)=>state.authReducer);
       toast.error("Failed to capture screenshot from webcam");
     }
   };
+
   const captureAnother = () => {
     setImageSrc(null);
   };
+
+  const videoConstraints = {
+    width: 390,
+    height: 390,
+    facingMode: "user",
+  };
+
   const sendPhoto = async () => {
     setIsLoading(true);
     if (imageSrc) {
@@ -63,17 +71,16 @@ const {data}= useSelector((state:any)=>state.authReducer);
             },
           }
         );
-        if (response.status === 200) {
-          toast.success("Photo sent successfully!");
+        if (response?.data?.ID) {
+          toast.success(response?.data?.message);
           setIsLoading(false);
           setFaceId(response.data.ID);
           handleNextStep();
-          console.log(response);
-        } else {
-          toast.error("Failed to send photo");
+        } else{
+          toast.error("No faces found PLZ enter valid face")
         }
-      } catch (error) {
-        console.error("Error sending photo:", error);
+      } catch (error:any) {
+        toast.error(error?.response?.data?.detail);
         setIsLoading(false);
       }
     }
@@ -88,11 +95,13 @@ const {data}= useSelector((state:any)=>state.authReducer);
   const handleDecrement = () => {
     setCount(Math.max(count - 1, 0));
   };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data: any) => {
     const dummyData = {
       touristDestination: {
@@ -100,12 +109,12 @@ const {data}= useSelector((state:any)=>state.authReducer);
         quantity: count,
       },
       faceId,
-      DateOfVisit: `${data.date}T${data.time}Z`,
+      DateOfVisit: `${data.date}T00:00:00.000Z`,
       paymentType: "card",
     };
-    console.log(dummyData);
     reserveTicket(dummyData);
   };
+
   const reserveTicket = (dummyData: any) => {
     setIsLoading(true);
     axios
@@ -114,27 +123,22 @@ const {data}= useSelector((state:any)=>state.authReducer);
         const { url } = res.data;
         setIsLoading(false);
         window.location.href = url;
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
         toast.error(
           err.response?.data?.validationErr[0]?.message || "Network Error"
         );
         setIsLoading(false);
       });
   };
-  const videoConstraints = {
-    width: 390,
-    height: 390,
-    facingMode: "user",
-  };
+
+  
   return (
     <div className="booking my-3">
       <Stepper  className=" stepper " steps={steps} activeStep={activeStep} />
       {activeStep == 0 ? (
         <div className="px-5">
-          <p className="text-4xl flex justify-center items-center">
+          <p className="text-xl md:text-4xl flex justify-center items-center gap-2">
             Face Matching <MdVerified className="text-green-500" />
           </p>
           <div>
@@ -283,21 +287,21 @@ const {data}= useSelector((state:any)=>state.authReducer);
                       id="date"
                       type="date"
                       placeholder="Select date"
-                      className="bg-gray-200 border  border-gray-300 text-gray-900 text-sm rounded-l-2xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+                      className="bg-gray-200 border  border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
                     />
-                    <input
+                    {/* <input
                       {...register("time", { required: "Time is required" })}
                       id="date"
                       type="time"
                       placeholder="Select date"
                       className="bg-gray-200 border  border-gray-300 text-gray-900 text-sm rounded-r-3xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
-                    />
+                    /> */}
                     {errors?.date && (
                       <ErrorMessage text={String(errors?.date.message)} />
                     )}
-                    {errors?.time && (
+                    {/* {errors?.time && (
                       <ErrorMessage text={String(errors?.time.message)} />
-                    )}
+                    )} */}
                   </div>
                 </div>
                 <div className="continue my-3">

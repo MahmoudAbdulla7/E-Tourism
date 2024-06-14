@@ -89,10 +89,10 @@ export default function Register() {
       if (Object.prototype.hasOwnProperty.call(allFormData, key)) {
         if (
           key === "image" &&
-          allFormData.image &&
-          allFormData.image.length > 0
+          allFormData?.image &&
+          allFormData?.image?.length > 0
         ) {
-          formData.append(key, allFormData.image[0], allFormData.image[0].name);
+          formData.append(key, allFormData?.image[0], allFormData?.image[0].name);
         } else {
           formData.append(key, allFormData[key]);
         }

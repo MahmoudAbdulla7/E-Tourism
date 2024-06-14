@@ -77,7 +77,7 @@ export default function AboutMuseum() {
         <>
           <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 py-6">
             <div className="navigation">
-              <label className="md:text-4xl mx-2 text-xl text-main flex items-center mb-8">
+              <label className="md:text-4xl mx-2 text-sm sm:text-lg text-main flex items-center mb-8">
                 <Link to="/">
                   <TiHome />
                 </Link>
@@ -94,20 +94,20 @@ export default function AboutMuseum() {
               </label>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 bg- shadow-2xl rounded-3xl overflow-hidden m-3 h-full md:h-[auto]">
+            <div className="grid grid-cols-1 lg:grid-cols-4 bg- shadow-2xl rounded-3xl overflow-hidden m-3 h-[84vh] md:h-[auto]">
               <div
                 className={` w-full h-auto lg:h-auto md:h-[70vh] overflow-hidden`}
               >
                 <img
-                  className="w-full rounded-3xl"
+                  className="w-full  rounded-3xl"
                   src={destination?.image?.secure_url}
                   alt="mesume-photo"
                 />
               </div>
-              <div className="lg:col-span-3 p-4 flex flex-col justify-between">
+              <div className="lg:col-span-3 text-sm sm:text-normal md:text-lg p-4 flex flex-col justify-between">
                 <div className="name">
                   <div className=" flex justify-between items-center">
-                    <h2 className="text-3xl font-semibold mb-2">
+                    <h2 className="text-xl sm:text-lg md:text-3xl font-semibold mb-2">
                       {destination?.name}
                     </h2>
                     <div className="youtube flex items-center my-2">
@@ -118,9 +118,8 @@ export default function AboutMuseum() {
                       </div>
                     </div>
                   </div>
-                <p className="text-lg">{destination?.description}</p>
+                  <p className="text-lg">{destination?.description}</p>
                 </div>
-
 
                 <div className="booking grid sm:grid-cols-2 grid-cols-1  mt-8">
                   <div>
@@ -133,19 +132,24 @@ export default function AboutMuseum() {
                     </p>
                     <p>{t("Prices may vary depending on selected date")}.</p>
                   </div>
-                  <div className="btn text-end">
-                    <button
-                      onClick={bookNow}
-                      className="px-4   py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
-                    >
-                      {t("Book Now")}
-                    </button>
-                    <button
-                      onClick={isSpeaking ? handlePause : handleSpeak}
-                      className="px-4  py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
-                    >
-                      {!isSpeaking ? "Speak" : "Pause"}
-                    </button>
+
+                  <div className="btn flex justify-end">
+                    <div>
+                      <button
+                        onClick={bookNow}
+                        className="px-4   py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                      >
+                        {t("Book Now")}
+                      </button>
+                    </div>
+                    <div className=" ml-3">
+                      <button
+                        onClick={isSpeaking ? handlePause : handleSpeak}
+                        className="px-4  py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                      >
+                        {!isSpeaking ? "Speak" : "Pause"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -157,17 +161,17 @@ export default function AboutMuseum() {
             thirdImagee={String(destination?.subImages[2]?.secure_url)}
           />
 
-          <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 mt-3 pb-5">
-            <div className="Highlights text-center border-[12px] rounded-xl">
-              <h2 className="text-main text-6xl font-bold py-6 ">
+          <div className="mx-auto max-w-7xl pl-1 sm:px-6 lg:px-8 mt-3 pb-5 ">
+            <div className="Highlights text-center border-[12px] rounded-xl ">
+              <h2 className="text-main text-3xl md:text-6xl font-bold py-6 ">
                 {t("Opening Hours")}
               </h2>
-              <div className="overflow-x-auto w-[70%] m-auto py-2 mb-5">
+              <div className="overflow-x-auto w-[95%] md:w-[70%] h-[85vh] md:h-[auto] m-auto  py-0 md:py-2 mb-0 md:mb-5">
                 <Table className="text-center" hoverable>
                   <Table.Head className="">
                     <Table.HeadCell
                       colSpan={4}
-                      className=" text-center text-3xl bg-main text-white"
+                      className=" text-center text-xl md:text-4xl bg-main text-white"
                     >
                       {t("Opening Hours")}
                     </Table.HeadCell>
