@@ -1,7 +1,7 @@
 import { Carousel } from "flowbite-react";
+import Footerr from "../SharedModules/Components/Footerr/Footerr";
 import Museums from "./Components/Museums/Museums";
 import Welcome from "./Components/Welcome/Welcome";
-import Footerr from "../SharedModules/Components/Footerr/Footerr";
 
 export default function Home() {
 

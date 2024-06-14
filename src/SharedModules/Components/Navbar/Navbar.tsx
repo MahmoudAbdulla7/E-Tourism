@@ -8,7 +8,7 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState<string>("En");
   const { data } = useSelector((state: any) => state.authReducer);
-console.log(data);
+// console.log(data);
 
   document.addEventListener("scroll", () => {
     const nav = document.getElementById("navbar");
@@ -121,14 +121,14 @@ console.log(data);
                 <>
                   <div className="mx-1">
                     <Link to={"/auth/login"}>
-                      <button className="px-4  py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-sky-900 border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent">
+                      <button className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500">
                         Login
                       </button>
                     </Link>
                   </div>
                   <div>
                     <Link to={"/auth/register"}>
-                      <button className="px-4   py-2 sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-sky-900 border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent">
+                      <button className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500">
                         Register
                       </button>
                     </Link>
