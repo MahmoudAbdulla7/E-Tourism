@@ -4,7 +4,6 @@ import { RouterProvider, createHashRouter } from "react-router-dom";
 import AdminHome from "./AdminModule/AdminHome";
 import AdminMonuments from "./AdminModule/Components/AdminMonuments/AdminMonuments";
 import Cities from "./AdminModule/Components/Cities/Cities";
-import Users from "./AdminModule/Components/Users/Users";
 import "./App.css";
 import Login from "./AuthModule/Components/Login/Login";
 import Register from "./AuthModule/Components/Register/Register";
@@ -86,7 +85,6 @@ function App() {
           errorElement: <NotFound />,
           element: <AdminHome />,
         },
-        { path: "users", element: <Users /> },
         { path: "adminmonuments", element: <AdminMonuments /> },
         { path: "cities", element: <Cities /> },
         { path: "profile", element: <Profile /> },

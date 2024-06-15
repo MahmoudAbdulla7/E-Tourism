@@ -26,7 +26,6 @@ export default function Cities() {
   const [isLoading, setIsLoading] = useState(false);
   const [cityId, setCityId] = useState(0);
   const [modalState, setModalState] = useState("close");
-  // const [cityData, setCityData] = useState();
   const showAddModal = () => {
     setValue('name',"");
     setValue('image',"")
@@ -39,7 +38,6 @@ export default function Cities() {
   };
 
   const showUpdateModal = (city:any) => {
-    // setCityData(city);
     setValue('name',city?.name);
     setValue('image',city?.image?.secure_url)
     setCityId(city?.id)
@@ -112,7 +110,6 @@ export default function Cities() {
     };
   return (
     <>
-      {/* header */}
       <div
         dir={i18n.language == "ar" ? "rtl" : "ltr"}
         className="Elheader home-container my-5 mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
@@ -135,12 +132,12 @@ export default function Cities() {
         </div>
       </div>
 
-      {cities.length > 0 ? (
+      {cities?.length > 0 ? (
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-1 ">
-          {cities.map((city: any) => (
+          {cities?.map((city: any) => (
             <div className="w-full" key={city.id}>
               <CityCard
-                modalDelete={() => showDeleteModal(city.id)}
+                modalDelete={() => showDeleteModal(city?.id)}
                 modalUpdate={()=>showUpdateModal(city)}
                 name={city?.name}
                 image={city?.image?.secure_url}
@@ -277,7 +274,6 @@ export default function Cities() {
             </button>
           </form>
         </Modal>
-        {/* **********delete-modal******* */}
         <Modal
           show={modalState == "delete-modal"}
           size="md"
@@ -325,7 +321,6 @@ export default function Cities() {
           </div>
         </Modal>
 
-        {/* *********update-modal************ */}
         <Modal
           show={modalState == "update-modal"}
           size="md"
@@ -447,7 +442,6 @@ export default function Cities() {
           </form>
         </Modal>
       </div>
-      {/* ---------------------- */}
     </>
   );
 }

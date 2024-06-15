@@ -53,9 +53,7 @@ export default function Museums() {
     backgroundPosition: "center",
   };
 
-  // useEffect(() => {
-  //   console.log(cities);
-  // }, []);
+ 
 
   return (
     <div className="Museums">

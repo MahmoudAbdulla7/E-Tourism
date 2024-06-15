@@ -64,7 +64,7 @@ export default function AllMuseums() {
                 id="citty"
               >
                 {cities.map((city: any) => (
-                  <option key={city._id} value={city.id}>
+                  <option key={city?._id} value={city?.id}>
                     {city?.name}
                   </option>
                 ))}

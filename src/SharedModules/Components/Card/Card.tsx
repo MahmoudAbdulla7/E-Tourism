@@ -39,7 +39,7 @@ const Card = ({ monument }: museum) => {
         <button
           onClick={() => {
             navigate(
-              `${`/museums/${monument?.cityId._id}/destination/${monument?._id}`}`
+              `${`/museums/${monument?.cityId?._id}/destination/${monument?._id}`}`
             );
           }}
           className="card__button"
