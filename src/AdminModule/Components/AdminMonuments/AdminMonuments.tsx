@@ -32,7 +32,7 @@ export default function AdminMonuments() {
   const [modalState, setModalState] = useState("");
   const [cityId, setCityId] = useState("");
   const [id, setId] = useState("");
-  const [monumentName, setMonumentName] = useState("");
+  // const [monumentName, setMonumentName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [updateModalLoading, setUpdateModalLoading] = useState(false);
   const dispatch = useDispatch();
@@ -187,7 +187,7 @@ export default function AdminMonuments() {
 
     const formData = new FormData();
 
-    if (monumentName!==data.name) {
+    if (true) {
     formData.append("name", data.name);}
     formData.append("ticketPrice", data.ticketPrice);
     formData.append("type", data.type);

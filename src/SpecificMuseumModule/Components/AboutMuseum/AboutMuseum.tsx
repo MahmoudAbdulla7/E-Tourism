@@ -1,22 +1,22 @@
-import { FaPlus, FaQuoteLeft, FaQuoteRight, FaStar } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
-import { TiHome } from "react-icons/ti";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { baseUrl } from "../../../Utls/BaseUrl";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import Highlights from "../Highlights/Highlights";
-import { useTranslation } from "react-i18next";
-import Loading from "../../../SharedModules/Components/Loading/Loading";
 import { Modal, Table } from "flowbite-react";
-import { IoClose, IoLogoYoutube } from "react-icons/io5";
-import { ImSpinner9 } from "react-icons/im";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import { useTranslation } from "react-i18next";
+import { FaPlus, FaQuoteLeft, FaStar } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
+import { ImSpinner9 } from "react-icons/im";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoClose, IoLogoYoutube } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { TiHome } from "react-icons/ti";
+import { useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import ErrorMessage from "../../../SharedModules/Components/ErrorMessage/ErrorMessage";
+import Loading from "../../../SharedModules/Components/Loading/Loading";
+import { baseUrl } from "../../../Utls/BaseUrl";
+import Highlights from "../Highlights/Highlights";
 
 export interface destination {
   name: string;
@@ -55,7 +55,7 @@ interface ReviewFormData {
 }
 
 export default function AboutMuseum() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [modalState, setModalState] = useState("close");
   const handleClose = () => setModalState("close");

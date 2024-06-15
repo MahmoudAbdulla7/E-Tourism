@@ -12,7 +12,7 @@ export default function Highlights({
   secImagee,
   thirdImagee,
 }: images) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [firstImage, setFirstImage] = useState<string>(firstImagee);
   const [secImage, setSecImage] = useState<string>(secImagee);
