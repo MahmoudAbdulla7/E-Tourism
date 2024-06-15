@@ -38,9 +38,9 @@ export default function Cities() {
   };
 
   const showUpdateModal = (city:any) => {
-    setValue('name',city?.name);
-    setValue('image',city?.image?.secure_url)
-    setCityId(city?.id)
+    setValue('name',city.name);
+    setValue('image',city.image.secure_url)
+    setCityId(city.id)
     
     setModalState("update-modal");
   };
@@ -76,6 +76,8 @@ export default function Cities() {
     axios
       .delete(`${baseUrl}city/${cityId}`, headers)
       .then((res) => {
+        console.log(res);
+        
         handleClose();
         setIsLoading(false);
         toast.success(res?.data?.message || "City deleted successfully");
@@ -132,15 +134,15 @@ export default function Cities() {
         </div>
       </div>
 
-      {cities?.length > 0 ? (
+      {cities.length > 0 ? (
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-1 ">
           {cities?.map((city: any) => (
             <div className="w-full" key={city.id}>
               <CityCard
-                modalDelete={() => showDeleteModal(city?.id)}
+                modalDelete={() => showDeleteModal(city.id)}
                 modalUpdate={()=>showUpdateModal(city)}
-                name={city?.name}
-                image={city?.image?.secure_url}
+                name={city.name}
+                image={city.image.secure_url}
               />
             </div>
           ))}
