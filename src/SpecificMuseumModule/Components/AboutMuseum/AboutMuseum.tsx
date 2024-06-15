@@ -117,7 +117,7 @@ export default function AboutMuseum() {
         setIsLoading(false);
         handleClose();
         toast.success(res?.data?.message);
-        console.log(res);
+        setModalState("close");
       })
       .catch((err) => {
         console.log(err);
@@ -183,12 +183,16 @@ export default function AboutMuseum() {
   }
 
   const requestFordeletingReview =()=>{
+    setIsLoading(true);
     axios.delete(`${baseUrl}city/${cityId}/destination/${destinationId}/review/${reviewId}`,headers).then((res)=>{
       toast.success(res.data.success);
       getReviews();
+      setModalState("close");
       
     }).catch((err)=>{
       toast.error(err.response.data.message||"network error");
+    }).finally(()=>{
+      setIsLoading(false);
     })
     
     
@@ -598,7 +602,7 @@ export default function AboutMuseum() {
                 ) : (
                   <>
                     <FaPlus className="mx-1" />
-                    {t("Add  Review")}
+                    {t("Delete")}
                   </>
                 )}
               </button>

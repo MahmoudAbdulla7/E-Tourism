@@ -13,7 +13,7 @@ import store from './Redux/Store.ts'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-    <ToastContainer autoClose={1000} style={{ marginTop:50 }} theme='dark'/>
+    <ToastContainer autoClose={1000} style={{ marginTop:50}} theme='dark'/>
     <App />
     </Provider>
   </React.StrictMode>,
