@@ -77,11 +77,11 @@ export default function AboutMuseum() {
     setIsSpeaking(true);
     const text = destination?.description;
     const value = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(value);
+    window?.speechSynthesis?.speak(value);
   };
 
   const handlePause = () => {
-    window.speechSynthesis.pause();
+    window?.speechSynthesis?.pause();
     setIsSpeaking(false);
   };
 
@@ -89,7 +89,6 @@ export default function AboutMuseum() {
     axios
       .get(`${baseUrl}city/${cityId}/destination/${destinationId}`)
       .then((res) => {
-        // console.log(res?.data?.touristDestination);
         setDestination(res?.data?.touristDestination);
       })
       .catch((err) => {
@@ -117,6 +116,7 @@ export default function AboutMuseum() {
         setIsLoading(false);
         handleClose();
         toast.success(res?.data?.message);
+        getReviews();
         setModalState("close");
       })
       .catch((err) => {
@@ -130,8 +130,8 @@ export default function AboutMuseum() {
     axios
       .get(`${baseUrl}city/${cityId}/destination/${destinationId}/review`)
       .then((res) => {
-        setReviewss(res.data.reviews);
-        console.log(res.data.reviews);
+        setReviewss(res?.data?.reviews);
+        console.log(res?.data?.reviews);
       })
       .catch((err) => {
         console.log(err);
@@ -160,12 +160,14 @@ export default function AboutMuseum() {
     setIsLoading(true)
     axios.put(`${baseUrl}city/${cityId}/destination/${destinationId}/review/${reviewId}`,data,headers).then((res)=>{
 
-      toast.success(res.data.message);
+      toast.success(res?.data?.message);
       setModalState("close");
+      getReviews();
+
 
     }).catch((err)=>{
 
-      toast.error(err.response.data.message||"network error");
+      toast.error(err?.response?.data?.message||"network error");
 
     }).finally(()=>{
 
@@ -185,12 +187,12 @@ export default function AboutMuseum() {
   const requestFordeletingReview =()=>{
     setIsLoading(true);
     axios.delete(`${baseUrl}city/${cityId}/destination/${destinationId}/review/${reviewId}`,headers).then((res)=>{
-      toast.success(res.data.success);
+      toast.success(res?.data?.success);
       getReviews();
       setModalState("close");
       
     }).catch((err)=>{
-      toast.error(err.response.data.message||"network error");
+      toast.error(err?.response?.data?.message||"network error");
     }).finally(()=>{
       setIsLoading(false);
     })
@@ -393,13 +395,13 @@ export default function AboutMuseum() {
                       <div className="flex items-start">
                         <img
                           className="w-10 h-10 rounded-full mr-4"
-                          src={review?.createdBy?.image.secure_url}
+                          src={review?.createdBy?.image?.secure_url}
                           alt={`${review?.createdBy?.firstName} ${review?.createdBy?.lastName}`}
                         />
                         <div className="flex-1">
                           <div className="flex justify-between items-center">
                             <div>
-                              <p className="text-lg font-bold">{`${review?.createdBy?.firstName} ${review?.createdBy.lastName}`}</p>
+                              <p className="text-lg font-bold">{`${review?.createdBy?.firstName} ${review?.createdBy?.lastName}`}</p>
                             </div>
                             <div className="flex items center justify-center">
                               {data?.id == review?.createdBy?._id ? (

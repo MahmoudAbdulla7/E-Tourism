@@ -74,7 +74,7 @@ const {data}= useSelector((state:any)=>state.authReducer);
         if (response?.data?.ID) {
           toast.success(response?.data?.message);
           setIsLoading(false);
-          setFaceId(response.data.ID);
+          setFaceId(response?.data?.ID);
           handleNextStep();
         } else{
           toast.error("No faces found PLZ enter valid face")
@@ -109,7 +109,7 @@ const {data}= useSelector((state:any)=>state.authReducer);
         quantity: count,
       },
       faceId,
-      DateOfVisit: `${data.date}T23:59:59.000Z`,
+      DateOfVisit: `${data?.date}T23:59:59.000Z`,
       paymentType: "card",
     };
     reserveTicket(dummyData);
@@ -216,7 +216,7 @@ const {data}= useSelector((state:any)=>state.authReducer);
             <div className="rounded-lg ">
               <img
                 className="w-full rounded-3xl shadow-lg"
-                src={Modified?.image.secure_url}
+                src={Modified?.image?.secure_url}
                 alt="site-image"
               />
             </div>
@@ -265,7 +265,7 @@ const {data}= useSelector((state:any)=>state.authReducer);
                       className="text-center border-none"
                       type="text"
                       value={count}
-                      onChange={(e: any) => setCount(e.target.value)} // Update count state on change
+                      onChange={(e: any) => setCount(e.target.value)}
                     />
                     <button
                       type="button"
@@ -289,19 +289,11 @@ const {data}= useSelector((state:any)=>state.authReducer);
                       placeholder="Select date"
                       className="bg-gray-200 border  border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
                     />
-                    {/* <input
-                      {...register("time", { required: "Time is required" })}
-                      id="date"
-                      type="time"
-                      placeholder="Select date"
-                      className="bg-gray-200 border  border-gray-300 text-gray-900 text-sm rounded-r-3xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
-                    /> */}
+                   
                     {errors?.date && (
-                      <ErrorMessage text={String(errors?.date.message)} />
+                      <ErrorMessage text={String(errors?.date?.message)} />
                     )}
-                    {/* {errors?.time && (
-                      <ErrorMessage text={String(errors?.time.message)} />
-                    )} */}
+                  
                   </div>
                 </div>
                 <div className="continue my-3">
