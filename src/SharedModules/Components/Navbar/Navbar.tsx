@@ -8,7 +8,6 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState<string>("En");
   const { data } = useSelector((state: any) => state.authReducer);
-// console.log(data);
 
   document.addEventListener("scroll", () => {
     const nav = document.getElementById("navbar");
@@ -100,22 +99,22 @@ export default function Navbar() {
 
           <div className="flex  items-center justify-evenly">
             <div className="flex justify-between items-center">
-              {data.role=="User"? (
+              {data?.role=="User"? (
                 <Link to={`/home/profile`} className="text-main text-sm sm:text-xs md:text-lg font-medium">
                   {t("Welcome")}
-                  <span className="text-main">{`, ${data.firstName} ${data.lastName}`}</span>
+                  <span className="text-main">{`, ${data?.firstName} ${data?.lastName}`}</span>
                 </Link>
               ) :
-              data.role=="Admin"?
+              data?.role=="Admin"?
               <Link to={`/dashboard/profile`} className="text-main text-sm sm:text-xs md:text-lg font-medium">
               {t("Welcome")}
-              <span className="text-main">{`, ${data.firstName} ${data.lastName}`}</span>
+              <span className="text-main">{`, ${data?.firstName} ${data?.lastName}`}</span>
             </Link>
               :
-              data.role=="Inspector"?
+              data?.role=="Inspector"?
               <Link to={`/inspector/profile`} className="text-main text-sm sm:text-xs md:text-lg font-medium">
               {t("Welcome")}
-              <span className="text-main">{`, ${data.firstName} ${data.lastName}`}</span>
+              <span className="text-main">{`, ${data?.firstName} ${data?.lastName}`}</span>
             </Link>:
               (
                 <>
