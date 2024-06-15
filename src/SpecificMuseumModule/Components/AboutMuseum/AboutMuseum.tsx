@@ -244,7 +244,8 @@ export default function AboutMuseum() {
                   <p className="text-lg">{destination?.description}</p>
                 </div>
 
-                <div className="booking grid sm:grid-cols-2 grid-cols-1  mt-8">
+                <div className="booking  mt-4">
+                  
                   <div>
                     <p className="flex text-main items-center">
                       <FaStar />
@@ -256,32 +257,34 @@ export default function AboutMuseum() {
                     <p>{t("Prices may vary depending on selected date")}.</p>
                   </div>
 
-                  <div className="btn flex justify-end items-center">
-                    <div className="mr-2">
-                      <button
+                  <div className="btn flex justify-end items-center mt-3">
+                    <div className="">
+                    
+                    {data?.id ? <button
                         onClick={showAddModal}
-                        className="px-4   sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                        className="px-3 font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
                       >
                         {t("Add Review")}
-                      </button>
+                      </button>:""}
                     </div>
-                    <div>
+                    <div className="mx-2">
                       <button
                         onClick={bookNow}
-                        className="px-4   sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                        className="px-3 font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
                       >
                         {t("Book Now")}
                       </button>
                     </div>
-                    <div className=" ml-2">
+                    <div className="">
                       <button
                         onClick={isSpeaking ? handlePause : handleSpeak}
-                        className="px-4  sm:w-auto w-full sm:m-0 mt-2  font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
+                        className="px-3 font-bold rounded-full bg-main border-main hover:text-main duration-700 border-2 text-white hover:bg-transparent"
                       >
                         {!isSpeaking ? "Speak" : "Pause"}
                       </button>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -386,18 +389,18 @@ export default function AboutMuseum() {
                       <div className="flex items-start">
                         <img
                           className="w-10 h-10 rounded-full mr-4"
-                          src={review.createdBy.image.secure_url}
-                          alt={`${review.createdBy.firstName} ${review.createdBy.lastName}`}
+                          src={review?.createdBy?.image.secure_url}
+                          alt={`${review?.createdBy?.firstName} ${review?.createdBy?.lastName}`}
                         />
                         <div className="flex-1">
                           <div className="flex justify-between items-center">
                             <div>
-                              <p className="text-lg font-bold">{`${review.createdBy.firstName} ${review.createdBy.lastName}`}</p>
+                              <p className="text-lg font-bold">{`${review?.createdBy?.firstName} ${review?.createdBy.lastName}`}</p>
                             </div>
                             <div className="flex items center justify-center">
-                              {data.id == review.createdBy._id ? (
+                              {data?.id == review?.createdBy?._id ? (
                                 <>
-                                  <button onClick={()=>{updateReview(review.comment,String(review?._id))}}>
+                                  <button onClick={()=>{updateReview(review?.comment,String(review?._id))}}>
                                     <FiEdit className="mx-2 text-yellow-400" />
                                   </button>
                                   <button onClick={()=>{deleteReview(String(review?._id))}}>
@@ -411,7 +414,7 @@ export default function AboutMuseum() {
                           </div>
                           <p className="flex items-center justify-center ">
                             <FaQuoteLeft className="text-gray-500 mr-2" />
-                            {review.comment}
+                            {review?.comment}
                           </p>
                         </div>
                       </div>

@@ -18,9 +18,8 @@ export interface museum {
 
 const Card = ({ monument }: museum) => {
   const { t } = useTranslation();
-
-
   const navigate = useNavigate();
+  
   return (
     <article className="card overflow-hidden rounded-2xl grid  shadow-lg h-[100vh]  ">
       <div>
@@ -31,10 +30,10 @@ const Card = ({ monument }: museum) => {
         />
       </div>
       <div className="card__content | flow">
-        <div className="card__content--container | flow">
+        <div className="card__content--container | flow p-2">
           <h2 className="card__title text-white text-lg">{monument?.name}</h2>
           <p className="card__description text-white mt-3 text-md">
-            {monument?.description}
+            {monument?.description?.split(",").slice(0,5).join(",")}
           </p>
         </div>
         <button

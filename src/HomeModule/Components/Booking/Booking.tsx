@@ -109,7 +109,7 @@ const {data}= useSelector((state:any)=>state.authReducer);
         quantity: count,
       },
       faceId,
-      DateOfVisit: `${data.date}T00:00:00.000Z`,
+      DateOfVisit: `${data.date}T23:59:59.000Z`,
       paymentType: "card",
     };
     reserveTicket(dummyData);

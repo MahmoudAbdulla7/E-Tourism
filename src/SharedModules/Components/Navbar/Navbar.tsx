@@ -121,15 +121,15 @@ export default function Navbar() {
                 <>
                   <div className="mx-1">
                     <Link to={"/auth/login"}>
-                      <button className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500">
-                        Login
+                      <button className="border-b-2 text-main hover:border-main focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500">
+                      {t("Login")}
                       </button>
                     </Link>
                   </div>
                   <div>
                     <Link to={"/auth/register"}>
-                      <button className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500">
-                        Register
+                      <button className="border-b-2 text-main hover:border-main focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500">
+                      {t("Register")}
                       </button>
                     </Link>
                   </div>

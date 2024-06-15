@@ -209,11 +209,9 @@ body {
   background-size: cover;
   background-position: center center;
 }
-
 .amoon-image {
   transform: translateX(-50%);
 }
-
 /* react-flag-select */
 .active {
   background-color: rgb(22 101 52) !important;
@@ -361,7 +359,6 @@ body {
     margin: 2rem auto;
     position: relative;
   }
-
   .card__background {
     object-fit: cover;
     width: 100vh !important;
@@ -374,9 +371,8 @@ body {
     height: 100%;
     padding: 2px !important;
   }
-
   .card  {
-    height: 60vh !important;
+    height: 80vh !important;
     padding: 4px 0px !important;
   }
 }
