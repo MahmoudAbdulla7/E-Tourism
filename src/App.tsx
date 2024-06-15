@@ -33,8 +33,7 @@ import ValidateTicket from "./ValidateTicket/ValidateTicket";
 
 function App() {
   const dispatch = useDispatch();
-
-
+  
   useEffect(() => {
     getAllCities("city",(res) => {
       return dispatch(setCities(res));
