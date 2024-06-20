@@ -48,10 +48,11 @@ export default function AdminMonuments() {
   } = useForm();
 
   const {
-    register:updateRegister,getValues:updateModalValues,
-    handleSubmit:handleSubmitUpdateModal,
-    setValue:setUpdateModalValues,
-    formState: { errors:updateErrors },
+    register: updateRegister,
+    getValues: updateModalValues,
+    handleSubmit: handleSubmitUpdateModal,
+    setValue: setUpdateModalValues,
+    formState: { errors: updateErrors },
   } = useForm();
 
   const { monuments } = useSelector((state: any) => state.MonumentsReducer);
@@ -62,7 +63,6 @@ export default function AdminMonuments() {
     getAllCities("destinations", (res) => {
       return dispatch(setmonuments(res));
     });
-
   }, []);
   //add modal
   const convertDataIntoFormData = (monumentObject: any): FormData => {
@@ -100,7 +100,9 @@ export default function AdminMonuments() {
         });
       })
       .catch((err) => {
-        toast.error(err?.response?.data?.message || "failed to create monument");
+        toast.error(
+          err?.response?.data?.message || "failed to create monument"
+        );
         toast.error(
           err?.response?.data?.validationErr[0]?.message || "Network error"
         );
@@ -138,7 +140,6 @@ export default function AdminMonuments() {
       .catch((err) => {
         toast.error(err?.response?.data?.message || "network error");
         console.log(err);
-        
       })
       .finally(() => {
         setIsLoading(false);
@@ -148,29 +149,38 @@ export default function AdminMonuments() {
   //update
   const getMonument = (cityId: string, id: string) => {
     axios
-    .get(`${baseUrl}city/${cityId}/destination/${id}`)
-    .then((res) => {
-
-      console.log(res);
-      if (res?.data?.touristDestination) {
-        setUpdateModalValues("name", res?.data?.touristDestination.name);
-        setUpdateModalValues("ticketPrice", res?.data?.touristDestination.ticketPrice);
-        setUpdateModalValues("type", res?.data?.touristDestination.type);
-        setUpdateModalValues("city", res?.data?.touristDestination?.cityId?.name);
-        setUpdateModalValues("location", res?.data?.touristDestination.location);
-        setUpdateModalValues("video", res?.data?.touristDestination.video);
-        setUpdateModalValues("description", res?.data?.touristDestination.description);
-      }
-      console.log(res?.data?.touristDestination?.cityId?.name);
-
-    })
-    .catch((err) => {
-      console.log(err);
-      
-    })
-    .finally(() => {
-      setUpdateModalLoading(false);
-    });
+      .get(`${baseUrl}city/${cityId}/destination/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res?.data?.touristDestination) {
+          setUpdateModalValues("name", res?.data?.touristDestination.name);
+          setUpdateModalValues(
+            "ticketPrice",
+            res?.data?.touristDestination.ticketPrice
+          );
+          setUpdateModalValues("type", res?.data?.touristDestination.type);
+          setUpdateModalValues(
+            "city",
+            res?.data?.touristDestination?.cityId?.name
+          );
+          setUpdateModalValues(
+            "location",
+            res?.data?.touristDestination.location
+          );
+          setUpdateModalValues("video", res?.data?.touristDestination.video);
+          setUpdateModalValues(
+            "description",
+            res?.data?.touristDestination.description
+          );
+        }
+        console.log(res?.data?.touristDestination?.cityId?.name);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setUpdateModalLoading(false);
+      });
   };
 
   const openUpdateModal = (cityId: string, id: string) => {
@@ -181,12 +191,12 @@ export default function AdminMonuments() {
     setId(id);
   };
 
-  const submitUpdateModal=(data:any)=>{
-
+  const submitUpdateModal = (data: any) => {
     const formData = new FormData();
 
     if (true) {
-    formData.append("name", data.name);}
+      formData.append("name", data.name);
+    }
     formData.append("ticketPrice", data.ticketPrice);
     formData.append("type", data.type);
     formData.append("location", data.location);
@@ -194,36 +204,38 @@ export default function AdminMonuments() {
     formData.append("description", data.description);
     sendUpdatedData(formData);
     console.log(updateModalValues());
-  }
+  };
 
-  const sendUpdatedData=(formData:any)=>{
+  const sendUpdatedData = (formData: any) => {
     setIsLoading(true);
     axios
-    .put(`${baseUrl}city/${cityId}/destination/${id}`, formData, headers)
-    .then((res) => {
-
-      toast.success(res?.data?.message);
-      onCloseModal();
-      getAllCities("destinations", (res) => {
-        return dispatch(setmonuments(res));
+      .put(`${baseUrl}city/${cityId}/destination/${id}`, formData, headers)
+      .then((res) => {
+        toast.success(res?.data?.message);
+        onCloseModal();
+        getAllCities("destinations", (res) => {
+          return dispatch(setmonuments(res));
+        });
+      })
+      .catch((err) => {
+        toast.error(
+          err?.response?.data?.message || "failed to create monument"
+        );
+        toast.error(
+          err?.response?.data?.validationErr[0]?.message || "Network error"
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-
-    })
-    .catch((err) => {
-      toast.error(err?.response?.data?.message || "failed to create monument");
-      toast.error(
-        err?.response?.data?.validationErr[0]?.message || "Network error"
-      );
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
   };
 
   return (
     <>
       <div
-        className="home-container my-5 mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
+        className="home-container my-5 mx-2 p-4 rounded-lg 
+        grid grid-cols-1 gap-4 
+        lg:grid-cols-4 lg:gap-8 align-items-center "
         dir={i18n.language == "ar" ? "rtl" : "ltr"}
       >
         <div className="lg:col-span-2 ">
@@ -237,7 +249,8 @@ export default function AdminMonuments() {
           <button
             onClick={() => setModalState("add")}
             type="button"
-            className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
+            className="text-white bg-main hover:bg-blue-950 font-medium rounded-lg 
+            text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
           >
             {t("Add New Monuments")}
           </button>
@@ -252,12 +265,15 @@ export default function AdminMonuments() {
         {updateModalLoading ? (
           ""
         ) : (
-          <form onSubmit={handleSubmitUpdateModal(submitUpdateModal)} className="px-3 pb-5">
+          <form
+            onSubmit={handleSubmitUpdateModal(submitUpdateModal)}
+            className="px-3 pb-5"
+          >
             <div className="grid gap-4 mb-3 grid-cols-2">
               <div>
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("Name")}
                 </label>
@@ -269,7 +285,8 @@ export default function AdminMonuments() {
                       {...updateRegister("name", {
                         required: "City Name is required",
                       })}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 
+                      text-sm rounded-lg block w-full p-2.5"
                       placeholder="Type Monument name"
                     />
                   </div>
@@ -282,9 +299,9 @@ export default function AdminMonuments() {
               <div>
                 <label
                   htmlFor="ticketPrice"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
-                {t("Ticket Price")}
+                  {t("Ticket Price")}
                 </label>
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
@@ -293,13 +310,16 @@ export default function AdminMonuments() {
                       {...updateRegister("ticketPrice", {
                         required: "Ticket Price is required",
                       })}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 
+                      text-sm rounded-lg block w-full p-2.5"
                       placeholder="Ticket Price"
                       id="ticketPrice"
                     />
                   </div>
                   {updateErrors?.ticketPrice && (
-                    <ErrorMessage text={String(updateErrors?.ticketPrice?.message)} />
+                    <ErrorMessage
+                      text={String(updateErrors?.ticketPrice?.message)}
+                    />
                   )}
                 </div>
               </div>
@@ -307,7 +327,7 @@ export default function AdminMonuments() {
               <div>
                 <label
                   htmlFor="type"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("Type")}
                 </label>
@@ -315,7 +335,9 @@ export default function AdminMonuments() {
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
                     <Select
-                      {...updateRegister("type", { required: "Type is required" })}
+                      {...updateRegister("type", {
+                        required: "Type is required",
+                      })}
                     >
                       <option value="Museum">{t("Museum")}</option>
                       <option value="Monument">{t("Monument")}</option>
@@ -330,7 +352,7 @@ export default function AdminMonuments() {
               <div>
                 <label
                   htmlFor="city"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("City")}
                 </label>
@@ -338,7 +360,9 @@ export default function AdminMonuments() {
                 <div className="flex items-center">
                   <div className="flex-auto mx-1">
                     <Select
-                      {...updateRegister("city", { required: "City is required" })}
+                      {...updateRegister("city", {
+                        required: "City is required",
+                      })}
                     >
                       {cities?.length > 0
                         ? cities.map((city: any, idx: number) => (
@@ -358,7 +382,7 @@ export default function AdminMonuments() {
               <div>
                 <label
                   htmlFor="location"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("Location")}
                 </label>
@@ -369,46 +393,50 @@ export default function AdminMonuments() {
                       {...updateRegister("location", {
                         required: "Location is required",
                       })}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 
+                      text-sm rounded-lg  block w-full p-2.5"
                       placeholder="Location Link from google map"
                       id="location"
                     />
                   </div>
                   {updateErrors?.location && (
-                    <ErrorMessage text={String(updateErrors?.location?.message)} />
+                    <ErrorMessage
+                      text={String(updateErrors?.location?.message)}
+                    />
                   )}
                 </div>
               </div>
 
               <div>
-              <label
-                htmlFor="video"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
-              >
-                Video
-              </label>
-              <div className="flex items-center">
-                <div className="flex-auto mx-1">
-                  <input
-                    type="text"
-                    {...updateRegister("video", {
-                      required: "video is required",
-                    })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Video Link for it"
-                    id="video"
-                  />
+                <label
+                  htmlFor="video"
+                  className="block mb-2 text-sm font-medium text-main"
+                >
+                  Video
+                </label>
+                <div className="flex items-center">
+                  <div className="flex-auto mx-1">
+                    <input
+                      type="text"
+                      {...updateRegister("video", {
+                        required: "video is required",
+                      })}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 
+                      text-sm rounded-lg block w-full p-2.5"
+                      placeholder="Video Link for it"
+                      id="video"
+                    />
+                  </div>
+                  {errors?.video && (
+                    <ErrorMessage text={String(errors?.video?.message)} />
+                  )}
                 </div>
-                {errors?.video && (
-                  <ErrorMessage text={String(errors?.video?.message)} />
-                )}
               </div>
-            </div>
 
               <div className="col-span-2">
                 <label
                   htmlFor="description"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("Description")}
                 </label>
@@ -420,21 +448,25 @@ export default function AdminMonuments() {
                       {...updateRegister("description", {
                         required: "Description is required",
                       })}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 
+                      text-sm rounded-lg block w-full p-2.5"
                       placeholder="Type Monument Description"
                       id="description"
                     />
                   </div>
                   {updateErrors?.description && (
-                    <ErrorMessage text={String(updateErrors?.description?.message)} />
+                    <ErrorMessage
+                      text={String(updateErrors?.description?.message)}
+                    />
                   )}
                 </div>
               </div>
             </div>
-            
+
             <button
               type="submit"
-              className="text-white bg-gray-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
+              className="text-white bg-gray-800   
+              font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
             >
               {!isLoading ? (
                 <span className="flex items-center">
@@ -458,7 +490,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="name"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("Name")}
               </label>
@@ -468,7 +500,8 @@ export default function AdminMonuments() {
                     id="name"
                     type="text"
                     {...register("name", { required: "City Name is required" })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 
+                    text-sm rounded-lg block w-full p-2.5"
                     placeholder="Type Monument name"
                   />
                 </div>
@@ -481,7 +514,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="ticketPrice"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("Ticket Price")}
               </label>
@@ -492,7 +525,8 @@ export default function AdminMonuments() {
                     {...register("ticketPrice", {
                       required: "Ticket Price is required",
                     })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 
+                    text-sm rounded-lg block w-full p-2.5"
                     placeholder="Ticket Price"
                     id="ticketPrice"
                   />
@@ -506,7 +540,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="ticketPrice"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main "
               >
                 {t("Type")}
               </label>
@@ -529,7 +563,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="city"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("City")}
               </label>
@@ -557,7 +591,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="location"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("Location")}
               </label>
@@ -568,7 +602,8 @@ export default function AdminMonuments() {
                     {...register("location", {
                       required: "Location is required",
                     })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 
+                    text-gray-900 text-sm rounded-lg block w-full p-2.5"
                     placeholder="Location Link from google map"
                     id="location"
                   />
@@ -579,11 +614,10 @@ export default function AdminMonuments() {
               </div>
             </div>
 
-
             <div>
               <label
                 htmlFor="video"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 Video
               </label>
@@ -594,7 +628,8 @@ export default function AdminMonuments() {
                     {...register("video", {
                       required: "video is required",
                     })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 
+                    text-sm rounded-lg block w-full p-2.5"
                     placeholder="Video Link for it"
                     id="video"
                   />
@@ -608,7 +643,7 @@ export default function AdminMonuments() {
             <div className="col-span-2">
               <label
                 htmlFor="description"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("Description")}
               </label>
@@ -620,7 +655,8 @@ export default function AdminMonuments() {
                     {...register("description", {
                       required: "Description is required",
                     })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 
+                    text-sm rounded-lg  block w-full p-2.5"
                     placeholder="Type Monument Description"
                     id="description"
                   />
@@ -634,7 +670,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="image"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("image")}
               </label>
@@ -645,7 +681,8 @@ export default function AdminMonuments() {
                     {...register("image", {
                       required: "image is required",
                     })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 
+                    text-gray-900 text-sm rounded-lg block w-full p-2.5"
                     id="image"
                   />
                 </div>
@@ -658,7 +695,7 @@ export default function AdminMonuments() {
             <div>
               <label
                 htmlFor="subImages"
-                className="block mb-2 text-sm font-medium text-main dark:text-white"
+                className="block mb-2 text-sm font-medium text-main"
               >
                 {t("Choose 3 images for monument Highlights")}
               </label>
@@ -672,7 +709,8 @@ export default function AdminMonuments() {
                       maxLength: 3 || "please choose 3 images",
                     })}
                     multiple
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 
+                    text-sm rounded-lg  block w-full p-2.5"
                     id="subImages"
                   />
                 </div>
@@ -684,12 +722,14 @@ export default function AdminMonuments() {
           </div>
           <button
             type="submit"
-            className="text-white bg-gray-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
+            className="text-white bg-gray-800  
+             font-medium rounded-lg text-sm px-5 py-2.5 text-center
+              inline-flex items-center duration-500"
           >
             {!isLoading ? (
               <span className="flex items-center">
                 <FaPlus className="mx-2" />
-               {t("Add new Monument")}
+                {t("Add new Monument")}
               </span>
             ) : (
               <ImSpinner9 className="animate-spin" />
@@ -704,29 +744,32 @@ export default function AdminMonuments() {
         onclose={onCloseModal}
       >
         <div className="text-center">
-          <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-          <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+          <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400" />
+          <h3 className="mb-5 text-lg font-normal text-gray-500">
             {t("Are you sure you want to delete this monument?")}
           </h3>
           <div className="flex justify-center gap-4">
             <button
-              className="bg-red-700 duration-300 hover:bg-red-800 text-white px-3 py-1 my-4 rounded-md"
+              className="bg-red-700 duration-300 hover:bg-red-800 text-white px-3 py-1 my-4 
+              rounded-md"
               onClick={deleteMonument}
             >
               {!isLoading ? (
                 <span className="flex items-center">
                   <FaPlus className="mx-2" />
-                 {t("Yes, I'm sure")}
+                  {t("Yes, I'm sure")}
                 </span>
               ) : (
                 <ImSpinner9 className="animate-spin" />
               )}
             </button>
             <button
-              className="bg-gray-600 duration-300 hover:bg-gray-700 text-white px-3 py-1 my-4 rounded-md"
+              className="bg-gray-600 duration-300 hover:bg-gray-700 
+              text-white px-3 py-1 my-4 
+              rounded-md"
               onClick={onCloseModal}
             >
-            {t("No, cancel")}
+              {t("No, cancel")}
             </button>
           </div>
         </div>

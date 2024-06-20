@@ -70,7 +70,7 @@ export default function Cities() {
         toast.error(err?.response?.data?.message);
       });
   };
-  // ---------------------deleteCity--------------------
+  //deleteCity
   const deleteCity = () => {
     setIsLoading(true);
     axios
@@ -90,7 +90,7 @@ export default function Cities() {
         setIsLoading(false);
       });
   };
-  //---------------------updateCity--------------------
+  //updateCity
   const updateCity = (data:any) => {
       const addFormData = new FormData();
     addFormData.append("name", data["name"]);
@@ -114,7 +114,8 @@ export default function Cities() {
     <>
       <div
         dir={i18n.language == "ar" ? "rtl" : "ltr"}
-        className="Elheader home-container my-5 mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
+        className="Elheader home-container my-5 mx-2 p-4 rounded-lg grid grid-cols-1 
+        gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
       >
         <div className="lg:col-span-2 ">
           <h4 className="text-2xl font-medium text-main">
@@ -127,7 +128,8 @@ export default function Cities() {
           <button
             onClick={showAddModal}
             type="button"
-            className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
+            className="text-white bg-main hover:bg-blue-950  font-medium rounded-lg 
+            text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
           >
             {t("Add New City")}
           </button>
@@ -155,9 +157,7 @@ export default function Cities() {
         </div>
       )}
 
-      {/* Modal */}
       <div className="ElModalls">
-        {/* *********add-modal******** */}
         <Modal
           show={modalState == "add-modal"}
           size="md"
@@ -165,7 +165,7 @@ export default function Cities() {
           popup
         >
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
-            <h3 className="text-lg font-semibold text-main dark:text-white">
+            <h3 className="text-lg font-semibold text-main">
             {t("Add New City")}
             </h3>
             <button onClick={handleClose}>
@@ -177,7 +177,7 @@ export default function Cities() {
               <div className="col-span-2">
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("Name")}
                 </label>
@@ -186,7 +186,8 @@ export default function Cities() {
                     <input
                       type="text"
                       id="name"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                      rounded-lg  block w-full p-2.5"
                       placeholder="Type city name"
                       {...register("name", {
                         required: true,
@@ -214,7 +215,8 @@ export default function Cities() {
                 </label>
                 <label
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 
+                  border-dashed rounded-lg cursor-pointer bg-gray-50   hover:bg-gray-100"
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
@@ -229,14 +231,15 @@ export default function Cities() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 
+                        5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                       />
                     </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <p className="mb-2 text-sm text-gray-500">
                       <span className="font-semibold">{t("Click to upload")}</span>
                       {t("or drag and drop")}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-gray-500 ">
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
                     </p>
                   </div>
@@ -261,7 +264,8 @@ export default function Cities() {
             <button
               type="submit"
               className={
-                "text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
+                `text-white bg-main hover:bg-blue-950  font-medium rounded-lg 
+                text-sm px-5 py-2.5 text-center inline-flex items-center duration-500` +
                 (isLoading ? " disabled" : " ")
               }
             >
@@ -283,7 +287,7 @@ export default function Cities() {
           popup
         >
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
-            <h3 className="text-lg font-semibold text-main dark:text-white">
+            <h3 className="text-lg font-semibold text-main">
               {t("Delete City")}
             </h3>
             <button onClick={handleClose}>
@@ -307,7 +311,8 @@ export default function Cities() {
                 type="submit"
                 onClick={deleteCity}
                 className={
-                  "text-white mt-3  bg-red-800  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
+                  `text-white mt-3  bg-red-800  font-medium rounded-lg text-sm  px-5 py-2.5 
+                  text-center inline-flex items-center duration-500` +
                   (isLoading ? " disabled" : " ")
                 }
               >
@@ -330,7 +335,7 @@ export default function Cities() {
           popup
         >
           <div className="flex items-center justify-between p-4  md:px-5  rounded-t">
-            <h3 className="text-lg font-semibold text-main dark:text-white">
+            <h3 className="text-lg font-semibold text-main">
              
               {t("Update City")}
             </h3>
@@ -343,7 +348,7 @@ export default function Cities() {
               <div className="col-span-2">
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                   {t("Name")}
                 </label>
@@ -352,7 +357,7 @@ export default function Cities() {
                     <input
                       type="text"
                       id="name"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg  block w-full p-2.5"
                       placeholder="Type city name"
                       {...register("name", {
                         required: true,
@@ -374,13 +379,15 @@ export default function Cities() {
               <div className="col-span-2 w-full">
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-main dark:text-white"
+                  className="block mb-2 text-sm font-medium text-main"
                 >
                  {t("City Image")}
                 </label>
                 <label
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  className="flex flex-col items-center justify-center w-full
+                   h-64 border-2 border-gray-300
+                   border-dashed rounded-lg cursor-pointer bg-gray-50   hover:bg-gray-100 "
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
@@ -395,10 +402,11 @@ export default function Cities() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 
+                        5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                       />
                     </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <p className="mb-2 text-sm text-gray-500">
                       <span className="font-semibold">{t("Click to upload")}</span> 
                       {t("or drag and drop")}
                     </p>
@@ -428,7 +436,8 @@ export default function Cities() {
               <button
                 type="submit"
                 className={
-                  "text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
+                  `text-white bg-main hover:bg-blue-950 focus:ring-4 
+                   font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500` +
                   (isLoading ? " disabled" : " ")
                 }
               >
