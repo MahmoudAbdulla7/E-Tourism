@@ -14,7 +14,8 @@ export default function AdminHome() {
       {data.role == "Admin" ? (
         <div
           dir={i18n.language == "ar" ? "rtl" : "ltr"}
-          className="home-container mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 align-items-center "
+          className="home-container mx-2 p-4 rounded-lg grid grid-cols-1 gap-4 lg:grid-cols-4 
+          lg:gap-8 align-items-center "
         >
           <div className="lg:col-span-3 ">
             <h4 className="text-2xl font-medium text-main">
@@ -34,7 +35,8 @@ export default function AdminHome() {
             <Link
               to="/dashboard/AdminMonuments"
               type="button"
-              className="text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
+              className="text-white bg-main hover:bg-blue-950 focus:ring-4   font-medium rounded-lg 
+              text-sm px-5 py-2.5 text-center inline-flex items-center duration-500"
             >
               {t("Fill Destinations")}
               <span className="mx-2">

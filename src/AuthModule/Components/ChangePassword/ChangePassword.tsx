@@ -59,7 +59,7 @@ const dispatch=useDispatch()
                     required: "Old Password is required",
                     pattern: {
                       value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+ /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
                       message: `The password must include at least one lowercase letter,
                       one uppercase letter, one digit, one special character,
                       and be at least 6 characters long!!`,
@@ -87,7 +87,7 @@ const dispatch=useDispatch()
                     required: "New Password is required",
                     pattern: {
                       value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+ /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
                       message: `The New Password must include at least one lowercase letter,
                       one uppercase letter, one digit, one special character,
                       and be at least 6 characters long!!`,
@@ -115,7 +115,7 @@ const dispatch=useDispatch()
                     required: "Confirm Password is required",
                     pattern: {
                       value:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
+/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/,
                       message: `The Confirm password must include at least one lowercase letter,
                       one uppercase letter, one digit, one special character,
                       and be at least 6 characters long!!`,
@@ -133,7 +133,8 @@ const dispatch=useDispatch()
         <button
           type="submit"
           className={
-            "text-white bg-main hover:bg-blue-950 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center duration-500" +
+            `text-white bg-main hover:bg-blue-950 focus:ring-4  font-medium rounded-lg 
+            text-sm px-5 py-2.5 text-center inline-flex items-center duration-500` +
             (isLoading ? " disabled" : " ")
           }
         >

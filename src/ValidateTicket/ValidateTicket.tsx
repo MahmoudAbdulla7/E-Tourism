@@ -18,26 +18,6 @@ interface TokenData {
   faceId: string;
   status: string;
 }
-// interface NewTicket {
-//   userId: {
-//     image: {
-//       secure_url: string;
-//     };
-//     lastName: string;
-//     firstName: string;
-//     country: string;
-//   };
-//   touristDestination: {
-//     name: string;
-//     quantity: number;
-//   };
-//   DateOfVisit: string;
-//   status: string;
-// }
-// interface TicketCardProps {
-//   ticket: NewTicket | null;
-// }
-
 
 export default function ValidateTicket() {
   const { token } = useParams();
@@ -144,21 +124,25 @@ export default function ValidateTicket() {
             },
           }
         );
-        if (response.status === 200) {
-          setIsLoading(false);
-          console.log(response);
-          if (Number(response?.data?.score?.split(".")[0]) >= 80) {
-            toast.success("Accepted User");
-            setIsAccepted(true);
-          } else {
-            toast.error("Not Accepted User");
-            setIsAccepted(false);
-          }
+        setIsLoading(false);
+        if (response?.status === 200) {
+          if(response?.data?.error=="You are matching two different persons."){
+          toast.error(response?.data?.error);
+          }else if(Number(response?.data?.score?.split(".")[0]) >= 80){
+            console.log(response);
+              toast.success(`Accepted User With Score:${response?.data?.score?.split(".")[0]}%`);
+              setIsAccepted(true);
+            }
+            else {
+             toast.error(`Not Accepted User With Score:${response?.data?.score?.split(".")[0]}%`);
+             setIsAccepted(false);
+           }
         } else {
           toast.error("Failed to send photo");
         }
-      } catch (error) {
-        console.error("Error sending photo:", error);
+      } catch (error:any) {
+        console.log(error);
+        toast.error(error?.response?.data?.detail);
         setIsLoading(false);
       }
     }
@@ -232,16 +216,19 @@ export default function ValidateTicket() {
                       )}
                     </button>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <button
-                      onClick={captureAnother}
-                      className={
-                        "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
-                      }
-                    >
-                      Capture another one?
-                    </button>
-                  </div>
+                  {!isAccepted && (
+                    <div className="flex items-center justify-center">
+                      <button
+                        id="another"
+                        onClick={captureAnother}
+                        className={
+                          "bg-main text-white px-5 py-2 mx-1  my-2 rounded-xl"
+                        }
+                      >
+                        Capture another one?
+                      </button>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center">
                     <div className="">
                       <button

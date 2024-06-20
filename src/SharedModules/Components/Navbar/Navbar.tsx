@@ -8,7 +8,6 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState<string>("En");
   const { data } = useSelector((state: any) => state.authReducer);
-// console.log(data);
 
   document.addEventListener("scroll", () => {
     const nav = document.getElementById("navbar");
